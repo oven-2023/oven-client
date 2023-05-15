@@ -1,20 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, SafeAreaView, Button } from 'react-native';
+import Navigation from './src/navigations/Stack';
+import TabNavigation from './src/navigations/TabNavigation';
+import styled from 'styled-components/native';
+import { useState } from 'react';
 
 export default function App() {
+  const [isLogin, setIsLogin] = useState(false);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <Container>
       <StatusBar style="auto" />
-    </View>
+      {isLogin ? <TabNavigation /> : <Navigation />}
+    </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Container = styled.View`
+  flex: 1;
+  justify-content: flex-start;
+`;

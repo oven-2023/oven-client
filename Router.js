@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, SafeAreaView, Button } from 'react-native';
-import Navigation from './src/navigations/Stack';
+import AuthNavigation from './src/navigations/AuthNavigation';
 import TabNavigation from './src/navigations/TabNavigation';
+import MainNavigation from './src/navigations/MainNavigation';
 import styled from 'styled-components/native';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,7 +11,8 @@ import React from 'react';
 import { RecoilRoot, useRecoilState } from 'recoil';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, SignUp } from './src/screens';
+import { Login, SignUp, MainStack } from './src/screens';
+import SearchScreen from './src/screens/Main/SearchScreen';
 
 export default function Router() {
   const Stack = createStackNavigator();
@@ -29,12 +31,21 @@ export default function Router() {
                   component={TabNavigation}
                   options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                  name="MainNavigation"
+                  component={MainNavigation}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="SearchScreen"
+                  component={SearchScreen}
+                />
               </>
             ) : (
               <>
                 <Stack.Screen
-                  name="Navigation"
-                  component={Navigation}
+                  name="AuthNavigation"
+                  component={AuthNavigation}
                   options={{ headerShown: false }}
                 />
                 {/* <Stack.Screen name="SignUp" component={SignUp} /> */}

@@ -1,12 +1,18 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
+import styled from 'styled-components';
 
 const SearchScreen = () => {
   return (
-    <View>
+    <Container>
       <Text>검색</Text>
-    </View>
+    </Container>
   );
 };
+
+const Container = styled.SafeAreaView`
+  flex: 1;
+  align-items: center;
+`;
 
 export default SearchScreen;

@@ -1,30 +1,29 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup } from '../screens';
+import { HomeScreen, SearchScreen } from '../screens';
 
-const Navigation = () => {
+const MainNavigation = () => {
   const Stack = createStackNavigator();
 
   return (
     <Stack.Navigator
-      // initialRouteName="Login"
       screenOptions={{
         // headerTitleAlign: 'center',
         headerShown: false,
       }}
     >
       <Stack.Screen
-        name="Login"
-        component={Login}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{ headerShown: false }} // 헤더 렌더링 ❌
       />
       <Stack.Screen
-        name="Signup"
-        component={Signup}
+        name="SearchScreen"
+        component={SearchScreen}
         options={{ headerShown: false }} // 헤더 렌더링 ❌
       />
     </Stack.Navigator>
   );
 };
 
-export default Navigation;
+export default MainNavigation;

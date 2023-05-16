@@ -4,6 +4,7 @@ import HomeScreen from './Main/HomeScreen';
 import SubscriptionScreen from './Subscription/SubHomeScreen';
 import ChattingScreen from './Subscription/ChattingScreen';
 import MyPageScreen from './Mypage/MyPageScreen';
+import SearchScreen from './Main/SearchScreen';
 
 export {
   Login,
@@ -12,4 +13,5 @@ export {
   SubscriptionScreen,
   ChattingScreen,
   MyPageScreen,
+  SearchScreen
 };

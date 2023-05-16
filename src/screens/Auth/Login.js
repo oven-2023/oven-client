@@ -12,8 +12,11 @@ import styled from 'styled-components';
 import Input from '../../components/Auth/Input';
 import AuthButton from '../../components/Auth/AuthButton';
 import TabNavigation from '../../navigations/TabNavigation';
+import { useRecoilState } from 'recoil';
+import { isLoginState } from '../../states';
 
 const Login = ({ navigation }) => {
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -25,6 +28,8 @@ const Login = ({ navigation }) => {
   };
   const HandleClickLogin = () => {
     // Alert.alert('Sign Up', '클릭');
+    navigation.navigate('TabNavigation');
+    setIsLogin(true);
   };
 
   return (
@@ -39,8 +44,8 @@ const Login = ({ navigation }) => {
       />
       <AuthButton
         text="로그인"
-        // onClick={HandleClickLogin}
-        onPress={() => navigation.navigate('TabNavigation')}
+        onPress={HandleClickLogin}
+        // onPress={() => navigation.navigate('TabNavigation')}
       />
       <Button
         title="회원가입"

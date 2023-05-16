@@ -6,23 +6,24 @@ const Navigation = () => {
   const Stack = createStackNavigator();
 
   return (
-      <Stack.Navigator
-        // initialRouteName="Login"
-        screenOptions={{
-          headerTitleAlign: 'center',
-        }}
-      >
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }} // 헤더 렌더링 ❌
-        />
-        <Stack.Screen
-          name="Signup"
-          component={Signup}
-          // options={{ headerBackTitleVisible: false }} // 뒤로가기 이름
-        />
-      </Stack.Navigator>
+    <Stack.Navigator
+      // initialRouteName="Login"
+      screenOptions={{
+        // headerTitleAlign: 'center',
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }} // 헤더 렌더링 ❌
+      />
+      <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={{ headerShown: false }} // 헤더 렌더링 ❌
+      />
+    </Stack.Navigator>
   );
 };
 

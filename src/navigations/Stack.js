@@ -1,15 +1,13 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup } from '../screens';
+import { Login, Signup, HomeScreen } from '../screens';
 
 const Navigation = () => {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        // initialRouteName="Login"
         screenOptions={{
           headerTitleAlign: 'center',
         }}
@@ -24,8 +22,12 @@ const Navigation = () => {
           component={Signup}
           // options={{ headerBackTitleVisible: false }} // 뒤로가기 이름
         />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
-    </NavigationContainer>
   );
 };
 

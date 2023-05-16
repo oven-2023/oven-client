@@ -24,7 +24,7 @@ const Login = ({ navigation }) => {
   };
   const HandleClickLogin = () => {
     // Alert.alert('Sign Up', '클릭');
-    navigate('HomeScreen');
+    navigation.navigate('HomeScreen');
   };
 
   return (
@@ -39,7 +39,8 @@ const Login = ({ navigation }) => {
       />
       <AuthButton
         text="로그인"
-        onClick={HandleClickLogin}
+        // onClick={HandleClickLogin}
+        onPress={() => navigation.navigate('HomeScreen')}
       />
       <Button
         title="회원가입"

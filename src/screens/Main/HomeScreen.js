@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
+import styled from 'styled-components';
 
-const MainScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
-    <View>
-      <Text>메인</Text>
-    </View>
+    <Container>
+      <Text onPress={() => navigation.navigate('Login')}>홈</Text>
+    </Container>
   );
 };
 
-export default MainScreen;
+const Container = styled.SafeAreaView`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export default HomeScreen;

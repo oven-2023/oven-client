@@ -11,6 +11,7 @@ import {
 import styled from 'styled-components';
 import Input from '../../components/Auth/Input';
 import AuthButton from '../../components/Auth/AuthButton';
+import TabNavigation from '../../navigations/TabNavigation';
 
 const Login = ({ navigation }) => {
   const [id, setId] = useState('');
@@ -24,7 +25,6 @@ const Login = ({ navigation }) => {
   };
   const HandleClickLogin = () => {
     // Alert.alert('Sign Up', '클릭');
-    navigation.navigate('HomeScreen');
   };
 
   return (
@@ -40,7 +40,7 @@ const Login = ({ navigation }) => {
       <AuthButton
         text="로그인"
         // onClick={HandleClickLogin}
-        onPress={() => navigation.navigate('HomeScreen')}
+        onPress={() => navigation.navigate('TabNavigation')}
       />
       <Button
         title="회원가입"

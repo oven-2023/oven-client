@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup, HomeScreen } from '../screens';
+import { Login, Signup } from '../screens';
 
 const Navigation = () => {
   const Stack = createStackNavigator();
@@ -21,11 +21,6 @@ const Navigation = () => {
           name="Signup"
           component={Signup}
           // options={{ headerBackTitleVisible: false }} // 뒤로가기 이름
-        />
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ headerShown: false }}
         />
       </Stack.Navigator>
   );

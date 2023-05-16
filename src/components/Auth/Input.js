@@ -27,7 +27,7 @@ const StyledTextInput = styled.TextInput`
   width: ${({ width }) => Dimensions.get('window').width - 60}px;
   height: 40px;
   margin: 20px 0px;
-  padding: 15px 20px;
+  padding: 0px 20px;
   border-radius: 10px;
   color: black;
 `;

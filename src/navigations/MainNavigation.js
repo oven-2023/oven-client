@@ -1,16 +1,18 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeScreen, SearchScreen } from '../screens';
+import { HomeScreen, SearchScreen, DetailScreen } from '../screens';
 
 const MainNavigation = () => {
   const Stack = createStackNavigator();
 
   return (
     <Stack.Navigator
-      screenOptions={{
-        // headerTitleAlign: 'center',
-        headerShown: false,
-      }}
+      screenOptions={
+        {
+          // headerTitleAlign: 'center',
+          // headerShown: false,
+        }
+      }
     >
       <Stack.Screen
         name="HomeScreen"
@@ -20,6 +22,11 @@ const MainNavigation = () => {
       <Stack.Screen
         name="SearchScreen"
         component={SearchScreen}
+        options={{ headerShown: false }} // 헤더 렌더링 ❌
+      />
+      <Stack.Screen
+        name="DetailScreen"
+        component={DetailScreen}
         options={{ headerShown: false }} // 헤더 렌더링 ❌
       />
     </Stack.Navigator>

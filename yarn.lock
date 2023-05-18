@@ -5747,7 +5747,12 @@ react-native-reanimated@~2.14.4:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native@*, react-native@0.71.7:
+react-native-view-overflow@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/react-native-view-overflow/-/react-native-view-overflow-0.0.5.tgz"
+  integrity sha512-p/peyU3IC7M84bZEz2K7hpLrKBPUT3W7/+wnXjGw40hX/Iaj0OmOqJI6mJcBUlpcHJvGYbx2OOpPZa4+hwJC6w==
+
+react-native@*, react-native@>=0.41.2, react-native@0.71.7:
   version "0.71.7"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.71.7.tgz"
   integrity sha512-Id6iRLS581fJMFGbBl1jP5uSmjExtGOvw5Gvh7694zISXjsRAsFMmU+izs0pyCLqDBoHK7y4BT7WGPGw693nYw==

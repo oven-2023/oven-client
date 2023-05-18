@@ -13,6 +13,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Login, SignUp, MainStack } from './src/screens';
 import SearchScreen from './src/screens/Main/SearchScreen';
+import DetailScreen from './src/screens/Main/DetailScreen';
 
 export default function Router() {
   const Stack = createStackNavigator();
@@ -39,6 +40,16 @@ export default function Router() {
                 <Stack.Screen
                   name="SearchScreen"
                   component={SearchScreen}
+                  options={{
+                    title: '작품 검색',
+                  }}
+                />
+                <Stack.Screen
+                  name="DetailScreen"
+                  component={DetailScreen}
+                  options={{
+                    title: '작품 상세 보기',
+                  }}
                 />
               </>
             ) : (

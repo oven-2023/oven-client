@@ -1,9 +1,9 @@
 import { Text, Button, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 
-const AuthButton = ({ text, onClick, onPress }) => {
+const AuthButton = ({ text, onPress }) => {
   return (
-    <StyledButton isFilled={false} onClick={onClick} onPress={onPress}>
+    <StyledButton isFilled={false} onPress={onPress}>
       <StyledText>{text}</StyledText>
     </StyledButton>
   );

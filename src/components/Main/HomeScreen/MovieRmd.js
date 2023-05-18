@@ -1,22 +1,24 @@
 import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
 
 const MovieRmd = () => {
+  const navigation = useNavigation();
   return (
     <MovieRmdContainer>
       <Movies>
-        <Movie>
+        <Movie onPress={() => navigation.navigate('DetailScreen')}>
           <MoviePoster />
           <MovieTitle>영화제목</MovieTitle>
           <MovieDetail>넷플</MovieDetail>
         </Movie>
-        <Movie>
+        <Movie onPress={() => navigation.navigate('DetailScreen')}>
           <MoviePoster />
           <MovieTitle>영화제목</MovieTitle>
           <MovieDetail>넷플</MovieDetail>
         </Movie>
-        <Movie>
+        <Movie onPress={() => navigation.navigate('DetailScreen')}>
           <MoviePoster />
           <MovieTitle>영화제목</MovieTitle>
           <MovieDetail>넷플</MovieDetail>
@@ -44,7 +46,7 @@ const MoviePoster = styled.View`
   height: 90;
 `;
 
-const Movie = styled.View`
+const Movie = styled.TouchableOpacity`
   border: 2px solid;
   width: 30%;
 `;

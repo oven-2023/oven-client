@@ -16,8 +16,8 @@ const OttList = () => {
   const netflix = require('../../img/netflix.png');
   return (
     <Container>
-      {otts.ott.map((ottname) => (
-        <Ott>
+      {otts.ott.map((ottname, index) => (
+        <Ott key={index}>
           <OttImg source={netflix} />
           <OttName>{ottname}</OttName>
         </Ott>

@@ -30,12 +30,12 @@ export default function Router() {
                 <Stack.Screen
                   name="TabNavigation"
                   component={TabNavigation}
-                  options={{ headerShown: false }}
+                  options={{ headerShown: false, title: '메인 화면' }}
                 />
                 <Stack.Screen
                   name="MainNavigation"
                   component={MainNavigation}
-                  options={{ headerShown: false }}
+                  options={{ headerShown: false, title: '메인 화면' }}
                 />
                 <Stack.Screen
                   name="SearchScreen"

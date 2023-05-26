@@ -1,54 +1,66 @@
 import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 
 const MovieRmd = () => {
+  //테스팅
+  const searchList = [
+    {
+      title: '제목1',
+      ott: 'netflix1',
+      detail: '설명1',
+      src: 'src1',
+    },
+    {
+      title: '제목2',
+      ott: 'netflix2',
+      detail: '설명2',
+      src: 'src2',
+    },
+    {
+      title: '제목3',
+      ott: 'netflix3',
+      detail: '설명3',
+      src: 'src3',
+    },
+    {
+      title: '제목4',
+      ott: 'netflix4',
+      detail: '설명4',
+      src: 'src4',
+    },
+  ];
   const navigation = useNavigation();
   return (
-    <MovieRmdContainer>
-      <Movies>
-        <Movie onPress={() => navigation.navigate('DetailScreen')}>
-          <MoviePoster />
-          <MovieTitle>영화제목</MovieTitle>
-          <MovieDetail>넷플</MovieDetail>
-        </Movie>
-        <Movie onPress={() => navigation.navigate('DetailScreen')}>
-          <MoviePoster />
-          <MovieTitle>영화제목</MovieTitle>
-          <MovieDetail>넷플</MovieDetail>
-        </Movie>
-        <Movie onPress={() => navigation.navigate('DetailScreen')}>
-          <MoviePoster />
-          <MovieTitle>영화제목</MovieTitle>
-          <MovieDetail>넷플</MovieDetail>
-        </Movie>
+      <Movies showsVerticalScrollIndicator={false} horizontal={true}>
+        {searchList.map(({ title, ott }) => {
+          return (
+            <Movie onPress={() => navigation.navigate('DetailScreen')}>
+              <MoviePoster />
+              <MovieTitle>{title}</MovieTitle>
+              <MovieDetail>{ott}</MovieDetail>
+            </Movie>
+          );
+        })}
       </Movies>
-    </MovieRmdContainer>
   );
 };
 
-const MovieRmdContainer = styled.View`
+const Movies = styled.ScrollView`
   margin-top: 20;
-  border: 2px solid;
   height: 150;
-  padding: 15px;
-`;
-
-const Movies = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 const MoviePoster = styled.View`
   background-color: pink;
-  height: 90;
+  height: 100;
 `;
 
 const Movie = styled.TouchableOpacity`
   border: 2px solid;
-  width: 30%;
+  width: 40%;
+  margin-right: 10px;
 `;
 
 const MovieTitle = styled.Text`

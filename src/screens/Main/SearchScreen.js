@@ -34,7 +34,7 @@ const Container = styled.SafeAreaView`
 `;
 
 const SearchInput = styled.TextInput`
-  background-color: whitesmoke;
+  background-color: white;
   border: 1px solid gray;
   width: 80%;
   height: 40px;

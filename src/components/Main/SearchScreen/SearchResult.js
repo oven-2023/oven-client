@@ -1,8 +1,17 @@
 import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { searchInputState } from '../../../states';
+import { useNavigation } from '@react-navigation/native';
+import { shadowStyles } from '../../../styles/shadow';
 
 const SearchResult = () => {
   //테스팅
@@ -33,49 +42,49 @@ const SearchResult = () => {
     },
   ];
 
+  const navigation = useNavigation();
   const [searchInput, setSearchInput] = useRecoilState(searchInputState);
   return (
-    <SearchResultContainer>
-      <Movies>
-        {searchList.map(({ title, ott, detail }) => {
-          return (
-            <Movie key={title}>
-              <MoviePoster />
-              <TextContainer>
-                <MovieTitle>{title}</MovieTitle>
-                <Ott>{ott}</Ott>
-                <MovieDetail>{detail}</MovieDetail>
-              </TextContainer>
-            </Movie>
-          );
-        })}
-      </Movies>
-    </SearchResultContainer>
+    <Movies showsVerticalScrollIndicator={false}>
+      {searchList.map(({ title, ott, detail }) => {
+        return (
+          <Movie
+            key={title}
+            onPress={() => navigation.navigate('DetailScreen')}
+            style={shadowStyles.boxView}
+          >
+            <MoviePoster />
+            <TextContainer>
+              <MovieTitle>{title}</MovieTitle>
+              <Ott>{ott}</Ott>
+              <MovieDetail>{detail}</MovieDetail>
+            </TextContainer>
+          </Movie>
+        );
+      })}
+    </Movies>
   );
 };
 
-const SearchResultContainer = styled.View`
-  border: 2px solid;
+const Movies = styled.ScrollView`
   height: 650;
-  padding: 15px;
   width: 80%;
-  overflow: scroll;
 `;
-
-const Movies = styled.View``;
 
 const MoviePoster = styled.View`
   background-color: pink;
   height: 90px;
   width: 80px;
-  border: 2px solid;
+  border: 1px solid gray;
   margin: 10px;
 `;
 
-const Movie = styled.View`
-  border: 2px solid;
+const Movie = styled.TouchableOpacity`
+  border: 1px solid gray;
+  border-radius: 10px;
   flex-direction: row;
   margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const MovieTitle = styled.Text`

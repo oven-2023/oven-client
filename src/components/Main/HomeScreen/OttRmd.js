@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
+import { shadowStyles } from '../../../styles/shadow';
 
 const OttRmd = () => {
   return (
-    <OttRmdContainer>
+    <OttRmdContainer style={shadowStyles.boxView}>
       <Text1>OTT 추천</Text1>
       <Text2>이번달 당신에게 맞는 OTT는</Text2>
       <Text2>
@@ -16,10 +17,12 @@ const OttRmd = () => {
 
 const OttRmdContainer = styled.View`
   margin-top: 50;
-  border: 2px solid;
+  border: 2px solid gray;
+  border-radius: 10px;
   width: 80%;
   height: 150;
   padding: 15px;
+  background-color: white;
 `;
 
 const Text1 = styled.Text`

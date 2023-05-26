@@ -45,7 +45,6 @@ const Container = styled.SafeAreaView`
 const Top = styled.View`
   width: 100%;
   flex-direction: row;
-  background-color: pink;
 `;
 
 const Bottom = styled.View`

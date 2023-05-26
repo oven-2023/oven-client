@@ -20,3 +20,8 @@ export const isModalState = atom({
   key: `isModal/${v1()}`,
   default: false,
 });
+
+export const searchInputState = atom({
+  key: `searchInput/${v1()}`,
+  default: '',
+});

@@ -1,19 +1,54 @@
 import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { searchInputState } from '../../../states';
 
 const SearchResult = () => {
+  //테스팅
+  const searchList = [
+    {
+      title: '제목1',
+      ott: 'netflix1',
+      detail: '설명1',
+      src: 'src1',
+    },
+    {
+      title: '제목2',
+      ott: 'netflix2',
+      detail: '설명2',
+      src: 'src2',
+    },
+    {
+      title: '제목3',
+      ott: 'netflix3',
+      detail: '설명3',
+      src: 'src3',
+    },
+    {
+      title: '제목4',
+      ott: 'netflix4',
+      detail: '설명4',
+      src: 'src4',
+    },
+  ];
+
+  const [searchInput, setSearchInput] = useRecoilState(searchInputState);
   return (
     <SearchResultContainer>
       <Movies>
-        <Movie>
-          <MoviePoster />
-          <TextContainer>
-            <MovieTitle>영화제목</MovieTitle>
-            <Ott>넷플</Ott>
-            <MovieDetail>배우, 장르</MovieDetail>
-          </TextContainer>
-        </Movie>
+        {searchList.map(({ title, ott, detail }) => {
+          return (
+            <Movie key={title}>
+              <MoviePoster />
+              <TextContainer>
+                <MovieTitle>{title}</MovieTitle>
+                <Ott>{ott}</Ott>
+                <MovieDetail>{detail}</MovieDetail>
+              </TextContainer>
+            </Movie>
+          );
+        })}
       </Movies>
     </SearchResultContainer>
   );

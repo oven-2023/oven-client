@@ -2,11 +2,27 @@ import React from 'react';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
 import styled from 'styled-components';
 import SearchResult from '../../components/Main/SearchScreen/SearchResult';
+import { useRecoilState } from 'recoil';
+import { searchInputState } from '../../states';
 
 const SearchScreen = () => {
+  const [searchInput, setSearchInput] = useRecoilState(searchInputState);
+  const onSearchHandler = (event) => {
+    setSearchInput(event.target.value);
+  };
+  const onKeyDownHandler = (event) => {
+    if (event.key === 'Enter') {
+      onSubmitHandler();
+    }
+  };
   return (
     <Container>
-      <SearchInput placeholder="작품명, 감독, 배우를 검색해보세요." />
+      <SearchInput
+        placeholder="작품명을 검색해보세요."
+        value={searchInput}
+        onChange={onSearchHandler}
+        onKeyDown={onKeyDownHandler}
+      />
       <SearchResult />
     </Container>
   );

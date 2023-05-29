@@ -15,6 +15,9 @@ import TabNavigation from '../../navigations/TabNavigation';
 import { useRecoilState } from 'recoil';
 import { isLoginState } from '../../states';
 import { FontAwesome } from '@expo/vector-icons';
+import axios from 'axios';
+import { baseURL } from '../../api/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
@@ -28,9 +31,27 @@ const LoginScreen = ({ navigation }) => {
     setPassword(password);
   };
   const HandleClickLogin = () => {
-    // 로그인 api 연결
+    postLoginAPI(); // 로그인 api 연결
     navigation.navigate('HomeScreen');
-    setIsLogin(true);
+  };
+
+  const postLoginAPI = async () => {
+    await axios
+      .post(`${baseURL}/login`, {
+        headers: {
+          'Content-Type': `application/json`,
+          password: password,
+          userName: id,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        // AsyncStorage.setItem('token', JSON.stringify(response.data));
+        setIsLogin(true);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (

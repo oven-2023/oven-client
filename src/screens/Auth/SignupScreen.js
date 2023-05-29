@@ -9,6 +9,8 @@ import {
 import Input from '../../components/Auth/Input';
 import styled from 'styled-components';
 import AuthButton from '../../components/Auth/AuthButton';
+import axios from 'axios';
+import { baseURL } from '../../api/client';
 
 const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -33,9 +35,28 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   const HandleClickSignup = () => {
-    // 회원가입 api 연결
-    Alert.alert('회원가입 완료');
+    postJoinAPI(); // 회원가입 api 연결
     navigation.navigate('LoginScreen');
+  };
+
+  const postJoinAPI = async () => {
+    await axios
+      .post(`${baseURL}/join`, {
+        headers: {
+          'Content-Type': `application/json`,
+          nickName: name,
+          password: password,
+          pwConfirm: passwordConfirm,
+          userName: id,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        Alert.alert('회원가입 완료');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (

@@ -6,14 +6,7 @@ const MainNavigation = () => {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator
-      screenOptions={
-        {
-          // headerTitleAlign: 'center',
-          // headerShown: false,
-        }
-      }
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}

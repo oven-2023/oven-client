@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, Signup } from '../screens';
+import { LoginScreen, SignUpScreen } from '../screens';
 
 const AuthNavigation = () => {
   const Stack = createStackNavigator();
@@ -16,8 +16,8 @@ const AuthNavigation = () => {
         }}
       />
       <Stack.Screen
-        name="Signup"
-        component={Signup}
+        name="SignUpScreen"
+        component={SignUpScreen}
         options={{
           title: '회원가입',
         }}

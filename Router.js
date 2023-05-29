@@ -11,7 +11,7 @@ import React from 'react';
 import { RecoilRoot, useRecoilState } from 'recoil';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginSreen, SignUp, MainStack } from './src/screens';
+import { LoginScreen, SignUpScreen, MainStack } from './src/screens';
 import SearchScreen from './src/screens/Main/SearchScreen';
 import DetailScreen from './src/screens/Main/DetailScreen';
 
@@ -29,7 +29,7 @@ export default function Router() {
                 <Stack.Screen
                   name="TabNavigation"
                   component={TabNavigation}
-                  options={{ headerShown: false, title: '메인 화면' }}
+                  options={{ headerShown: false }}
                 />
                 <Stack.Screen
                   name="MainNavigation"
@@ -58,7 +58,6 @@ export default function Router() {
                   component={AuthNavigation}
                   options={{ headerShown: false }}
                 />
-                {/* <Stack.Screen name="SignUp" component={SignUp} /> */}
               </>
             )}
           </Stack.Navigator>

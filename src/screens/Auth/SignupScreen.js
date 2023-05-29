@@ -10,7 +10,7 @@ import Input from '../../components/Auth/Input';
 import styled from 'styled-components';
 import AuthButton from '../../components/Auth/AuthButton';
 
-const Signup = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -34,7 +34,6 @@ const Signup = ({ navigation }) => {
 
   const HandleClickSignup = () => {
     // 회원가입 api 연결
-    alert('버튼 글릭');
     navigation.navigate('LoginScreen');
   };
 
@@ -55,7 +54,7 @@ const Signup = ({ navigation }) => {
         onChangeText={HandleChangePasswordConfirm}
         secureTextEntry={true}
       />
-      <AuthButton text="회원가입" onClick={HandleClickSignup} />
+      <AuthButton text="회원가입" onPress={HandleClickSignup} />
     </Container>
   );
 };
@@ -74,4 +73,4 @@ const Container = styled.SafeAreaView`
   background-color: black;
 `;
 
-export default Signup;
+export default SignUpScreen;

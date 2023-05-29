@@ -1,5 +1,5 @@
 import LoginScreen from './Auth/LoginScreen';
-import Signup from './Auth/Signup';
+import SignUpScreen from './Auth/SignupScreen';
 import HomeScreen from './Main/HomeScreen';
 import SubscriptionScreen from './Subscription/SubHomeScreen';
 import ChattingScreen from './Subscription/ChattingScreen';
@@ -9,7 +9,7 @@ import DetailScreen from './Main/DetailScreen';
 
 export {
   LoginScreen,
-  Signup,
+  SignUpScreen,
   HomeScreen,
   SubscriptionScreen,
   ChattingScreen,

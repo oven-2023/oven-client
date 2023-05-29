@@ -45,7 +45,6 @@ const MovieInfoBox = () => {
                 name="heart"
                 onPress={toggleHeart}
                 size={34}
-                color="#f368e0"
               />
             ) : (
               <HeartBtn

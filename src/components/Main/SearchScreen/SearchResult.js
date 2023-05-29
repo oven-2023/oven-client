@@ -37,15 +37,14 @@ const SearchResult = () => {
   ];
 
   const navigation = useNavigation();
-  const [searchedResult, setSearchedResult] =
-    useRecoilState(searchedResultState);
+  // const [searchedResult, setSearchedResult] = useRecoilState(searchedResultState);
   return (
     <MovieContainer showsVerticalScrollIndicator={false}>
       <Movies>
         {searchedResult.map(({ poster, title, workId }) => {
           return (
             <Movie
-              key={workId}
+              // key={workId}
               onPress={() => navigation.navigate('DetailScreen')}
             >
               {/* <Movie onPress={() => navigation.navigate('DetailScreen', {workId})}> */}

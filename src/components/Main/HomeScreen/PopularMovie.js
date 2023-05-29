@@ -65,7 +65,7 @@ const PopularMovie = () => {
   };
 
   useEffect(() => {
-    getPopularsAPI();
+    // getPopularsAPI();
   }, []);
 
   const navigation = useNavigation();
@@ -75,7 +75,7 @@ const PopularMovie = () => {
       {populars.map(({ poster, title, workId }) => {
         return (
           <Movie
-            key={workId}
+            // key={workId}
             onPress={() => navigation.navigate('DetailScreen')}
           >
             {/* <Movie onPress={() => navigation.navigate('DetailScreen', { workId })}> */}

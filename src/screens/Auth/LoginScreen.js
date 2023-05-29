@@ -31,7 +31,8 @@ const LoginScreen = ({ navigation }) => {
     setPassword(password);
   };
   const HandleClickLogin = () => {
-    postLoginAPI(); // 로그인 api 연결
+    // postLoginAPI(); // 로그인 api 연결
+    setIsLogin(true);
     navigation.navigate('HomeScreen');
   };
 

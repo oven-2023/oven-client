@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
 import styled from 'styled-components';
 import SearchResult from '../../components/Main/SearchScreen/SearchResult';
@@ -38,9 +38,9 @@ const SearchScreen = () => {
       });
   };
 
-  useEffect(() => {
-    getSearchAPI();
-  }, [keyword]);
+  // useEffect(() => {
+  //   getSearchAPI();
+  // }, [keyword]);
 
   return (
     <Container>

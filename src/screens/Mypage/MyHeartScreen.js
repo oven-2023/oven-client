@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native';
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-import baseURL from '../../../api/client';
+import { baseURL } from '../../api/client';
 
-const MovieRmd = () => {
+const MyHeartScreen = ({ navigation }) => {
   //테스팅
-  const recommendations = [
+  const heartedMovie = [
     {
       poster:
         'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
@@ -46,18 +46,18 @@ const MovieRmd = () => {
     },
   ];
 
-  // const [recommendations, setRecommendations] = useState([]);
+  // const [heartedMovie, setHeartedMovie] = useState([]);
 
-  const getRecommendationsAPI = async () => {
+  const getPopularsAPI = async () => {
     await axios
-      .get(`${baseURL}/home/recommendation/work`, {
+      .get(`${baseURL}/home/populars`, {
         headers: {
           'Content-Type': `application/json`,
         },
       })
       .then((response) => {
         console.log(response);
-        // setRecommendations(response.data);
+        // setPopulars(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -65,37 +65,40 @@ const MovieRmd = () => {
   };
 
   useEffect(() => {
-    // getRecommendationsAPI();
+    // getPopularsAPI();
   }, []);
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
+
   return (
-    <MovieContainer>
-      <Movies>
-        {recommendations.map(({ poster, title, workId }) => {
-          return (
-            <Movie
-              // key={workId}
-              onPress={() => navigation.navigate('DetailScreen')}
-            >
-              {/* <Movie onPress={() => navigation.navigate('DetailScreen', { workId })}> */}
-              <MoviePoster src={poster} />
-              <MovieTitle>{title}</MovieTitle>
-            </Movie>
-          );
-        })}
-      </Movies>
-    </MovieContainer>
+    // <Container>
+    //   <MovieContainer showsVerticalScrollIndicator={false} horizontal={true}>
+    //     {heartedMovie.map(({ poster, title, workId }) => {
+    //       return (
+    //         <Movie
+    //           key={workId}
+    //           onPress={() => navigation.navigate('DetailScreen')}
+    //         >
+    //           {/* <Movie onPress={() => navigation.navigate('DetailScreen', { workId })}> */}
+    //           <MoviePoster src={poster} />
+    //           <MovieTitle>{title}</MovieTitle>
+    //         </Movie>
+    //       );
+    //     })}
+    //   </MovieContainer>
+    // </Container>
+    <></>
   );
 };
 
-const MovieContainer = styled.View`
-  margin-top: 20px;
+const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: black;
 `;
 
-const Movies = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
+const MovieContainer = styled.ScrollView`
+  margin-top: 20px;
+  height: 170;
 `;
 
 const MoviePoster = styled.Image`
@@ -104,8 +107,8 @@ const MoviePoster = styled.Image`
 `;
 
 const Movie = styled.TouchableOpacity`
-  margin: 5px;
-  width: 30%;
+  margin-right: 10px;
+  width: 110px;
 `;
 
 const MovieTitle = styled.Text`
@@ -116,4 +119,4 @@ const MovieTitle = styled.Text`
   font-weight: 700;
 `;
 
-export default MovieRmd;
+export default MyHeartScreen;

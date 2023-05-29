@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View, SafeAreaView, Button } from 'react-native';
 import AuthNavigation from './src/navigations/AuthNavigation';
 import TabNavigation from './src/navigations/TabNavigation';
-import MainNavigation from './src/navigations/MainNavigation';
 import styled from 'styled-components/native';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,8 +11,11 @@ import { RecoilRoot, useRecoilState } from 'recoil';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator } from '@react-navigation/stack';
 import { LoginScreen, SignUpScreen, MainStack } from './src/screens';
+import { HomeScreen } from './src/screens';
 import SearchScreen from './src/screens/Main/SearchScreen';
 import DetailScreen from './src/screens/Main/DetailScreen';
+import { MyPageScreen } from './src/screens';
+import { MyHeartScreen } from './src/screens';
 
 export default function Router() {
   const Stack = createStackNavigator();
@@ -32,8 +34,8 @@ export default function Router() {
                   options={{ headerShown: false, title: '메인 화면' }}
                 />
                 <Stack.Screen
-                  name="MainNavigation"
-                  component={MainNavigation}
+                  name="HomeScreen"
+                  component={HomeScreen}
                   options={{ headerShown: false, title: '메인 화면' }}
                 />
                 <Stack.Screen
@@ -49,6 +51,20 @@ export default function Router() {
                   // initialParams={{ workId: 1 }}
                   options={{
                     title: '작품 상세 보기',
+                  }}
+                />
+                <Stack.Screen
+                  name="MyPageScreen"
+                  component={MyPageScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="MyHeartScreen"
+                  component={MyHeartScreen}
+                  options={{
+                    title: '내가 찜한 작품',
                   }}
                 />
               </>

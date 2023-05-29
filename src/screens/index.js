@@ -6,6 +6,7 @@ import ChattingScreen from './Subscription/ChattingScreen';
 import MyPageScreen from './Mypage/MyPageScreen';
 import SearchScreen from './Main/SearchScreen';
 import DetailScreen from './Main/DetailScreen';
+import MyHeartScreen from './Mypage/MyHeartScreen';
 
 export {
   LoginScreen,
@@ -16,4 +17,5 @@ export {
   MyPageScreen,
   SearchScreen,
   DetailScreen,
+  MyHeartScreen,
 };

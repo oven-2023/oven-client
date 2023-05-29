@@ -16,12 +16,12 @@ import { isModalState, detailMovieState } from '../../states';
 import RatingModal from '../../components/Main/DetailScreen/RatingModal';
 
 const DetailScreen = ({ route }) => {
-  const { workId } = route.params;
+  // const { workId } = route.params;
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
   // const [detailMovie, setDetailMovie] = useRecoilState(detailMovieState);
 
   useEffect(() => {
-    getWorkDetailAPI();
+    // getWorkDetailAPI();
   }, []);
 
   const getWorkDetailAPI = async () => {

@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { isLoginState } from '../../states';
 import { FontAwesome } from '@expo/vector-icons';
 import OttRmd from '../../components/Main/HomeScreen/OttRmd';
 import MovieRmd from '../../components/Main/HomeScreen/MovieRmd';
@@ -11,7 +10,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import PopularMovie from '../../components/Main/HomeScreen/PopularMovie';
 
 const HomeScreen = ({ navigation }) => {
-  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [user, setUser] = useRecoilState(userState);
   return (
     <Container>

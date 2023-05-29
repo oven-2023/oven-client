@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView, Text, Button } from 'react-native';
+import { View, SafeAreaView, Text, Button, Image } from 'react-native';
 import styled from 'styled-components';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
-import { isHeartState } from '../../../states';
+import { detailMovieState, isHeartState } from '../../../states';
 import { isModalState } from '../../../states';
 
 const MovieInfoBox = () => {
   const [isHearted, setIsHearted] = useRecoilState(isHeartState);
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
+  const [detailMovie] = useRecoilState(detailMovieState)
 
   const toggleHeart = () => {
     setIsHearted((previousState) => !previousState);
@@ -17,17 +18,17 @@ const MovieInfoBox = () => {
 
   return (
     <Container>
-      <MoviePoster />
+      <MoviePoster src={detailMovie.poster} />
       <Row>
         <TextContainer>
           <Row>
-            <Title>영화제목</Title>
+            <Title>{detailMovie.titleKr}</Title>
             <Rate>평점</Rate>
           </Row>
-          <Genre>장르</Genre>
-          <Actor>출연: 배우</Actor>
-          <Director>감독: 감독</Director>
-          <OTT>시청 가능한 곳: 오티티</OTT>
+          <Genre>장르: {detailMovie.genre}</Genre>
+          <Actor>출연: {detailMovie.actor}</Actor>
+          <Director>감독: {detailMovie.director}</Director>
+          {/* <OTT>시청 가능한 곳: {detailMovie.providerList}</OTT> */}
         </TextContainer>
         <ButtonContainer>
           <Column>
@@ -69,7 +70,7 @@ const Container = styled.View`
   margin-top: 40px;
 `;
 
-const MoviePoster = styled.View`
+const MoviePoster = styled.Image`
   background-color: white;
   width: 100%;
   height: 200px;

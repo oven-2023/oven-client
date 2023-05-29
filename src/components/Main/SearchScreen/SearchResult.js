@@ -14,45 +14,21 @@ import { searchedResultState } from '../../../states';
 import { useNavigation } from '@react-navigation/native';
 
 const SearchResult = () => {
-  //테스팅
-  const searchedResult = [
-    {
-      title: '제목입니다1',
-    },
-    {
-      title: '제목입니다2',
-    },
-    {
-      title: '제목입니다3',
-    },
-    {
-      title: '제목입니다4',
-    },
-    {
-      title: '제목입니다5',
-    },
-    {
-      title: '제목입니다6',
-    },
-  ];
 
   const navigation = useNavigation();
-  // const [searchedResult, setSearchedResult] = useRecoilState(searchedResultState);
+  const [searchedResult, setSearchedResult] = useRecoilState(searchedResultState);
   return (
     <MovieContainer showsVerticalScrollIndicator={false}>
       <Movies>
-        {searchedResult.map(({ poster, title, workId }) => {
-          return (
+        {searchedResult.map(({ poster, title, workId }) => (
             <Movie
-              // key={workId}
-              onPress={() => navigation.navigate('DetailScreen')}
+              key={workId}
+              onPress={() => navigation.navigate('DetailScreen',{workId})}
             >
-              {/* <Movie onPress={() => navigation.navigate('DetailScreen', {workId})}> */}
               <MoviePoster src={poster} />
               <MovieTitle>{title}</MovieTitle>
             </Movie>
-          );
-        })}
+        ))}
       </Movies>
     </MovieContainer>
   );

@@ -7,6 +7,7 @@ import MyPageScreen from './Mypage/MyPageScreen';
 import SearchScreen from './Main/SearchScreen';
 import DetailScreen from './Main/DetailScreen';
 import MyHeartScreen from './Mypage/MyHeartScreen';
+import MyStarScreen from './Mypage/MyStarScreen';
 
 export {
   LoginScreen,
@@ -18,4 +19,5 @@ export {
   SearchScreen,
   DetailScreen,
   MyHeartScreen,
+  MyStarScreen,
 };

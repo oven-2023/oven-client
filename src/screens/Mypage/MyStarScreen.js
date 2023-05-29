@@ -4,24 +4,60 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const MyHeartScreen = ({ navigation }) => {
-  const [heartedMovie, setHeartedMovie] = useState([]);
-  const [token, setToken] = useState('');
+const MyStarScreen = ({ navigation }) => {
+  //테스팅
+  const staredMovie = [
+    {
+      poster:
+        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
+      title: '제목입니다1',
+      workId: 1,
+    },
+    {
+      poster:
+        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
+      title: '제목입니다2',
+      workId: 2,
+    },
+    {
+      poster:
+        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
+      title: '제목입니다3',
+      workId: 3,
+    },
+    {
+      poster:
+        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
+      title: '제목입니다4',
+      workId: 4,
+    },
+    {
+      poster:
+        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
+      title: '제목입니다5',
+      workId: 5,
+    },
+    {
+      poster:
+        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
+      title: '제목입니다6',
+      workId: 6,
+    },
+  ];
+
+  // const [heartedMovie, setHeartedMovie] = useState([]);
 
   const getPopularsAPI = async () => {
     await axios
-      .get(`${baseURL}/mypage/likes`, {
+      .get(`${baseURL}/home/populars`, {
         headers: {
-          Authorization: token,
+          'Content-Type': `application/json`,
         },
       })
       .then((response) => {
-        console.log(token);
-        console.log('hearted');
         console.log(response);
-        setPopulars(response.data);
+        // setPopulars(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -29,22 +65,17 @@ const MyHeartScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    // console.log('hsefsf');
-    // const token = AsyncStorage.getItem('token');
-    // setToken(JSON.parse(token).token);
     // getPopularsAPI();
-    // console.log(token);
-
   }, []);
 
   // const navigation = useNavigation();
 
   return (
     <Container>
-      <Title>내가 찜한 작품</Title>
+      <Title>내가 평가한 작품</Title>
       <MovieContainer>
         <Movies>
-          {heartedMovie.map(({ poster, title, workId }) => (
+          {staredMovie.map(({ poster, title, workId }) => (
             <Movie
               key={workId}
               onPress={() => navigation.navigate('DetailScreen', { workId })}
@@ -103,4 +134,4 @@ const Title = styled.Text`
   margin-top: 30px;
 `;
 
-export default MyHeartScreen;
+export default MyStarScreen;

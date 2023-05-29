@@ -30,28 +30,22 @@ const LoginScreen = ({ navigation }) => {
   const HandleChangePassword = (password) => {
     setPassword(password);
   };
-  const HandleClickLogin = () => {
-    // postLoginAPI(); // 로그인 api 연결
-    setIsLogin(true);
-    navigation.navigate('HomeScreen');
-  };
 
   const postLoginAPI = async () => {
     await axios
       .post(`${baseURL}/login`, {
-        headers: {
-          'Content-Type': `application/json`,
-          password: password,
-          userName: id,
-        },
+        password: password,
+        userName: id,
       })
       .then((response) => {
-        console.log(response);
-        // AsyncStorage.setItem('token', JSON.stringify(response.data));
+        console.log(response.data.token);
+        AsyncStorage.setItem('token', JSON.stringify(response.data.token));
         setIsLogin(true);
+        navigation.navigate('HomeScreen');
       })
       .catch(function (error) {
         console.log(error);
+        alert('로그인 실패');
       });
   };
 
@@ -66,7 +60,7 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={HandleChangePassword}
         secureTextEntry={true}
       />
-      <AuthButton text="로그인" onPress={HandleClickLogin} />
+      <AuthButton text="로그인" onPress={postLoginAPI} />
       <Button
         title="회원가입"
         onPress={() => navigation.navigate('SignUpScreen')}

@@ -5,18 +5,25 @@ import { useRecoilState } from 'recoil';
 import { FontAwesome } from '@expo/vector-icons';
 import OttRmd from '../../components/Main/HomeScreen/OttRmd';
 import MovieRmd from '../../components/Main/HomeScreen/MovieRmd';
-import { userState } from '../../states';
-import { ScrollView } from 'react-native-gesture-handler';
+import { isLoginState, userState } from '../../states';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import PopularMovie from '../../components/Main/HomeScreen/PopularMovie';
 
 const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useRecoilState(userState);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const logout = () => {
+    setIsLogin(false);
+    navigation.navigate('LoginScreen');
+  };
   return (
     <Container>
       <ScrollView>
         <Centralizer>
           <Top>
-            <Oven>Oven</Oven>
+            <TouchableOpacity onPress={logout}>
+              <Oven>Oven</Oven>
+            </TouchableOpacity>
             <SearchButton
               name="search"
               size={34}
@@ -48,8 +55,8 @@ const Container = styled.SafeAreaView`
 `;
 
 const Centralizer = styled.View`
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Top = styled.View`

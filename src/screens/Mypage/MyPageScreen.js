@@ -25,7 +25,10 @@ const MyPageScreen = ({ navigation }) => {
           <FontAwesome name="heart" size={34} color="black" />
           <MenuText> 내가 찜한 작품 보기</MenuText>
         </MenuButton>
-        <MenuButton isFiled={false}>
+        <MenuButton
+          isFiled={false}
+          onPress={() => navigation.navigate('MyStarScreen')}
+        >
           <FontAwesome name="star" size={34} color="black" />
           <MenuText> 내가 평가한 작품 보기</MenuText>
         </MenuButton>

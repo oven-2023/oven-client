@@ -14,29 +14,31 @@ import OttList from '../../components/Main/DetailScreen/OttList';
 import { useRecoilState } from 'recoil';
 import { isModalState, detailMovieState } from '../../states';
 import RatingModal from '../../components/Main/DetailScreen/RatingModal';
+import axios from 'axios';
+import { baseURL } from '../../api/client';
 
 const DetailScreen = ({ route }) => {
-  // const { workId } = route.params;
+  const { workId } = route.params;
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
-  // const [detailMovie, setDetailMovie] = useRecoilState(detailMovieState);
+  const [detailMovie, setDetailMovie] = useRecoilState(detailMovieState);
 
   useEffect(() => {
-    // getWorkDetailAPI();
+    getWorkDetailAPI();
   }, []);
 
   const getWorkDetailAPI = async () => {
     await axios
-      .get(`${baseURL}/works`, {
-        headers: {
-          'Content-Type': `application/json`,
-        },
-        params: {
-          workId: { workId },
-        },
-      })
+      .get(
+        `http://ec2-3-34-203-105.ap-northeast-2.compute.amazonaws.com/works/${workId}`,
+        {
+          params: {
+            workId: workId,
+          },
+        }
+      )
       .then((response) => {
-        console.log(response);
-        // setDetailMovie(response.data);
+        console.log('detail', response.data.data);
+        setDetailMovie(response.data.data);
       })
       .catch(function (error) {
         console.log(error);

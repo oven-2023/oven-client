@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
 import styled from 'styled-components';
 import SearchResult from '../../components/Main/SearchScreen/SearchResult';
@@ -21,26 +21,29 @@ const SearchScreen = () => {
 
   const getSearchAPI = async () => {
     await axios
-      .get(`${baseURL}/search`, {
-        headers: {
-          'Content-Type': `application/json`,
-        },
-        params: {
-          keyword: searchInput,
-        },
-      })
+      .get(
+        `http://ec2-3-34-203-105.ap-northeast-2.compute.amazonaws.com/search`,
+        {
+          headers: {
+            'Content-Type': `application/json`,
+          },
+          params: {
+            keyword: searchInput,
+          },
+        }
+      )
       .then((response) => {
-        console.log(response);
-        // setSearchedResult(response.data);
+        console.log('search', response.data.data);
+        setSearchedResult(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  // useEffect(() => {
-  //   getSearchAPI();
-  // }, [keyword]);
+  useEffect(() => {
+    getSearchAPI();
+  }, [searchInput]);
 
   return (
     <Container>

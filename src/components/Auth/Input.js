@@ -29,7 +29,7 @@ const StyledTextInput = styled.TextInput`
   margin: 20px 0px;
   padding: 0px 20px;
   border-radius: 10px;
-  color: white;
+  color: black;
   font-size: 20px;
   font-weight: 600;
 `;

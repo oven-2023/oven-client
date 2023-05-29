@@ -2,21 +2,15 @@ import React from 'react';
 import { View, SafeAreaView, Text, Button } from 'react-native';
 import styled from 'styled-components';
 import { FontAwesome } from '@expo/vector-icons';
+import { useRecoilState } from 'recoil';
+import { detailMovieState } from '../../../states';
 
 const MovieInfoText = () => {
+  const [detailMovie] = useRecoilState(detailMovieState)
   return (
     <Container>
       <Title>작품 정보</Title>
-      <MovieSummary>
-        작품정보요약 작품정보요약 작품정보요약 작품정보요약 작품정보요약
-        작품정보요약 작품정보요약 작품정보요약 작품정보요약 작품정보요약
-        작품정보요약 작품정보요약 작품정보요약 작품정보요약 작품정보요약
-        작품정보요약 작품정보요약 작품정보요약 작품정보요약 작품정보요약
-        작품정보요약 작품정보요약 작품정보요약 작품정보요약 작품정보요약
-        작품정보요약 작품정보요약 작품정보요약 작품정보요약 작품정보요약
-        작품정보요약 작품정보요약 작품정보요약 작품정보요약 작품정보요약
-        작품정보요약 작품정보요약 작품정보요약 작품정보요약 작품정보요약
-      </MovieSummary>
+      <MovieSummary>{detailMovie.summary}</MovieSummary>
     </Container>
   );
 };

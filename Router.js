@@ -16,6 +16,7 @@ import SearchScreen from './src/screens/Main/SearchScreen';
 import DetailScreen from './src/screens/Main/DetailScreen';
 import { MyPageScreen } from './src/screens';
 import { MyHeartScreen } from './src/screens';
+import { MyStarScreen } from './src/screens';
 
 export default function Router() {
   const Stack = createStackNavigator();
@@ -65,6 +66,13 @@ export default function Router() {
                   component={MyHeartScreen}
                   options={{
                     title: '내가 찜한 작품',
+                  }}
+                />
+                <Stack.Screen
+                  name="MyStarScreen"
+                  component={MyStarScreen}
+                  options={{
+                    title: '내가 평가한 작품',
                   }}
                 />
               </>

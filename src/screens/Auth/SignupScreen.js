@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   Button,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import Input from '../../components/Auth/Input';
 import styled from 'styled-components';
@@ -34,25 +35,18 @@ const SignUpScreen = ({ navigation }) => {
     setPasswordConfirm(passwordConfirm);
   };
 
-  const HandleClickSignup = () => {
-    postJoinAPI(); // 회원가입 api 연결
-    navigation.navigate('LoginScreen');
-  };
-
   const postJoinAPI = async () => {
     await axios
       .post(`${baseURL}/join`, {
-        headers: {
-          'Content-Type': `application/json`,
           nickName: name,
           password: password,
           pwConfirm: passwordConfirm,
           userName: id,
-        },
       })
       .then((response) => {
         console.log(response);
         Alert.alert('회원가입 완료');
+        navigation.navigate('LoginScreen');
       })
       .catch(function (error) {
         console.log(error);
@@ -76,7 +70,7 @@ const SignUpScreen = ({ navigation }) => {
         onChangeText={HandleChangePasswordConfirm}
         secureTextEntry={true}
       />
-      <AuthButton text="회원가입" onPress={HandleClickSignup} />
+      <AuthButton text="회원가입" onPress={postJoinAPI} />
     </Container>
   );
 };

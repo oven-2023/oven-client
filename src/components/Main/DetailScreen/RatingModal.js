@@ -20,6 +20,7 @@ const RatingModal = () => {
   const onHandleSubmit = () => {
     // 평점 없으면 -> 평점 등록 api
     // 평점 있으면 -> 평점 수정 api
+    alert('평점 등록 완료!');
     setIsModalOpened(false);
   };
 
@@ -75,7 +76,7 @@ const ModalBackground = styled.SafeAreaView`
   height: 100%;
   align-items: center;
   justify-content: center;
-  background-color: whitesmoke;
+  background-color: black;
 `;
 
 const ModalView = styled.SafeAreaView`
@@ -90,6 +91,7 @@ const ModalView = styled.SafeAreaView`
 const Title = styled.Text`
   font-size: 30px;
   margin-top: 20px;
+  font-weight: 700;
 `;
 
 const Stars = styled.View`
@@ -107,11 +109,13 @@ const StyledButton = styled.TouchableOpacity``;
 
 const Close = styled.Text`
   font-size: 20px;
+  font-weight: 700;
 `;
 
 const Submit = styled.Text`
   font-size: 20px;
-  color: red;
+  color: #ae0c18;
+  font-weight: 700;
 `;
 
 const ButtonContainer = styled.View`
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: '#ffffff',
     shadowOffset: {
       width: 0,
       height: 4,

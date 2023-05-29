@@ -11,13 +11,19 @@ const AuthButton = ({ text, onPress }) => {
 
 const StyledButton = styled.TouchableOpacity`
   height: 50px;
-  width: 200px;
-  background-color: pink;
+  width: 300px;
+  background-color: #ae0c18;
   border-radius: 4px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
-const StyledText = styled.Text``;
+const StyledText = styled.Text`
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+`;
 
 export default AuthButton;

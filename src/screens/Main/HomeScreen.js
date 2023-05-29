@@ -6,33 +6,39 @@ import { isLoginState } from '../../states';
 import { FontAwesome } from '@expo/vector-icons';
 import OttRmd from '../../components/Main/HomeScreen/OttRmd';
 import MovieRmd from '../../components/Main/HomeScreen/MovieRmd';
+import { userState } from '../../states';
+import { ScrollView } from 'react-native-gesture-handler';
+import PopularMovie from '../../components/Main/HomeScreen/PopularMovie';
 
 const HomeScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
-  const HandleClickHome = () => {
-    navigation.navigate('Login');
-    setIsLogin(false);
-  };
+  const [user, setUser] = useRecoilState(userState);
   return (
     <Container>
-      <Top>
-        <Oven onPress={HandleClickHome}>Oven</Oven>
-        <SearchButton
-          name="search"
-          size={34}
-          color="black"
-          onPress={() => navigation.navigate('SearchScreen')}
-        />
-      </Top>
-      <OttRmd />
-      <Bottom>
-        <Title>실시간 인기작</Title>
-        <MovieRmd />
-      </Bottom>
-      <Bottom>
-        <Title>000님 맞춤 추천작</Title>
-        <MovieRmd />
-      </Bottom>
+      <ScrollView>
+        <Centralizer>
+          <Top>
+            <Oven>Oven</Oven>
+            <SearchButton
+              name="search"
+              size={34}
+              color="black"
+              onPress={() => navigation.navigate('SearchScreen')}
+            />
+          </Top>
+          <OttRmd />
+          <Bottom>
+            <Title>실시간 인기작</Title>
+            <PopularMovie />
+          </Bottom>
+          <Bottom>
+            <Title>
+              <User>{user}</User> 님 맞춤 추천작
+            </Title>
+            <MovieRmd />
+          </Bottom>
+        </Centralizer>
+      </ScrollView>
     </Container>
   );
 };
@@ -40,6 +46,12 @@ const HomeScreen = ({ navigation }) => {
 const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
+  background-color: black;
+`;
+
+const Centralizer = styled.View`
+justify-content: center;
+align-items: center;
 `;
 
 const Top = styled.View`
@@ -56,11 +68,19 @@ const Bottom = styled.View`
 const Oven = styled.Text`
   font-size: 50;
   margin-left: 30;
+  color: white;
+  font-weight: 700;
 `;
 
 const Title = styled.Text`
+  font-size: 25;
+  color: white;
+  font-weight: 700;
+`;
+
+const User = styled.Text`
   font-size: 30;
-  /* align-items: flex-start; */
+  color: #ae0c18;
 `;
 
 const SearchButton = styled(FontAwesome)`
@@ -68,6 +88,7 @@ const SearchButton = styled(FontAwesome)`
   margin-right: 20;
   margin-top: 10;
   align-items: center;
+  color: white;
 `;
 
 export default HomeScreen;

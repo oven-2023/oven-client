@@ -17,18 +17,20 @@ const Input = ({ placeholder, value, onChangeText, secureTextEntry }) => {
       value={value}
       onChangeText={onChangeText}
       secureTextEntry={secureTextEntry}
+      placeholderTextColor="gray"
     />
   );
 };
 
 const StyledTextInput = styled.TextInput`
   background-color: whitesmoke;
-  border: 1px solid gray;
   width: ${({ width }) => Dimensions.get('window').width - 60}px;
-  height: 40px;
+  height: 50px;
   margin: 20px 0px;
   padding: 0px 20px;
   border-radius: 10px;
-  color: black;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
 `;
 export default Input;

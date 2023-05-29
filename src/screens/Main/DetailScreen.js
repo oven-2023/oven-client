@@ -22,7 +22,7 @@ const DetailScreen = () => {
     <Container>
       {isModalOpened ? <RatingModal /> : <></>}
       <MovieInfoBox />
-      <OttList />
+      {/* <OttList /> */}
       <MovieInfoText />
     </Container>
   );
@@ -33,6 +33,7 @@ const StyledButton = styled.TouchableOpacity``;
 const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
+  background-color: black;
 `;
 
 export default DetailScreen;

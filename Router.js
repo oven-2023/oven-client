@@ -6,18 +6,17 @@ import MainNavigation from './src/navigations/MainNavigation';
 import styled from 'styled-components/native';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { isLoginState, testState } from './src/states';
+import { isLoginState } from './src/states';
 import React from 'react';
 import { RecoilRoot, useRecoilState } from 'recoil';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, SignUp, MainStack } from './src/screens';
+import { LoginSreen, SignUp, MainStack } from './src/screens';
 import SearchScreen from './src/screens/Main/SearchScreen';
 import DetailScreen from './src/screens/Main/DetailScreen';
 
 export default function Router() {
   const Stack = createStackNavigator();
-  const [test, setTest] = useRecoilState(testState);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   return (
     <SafeAreaProvider>

@@ -61,7 +61,6 @@ const Movies = styled.View`
   margin-top: 20;
   height: 700;
   width: 100%;
-  background-color: yellow;
   flex-direction: row;
   flex-wrap: wrap;
 `;
@@ -72,7 +71,7 @@ const Movie = styled.TouchableOpacity`
 `;
 
 const MoviePoster = styled.View`
-  background-color: pink;
+  background-color: white;
   height: 140;
 `;
 
@@ -80,6 +79,8 @@ const MovieTitle = styled.Text`
   font-size: 10px;
   margin-top: 5;
   text-align: center;
+  color: white;
+  font-weight: 700;
 `;
 
 export default SearchResult;

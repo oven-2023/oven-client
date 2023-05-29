@@ -15,7 +15,7 @@ import TabNavigation from '../../navigations/TabNavigation';
 import { useRecoilState } from 'recoil';
 import { isLoginState } from '../../states';
 
-const Login = ({ navigation }) => {
+const LoginSreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -27,14 +27,14 @@ const Login = ({ navigation }) => {
     setPassword(password);
   };
   const HandleClickLogin = () => {
-    // Alert.alert('Sign Up', '클릭');
+    // 로그인 api 연결
     navigation.navigate('TabNavigation');
     setIsLogin(true);
   };
 
   return (
     <Container>
-      <Text>로그인</Text>
+      <Title>로그인</Title>
       <Input placeholder="아이디" value={id} onChangeText={HandleChangeId} />
       <Input
         placeholder="비밀번호"
@@ -45,7 +45,6 @@ const Login = ({ navigation }) => {
       <AuthButton
         text="로그인"
         onPress={HandleClickLogin}
-        // onPress={() => navigation.navigate('TabNavigation')}
       />
       <Button
         title="회원가입"
@@ -60,6 +59,14 @@ const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: black;
 `;
 
-export default Login;
+const Title = styled.Text`
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+`;
+
+export default LoginSreen;

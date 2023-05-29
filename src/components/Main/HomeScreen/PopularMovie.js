@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 
-const MovieRmd = () => {
+const PopularMovie = () => {
   //테스팅
   const searchList = [
     {
@@ -30,28 +30,22 @@ const MovieRmd = () => {
   ];
   const navigation = useNavigation();
   return (
-    <MovieContainer>
-      <Movies>
-        {searchList.map(({ title }) => {
-          return (
-            <Movie onPress={() => navigation.navigate('DetailScreen')}>
-              <MoviePoster />
-              <MovieTitle>{title}</MovieTitle>
-            </Movie>
-          );
-        })}
-      </Movies>
+    <MovieContainer showsVerticalScrollIndicator={false} horizontal={true}>
+      {searchList.map(({ title }) => {
+        return (
+          <Movie onPress={() => navigation.navigate('DetailScreen')}>
+            <MoviePoster />
+            <MovieTitle>{title}</MovieTitle>
+          </Movie>
+        );
+      })}
     </MovieContainer>
   );
 };
 
-const MovieContainer = styled.View`
+const MovieContainer = styled.ScrollView`
   margin-top: 20px;
-`;
-
-const Movies = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
+  height: 170;
 `;
 
 const MoviePoster = styled.View`
@@ -60,8 +54,8 @@ const MoviePoster = styled.View`
 `;
 
 const Movie = styled.TouchableOpacity`
-  margin: 5px;
-  width: 30%;
+  margin-right: 10px;
+  width: 110px;
 `;
 
 const MovieTitle = styled.Text`
@@ -72,4 +66,4 @@ const MovieTitle = styled.Text`
   font-weight: 700;
 `;
 
-export default MovieRmd;
+export default PopularMovie;

@@ -1,27 +1,26 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup } from '../screens';
+import { LoginScreen, Signup } from '../screens';
 
 const AuthNavigation = () => {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator
-      // initialRouteName="Login"
-      screenOptions={{
-        // headerTitleAlign: 'center',
-        headerShown: false,
-      }}
-    >
+    <Stack.Navigator initialRouteName="LoginScreen">
       <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }} // 헤더 렌더링 ❌
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{
+          headerShown: false, // 헤더 렌더링 ❌
+          title: '로그인',
+        }}
       />
       <Stack.Screen
         name="Signup"
         component={Signup}
-        options={{ headerShown: false }} // 헤더 렌더링 ❌
+        options={{
+          title: '회원가입',
+        }}
       />
     </Stack.Navigator>
   );

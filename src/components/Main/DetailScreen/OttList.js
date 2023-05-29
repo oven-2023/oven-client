@@ -39,7 +39,7 @@ const Ott = styled.View`
 `;
 
 const OttImg = styled.Image`
-  background-color: pink;
+  background-color: white;
   width: 70px;
   height: 70px;
   border-radius: 15px;

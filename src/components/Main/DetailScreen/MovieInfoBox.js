@@ -22,11 +22,12 @@ const MovieInfoBox = () => {
         <TextContainer>
           <Row>
             <Title>영화제목</Title>
-            <Genre>장르</Genre>
+            <Rate>평점</Rate>
           </Row>
-          <Rate>평점</Rate>
-          <Actor>배우</Actor>
-          <Director>감독</Director>
+          <Genre>장르</Genre>
+          <Actor>출연: 배우</Actor>
+          <Director>감독: 감독</Director>
+          <OTT>시청 가능한 곳: 오티티</OTT>
         </TextContainer>
         <ButtonContainer>
           <Column>
@@ -36,7 +37,7 @@ const MovieInfoBox = () => {
               size={34}
               color="black"
             />
-            <Text>평가하기</Text>
+            <WhiteText>평가하기</WhiteText>
           </Column>
           <Column>
             {isHearted ? (
@@ -54,7 +55,7 @@ const MovieInfoBox = () => {
                 color="black"
               />
             )}
-            <Text>찜하기</Text>
+            <WhiteText>찜하기</WhiteText>
           </Column>
         </ButtonContainer>
       </Row>
@@ -65,39 +66,42 @@ const MovieInfoBox = () => {
 const Container = styled.View`
   align-items: center;
   width: 80%;
-  height: 350px;
-  border: 2px solid;
+  height: 470px;
   margin-top: 40px;
 `;
 
 const MoviePoster = styled.View`
-  background-color: pink;
+  background-color: white;
   width: 100%;
   height: 200px;
   position: relative;
 `;
 const TextContainer = styled.View`
   width: 100%;
-  height: 150px;
-  padding: 20px;
+  height: 200px;
 `;
 const Title = styled.Text`
   font-size: 26px;
+  color: white;
+  font-weight: 700;
 `;
 const Rate = styled.Text`
-  font-size: 20px;
-  margin-top: 10px;
+  margin-left: 20px;
+  color: white;
+  font-weight: 700;
 `;
 const Actor = styled.Text`
   font-size: 16px;
   margin-top: 10px;
+  color: white;
+  font-weight: 500;
 `;
 const Director = styled(Actor)`
-  margin-top: 10px;
 `;
-const Genre = styled.Text`
-  margin-left: 20px;
+const Genre = styled(Actor)`
 `;
+
+const OTT = styled(Actor)``;
 
 const ButtonContainer = styled.View`
   flex-direction: row;
@@ -107,20 +111,29 @@ const ButtonContainer = styled.View`
 `;
 const RatingBtn = styled(FontAwesome)`
   padding: 10px;
+  color: white;
 `;
 const HeartBtn = styled(FontAwesome)`
   padding: 10px;
+  color: white;
 `;
 
 const Row = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
 const Column = styled.View`
   flex-direction: column;
   align-items: center;
   margin-right: 10px;
+`;
+
+const WhiteText = styled.Text`
+  color: white;
+  font-weight: 700;
 `;
 
 export default MovieInfoBox;

@@ -32,13 +32,15 @@ const Signup = ({ navigation }) => {
     setPasswordConfirm(passwordConfirm);
   };
 
-  const HandleClickSignup = (passwordConfirm) => {
-    setPasswordConfirm(passwordConfirm);
+  const HandleClickSignup = () => {
+    // 회원가입 api 연결
+    alert('버튼 글릭');
+    navigation.navigate('LoginScreen');
   };
 
   return (
     <Container>
-      <Text>회원가입</Text>
+      <Title>회원가입</Title>
       <Input placeholder="이름" value={name} onChangeText={HandleChangeName} />
       <Input placeholder="아이디" value={id} onChangeText={HandleChangeId} />
       <Input
@@ -58,10 +60,18 @@ const Signup = ({ navigation }) => {
   );
 };
 
+const Title = styled.Text`
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+`;
+
 const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: black;
 `;
 
 export default Signup;

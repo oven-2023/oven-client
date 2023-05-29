@@ -21,7 +21,12 @@ export const isModalState = atom({
   default: false,
 });
 
-export const searchInputState = atom({
-  key: `searchInput/${v1()}`,
-  default: '',
+export const searchedResultState = atom({
+  key: `searchedResult/${v1()}`,
+  default: [],
+});
+
+export const detailMovieState = atom({
+  key: `detailMovie/${v1()}`,
+  default: [],
 });

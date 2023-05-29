@@ -14,6 +14,7 @@ import AuthButton from '../../components/Auth/AuthButton';
 import TabNavigation from '../../navigations/TabNavigation';
 import { useRecoilState } from 'recoil';
 import { isLoginState } from '../../states';
+import { FontAwesome } from '@expo/vector-icons';
 
 const LoginScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
@@ -34,6 +35,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <Container>
+      <Title>Oven</Title>
       <Title>로그인</Title>
       <Input placeholder="아이디" value={id} onChangeText={HandleChangeId} />
       <Input

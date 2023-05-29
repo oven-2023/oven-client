@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Modal,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
@@ -20,7 +21,7 @@ const RatingModal = () => {
   const onHandleSubmit = () => {
     // 평점 없으면 -> 평점 등록 api
     // 평점 있으면 -> 평점 수정 api
-    alert('평점 등록 완료!');
+    Alert.alert('평점 등록 완료!');
     setIsModalOpened(false);
   };
 

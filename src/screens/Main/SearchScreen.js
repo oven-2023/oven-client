@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
 import styled from 'styled-components';
 import SearchResult from '../../components/Main/SearchScreen/SearchResult';
 import { useRecoilState } from 'recoil';
-import { searchInputState } from '../../states';
+import { searchedResultState } from '../../states';
+import axios from 'axios';
+import { baseURL } from '../../api/client';
 
 const SearchScreen = () => {
-  const [searchInput, setSearchInput] = useRecoilState(searchInputState);
+  const [searchInput, setSearchInput] = useState('');
+  const [seachedMovie, setSearchedResult] = useRecoilState(searchedResultState);
   const onSearchHandler = (event) => {
     setSearchInput(event.target.value);
   };
@@ -15,6 +18,30 @@ const SearchScreen = () => {
       onSubmitHandler();
     }
   };
+
+  const getSearchAPI = async () => {
+    await axios
+      .get(`${baseURL}/search`, {
+        headers: {
+          'Content-Type': `application/json`,
+        },
+        params: {
+          keyword: searchInput,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        // setSearchedResult(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getSearchAPI();
+  }, [keyword]);
+
   return (
     <Container>
       <SearchInput

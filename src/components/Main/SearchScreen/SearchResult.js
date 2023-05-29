@@ -6,15 +6,16 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
+  Image
 } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { searchInputState } from '../../../states';
+import { searchedResultState } from '../../../states';
 import { useNavigation } from '@react-navigation/native';
 
 const SearchResult = () => {
   //테스팅
-  const searchList = [
+  const searchedResult = [
     {
       title: '제목입니다1',
     },
@@ -36,14 +37,19 @@ const SearchResult = () => {
   ];
 
   const navigation = useNavigation();
-  const [searchInput, setSearchInput] = useRecoilState(searchInputState);
+  const [searchedResult, setSearchedResult] =
+    useRecoilState(searchedResultState);
   return (
     <MovieContainer showsVerticalScrollIndicator={false}>
       <Movies>
-        {searchList.map(({ title }) => {
+        {searchedResult.map(({ poster, title, workId }) => {
           return (
-            <Movie onPress={() => navigation.navigate('DetailScreen')}>
-              <MoviePoster />
+            <Movie
+              key={workId}
+              onPress={() => navigation.navigate('DetailScreen')}
+            >
+              {/* <Movie onPress={() => navigation.navigate('DetailScreen', {workId})}> */}
+              <MoviePoster src={poster} />
               <MovieTitle>{title}</MovieTitle>
             </Movie>
           );
@@ -70,7 +76,7 @@ const Movie = styled.TouchableOpacity`
   width: 30%;
 `;
 
-const MoviePoster = styled.View`
+const MoviePoster = styled.Image`
   background-color: white;
   height: 140;
 `;

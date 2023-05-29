@@ -34,6 +34,7 @@ const SignUpScreen = ({ navigation }) => {
 
   const HandleClickSignup = () => {
     // 회원가입 api 연결
+    Alert.alert('회원가입 완료');
     navigation.navigate('LoginScreen');
   };
 

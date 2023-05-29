@@ -29,7 +29,7 @@ export default function Router() {
                 <Stack.Screen
                   name="TabNavigation"
                   component={TabNavigation}
-                  options={{ headerShown: false }}
+                  options={{ headerShown: false, title: '메인 화면' }}
                 />
                 <Stack.Screen
                   name="MainNavigation"
@@ -46,6 +46,7 @@ export default function Router() {
                 <Stack.Screen
                   name="DetailScreen"
                   component={DetailScreen}
+                  // initialParams={{ workId: 1 }}
                   options={{
                     title: '작품 상세 보기',
                   }}

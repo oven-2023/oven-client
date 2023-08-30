@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Button } from 'react-native';
+import { View, Text, SafeAreaView, Button, Alert } from 'react-native';
 import styled from 'styled-components';
 import { isLoginState } from '../../states/index';
 import { useRecoilState } from 'recoil';
@@ -8,10 +8,14 @@ import { AsyncStorage } from '@react-native-async-storage/async-storage';
 
 const MyPageScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
-  const HandleLogout = () => {
-    setIsLogin(false);
-    // AsyncStorage.removeItem(token);
-    navigation.navigate('LoginScreen');
+  const HandleLogout = async () => {
+    try {
+      setIsLogin(false);
+      await AsyncStorage.removeItem(token);
+      navigation.navigate('LoginScreen');
+    } catch {
+      Alert.alert('다시 시도하세요');
+    }
   };
 
   return (
@@ -20,7 +24,9 @@ const MyPageScreen = ({ navigation }) => {
       <ButtonContainer>
         <MenuButton
           isFiled={false}
-          onPress={() => navigation.navigate('MyHeartScreen')}
+          onPress={() => {
+            navigation.navigate('MyHeartScreen');
+          }}
         >
           <FontAwesome name="heart" size={34} color="black" />
           <MenuText> 내가 찜한 작품 보기</MenuText>

@@ -7,65 +7,23 @@ import { baseURL } from '../../api/client';
 
 const MyStarScreen = ({ navigation }) => {
   //테스팅
-  const staredMovie = [
-    {
-      poster:
-        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
-      title: '제목입니다1',
-      workId: 1,
-    },
-    {
-      poster:
-        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
-      title: '제목입니다2',
-      workId: 2,
-    },
-    {
-      poster:
-        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
-      title: '제목입니다3',
-      workId: 3,
-    },
-    {
-      poster:
-        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
-      title: '제목입니다4',
-      workId: 4,
-    },
-    {
-      poster:
-        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
-      title: '제목입니다5',
-      workId: 5,
-    },
-    {
-      poster:
-        'https://nujhrcqkiwag1408085.cdn.ntruss.com/static/upload/drama_poster_images/280x400/drama_102591_1681959812.jpg',
-      title: '제목입니다6',
-      workId: 6,
-    },
-  ];
 
-  // const [heartedMovie, setHeartedMovie] = useState([]);
+  const [staredMovie, setStaredMovie] = useState([]);
 
   const getPopularsAPI = async () => {
     await axios
-      .get(`${baseURL}/home/populars`, {
-        headers: {
-          'Content-Type': `application/json`,
-        },
-      })
+      .get(`${baseURL}/home/recommendation/works`, {})
       .then((response) => {
         console.log(response);
-        // setPopulars(response.data);
+        setStaredMovie(response.data.data);
       })
       .catch(function (error) {
-        console.log(error);
+        console.log('popular', error);
       });
   };
 
   useEffect(() => {
-    // getPopularsAPI();
+    getPopularsAPI();
   }, []);
 
   // const navigation = useNavigation();

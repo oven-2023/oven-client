@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,
   SubscriptionScreen,
-  ChattingScreen,
+  ChatHomeScreen,
   MyPageScreen,
 } from '../screens';
 
@@ -11,10 +11,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="HomeScreen"
-      independent={true}
-    >
+    <Tab.Navigator initialRouteName="HomeScreen" independent={true}>
       <Tab.Screen
         name="홈"
         component={HomeScreen}
@@ -27,7 +24,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="채팅"
-        component={ChattingScreen}
+        component={ChatHomeScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen

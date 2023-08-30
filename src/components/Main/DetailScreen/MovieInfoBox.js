@@ -13,7 +13,7 @@ const MovieInfoBox = () => {
 
   const toggleHeart = () => {
     setIsHearted((previousState) => !previousState);
-    // 추후 찜한 목록에 추가해야함
+    // postHeartedAPI();
   };
 
   return (

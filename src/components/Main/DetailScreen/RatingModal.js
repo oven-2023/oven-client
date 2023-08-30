@@ -19,8 +19,7 @@ const RatingModal = () => {
   const [selectedStars, setSelectedStars] = useState(0);
 
   const onHandleSubmit = () => {
-    // 평점 없으면 -> 평점 등록 api
-    // 평점 있으면 -> 평점 수정 api
+    // postRatingAPI();
     Alert.alert('평점 등록 완료!');
     setIsModalOpened(false);
   };

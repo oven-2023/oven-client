@@ -6,54 +6,77 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  Image
+  FlatList,
+  Image,
+  ActivityIndicator,
 } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { searchedResultState } from '../../../states';
 import { useNavigation } from '@react-navigation/native';
 
-const SearchResult = () => {
-
+const SearchResult = ({ onEndReached, onEndReachedThreshold, isLoading }) => {
   const navigation = useNavigation();
-  const [searchedResult, setSearchedResult] = useRecoilState(searchedResultState);
+  const [searchedResult, setSearchedResult] =
+    useRecoilState(searchedResultState);
   return (
-    <MovieContainer showsVerticalScrollIndicator={false}>
-      <Movies>
-        {searchedResult.map(({ poster, title, workId }) => (
+    <MovieContainer
+      showsVerticalScrollIndicator={false}
+      data={searchedResult}
+      keyExtractor={(item) => item.workId}
+      renderItem={({ item }) => {
+        return (
+          <Movies>
+            <Movie>
+              {/* <MoviePoster src={item.poster} /> */}
+              <MovieTitle>{item.title}</MovieTitle>
+            </Movie>
+          </Movies>
+        );
+      }}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={onEndReachedThreshold}
+      ListFooterComponent={isLoading && <ActivityIndicator />}
+    >
+      {/* <Movies>
+          {searchedResult.map(({ poster, title, workId }) => (
             <Movie
               key={workId}
-              onPress={() => navigation.navigate('DetailScreen',{workId})}
+              onPress={() => navigation.navigate('DetailScreen', { workId })}
             >
               <MoviePoster src={poster} />
               <MovieTitle>{title}</MovieTitle>
             </Movie>
-        ))}
-      </Movies>
+          ))}
+        </Movies> */}
     </MovieContainer>
   );
 };
 
-const MovieContainer = styled.ScrollView`
+const MovieContainer = styled.FlatList`
   width: 80%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: pink;
 `;
 
 const Movies = styled.View`
-  margin-top: 20;
-  height: 700;
   width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
+  background-color: violet;
 `;
 
 const Movie = styled.TouchableOpacity`
   margin: 5px;
   width: 30%;
+  height: 50px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: blue;
 `;
 
 const MoviePoster = styled.Image`
-  background-color: white;
-  height: 140;
+  background-color: green;
+  height: 40;
 `;
 
 const MovieTitle = styled.Text`

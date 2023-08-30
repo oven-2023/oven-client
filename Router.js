@@ -17,6 +17,8 @@ import DetailScreen from './src/screens/Main/DetailScreen';
 import { MyPageScreen } from './src/screens';
 import { MyHeartScreen } from './src/screens';
 import { MyStarScreen } from './src/screens';
+import ChatHomeScreen from './src/screens/Chat/ChatHomeScreen';
+import ChatRoomScreen from './src/screens/Chat/ChatRoomScreen';
 
 export default function Router() {
   const Stack = createStackNavigator();
@@ -32,7 +34,10 @@ export default function Router() {
                 <Stack.Screen
                   name="TabNavigation"
                   component={TabNavigation}
-                  options={{ headerShown: false, title: '메인 화면' }}
+                  options={{
+                    headerShown: false,
+                    title: '메인 화면',
+                  }}
                 />
                 <Stack.Screen
                   name="HomeScreen"
@@ -75,13 +80,37 @@ export default function Router() {
                     title: '내가 평가한 작품',
                   }}
                 />
+                <Stack.Screen
+                  name="ChatHomeScreen"
+                  component={ChatHomeScreen}
+                  options={{
+                    title: '채팅 홈',
+                  }}
+                />
+                <Stack.Screen
+                  name="ChatRoomScreen"
+                  component={ChatRoomScreen}
+                  options={{
+                    title: '채팅 방',
+                  }}
+                />
               </>
             ) : (
               <>
                 <Stack.Screen
-                  name="AuthNavigation"
-                  component={AuthNavigation}
-                  options={{ headerShown: false }}
+                  name="LoginScreen"
+                  component={LoginScreen}
+                  options={{
+                    headerShown: false, // 헤더 렌더링 ❌
+                    title: '로그인',
+                  }}
+                />
+                <Stack.Screen
+                  name="SignUpScreen"
+                  component={SignUpScreen}
+                  options={{
+                    title: '회원가입',
+                  }}
                 />
               </>
             )}

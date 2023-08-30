@@ -10,7 +10,7 @@ const MyHeartScreen = ({ navigation }) => {
   const [heartedMovie, setHeartedMovie] = useState([]);
   const [token, setToken] = useState('');
 
-  const getPopularsAPI = async () => {
+  const getHeartedAPI = async () => {
     await axios
       .get(`${baseURL}/mypage/likes`, {
         headers: {
@@ -21,20 +21,33 @@ const MyHeartScreen = ({ navigation }) => {
         console.log(token);
         console.log('hearted');
         console.log(response);
-        setPopulars(response.data);
+        setHeartedMovie(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  useEffect(() => {
-    // console.log('hsefsf');
-    // const token = AsyncStorage.getItem('token');
-    // setToken(JSON.parse(token).token);
-    // getPopularsAPI();
-    // console.log(token);
+  const getPopularsAPI = async () => {
+    await axios
+      .get(`${baseURL}/home/populars`, {})
+      .then((response) => {
+        console.log(response);
+        setHeartedMovie(response.data.data);
+      })
+      .catch(function (error) {
+        console.log('popular', error);
+      });
+  };
 
+  useEffect(() => {
+    const tokenFunction = async () => {
+      const token = await AsyncStorage.getItem('token');
+    };
+    console.log('hsefsf');
+    tokenFunction();
+    // getHeartedAPI();
+    getPopularsAPI();
   }, []);
 
   // const navigation = useNavigation();

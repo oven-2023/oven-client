@@ -5,6 +5,7 @@ import { isLoginState } from '../../states/index';
 import { useRecoilState } from 'recoil';
 import { FontAwesome } from '@expo/vector-icons';
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import MainLayout from '../../components/Layout/MainLayout';
 
 const MyPageScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
@@ -19,7 +20,7 @@ const MyPageScreen = ({ navigation }) => {
   };
 
   return (
-    <Container>
+    <MainLayout>
       <Title>마이페이지</Title>
       <ButtonContainer>
         <MenuButton
@@ -42,32 +43,24 @@ const MyPageScreen = ({ navigation }) => {
           <MenuText>로그아웃</MenuText>
         </LogoutButton>
       </ButtonContainer>
-    </Container>
+    </MainLayout>
   );
 };
 
-const Container = styled.SafeAreaView`
-  flex: 1;
-  background-color: black;
-`;
-
-const ButtonContainer = styled.View`
-  margin-top: 30px;
-  align-items: center;
-`;
+const ButtonContainer = styled.View``;
 
 const Title = styled.Text`
-  color: white;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
-  margin-top: 10px;
-  margin-left: 30;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: 20;
 `;
 
 const MenuButton = styled.TouchableOpacity`
   height: 50px;
-  width: 80%;
-  background-color: whitesmoke;
+  width: 280px;
+  background-color: pink;
   border-radius: 4px;
   justify-content: center;
   align-items: center;

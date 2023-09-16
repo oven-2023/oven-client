@@ -8,29 +8,21 @@ import MovieRmd from '../../components/Main/HomeScreen/MovieRmd';
 import { isLoginState, userState } from '../../states';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import PopularMovie from '../../components/Main/HomeScreen/PopularMovie';
+import MainLayout from '../../components/Layout/MainLayout';
 
 const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useRecoilState(userState);
-  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
-  const logout = () => {
-    setIsLogin(false);
-    navigation.navigate('LoginScreen');
-  };
+
   return (
-    <Container>
-      <ScrollView>
+    <MainLayout>
+      <Scroller>
+          <SearchButton
+            name="search"
+            size={34}
+            color="black"
+            onPress={() => navigation.navigate('SearchScreen')}
+          />
         <Centralizer>
-          <Top>
-            <TouchableOpacity onPress={logout}>
-              <Oven>Oven</Oven>
-            </TouchableOpacity>
-            <SearchButton
-              name="search"
-              size={34}
-              color="black"
-              onPress={() => navigation.navigate('SearchScreen')}
-            />
-          </Top>
           <OttRmd />
           <Bottom>
             <Title>실시간 인기작</Title>
@@ -43,25 +35,17 @@ const HomeScreen = ({ navigation }) => {
             <MovieRmd />
           </Bottom>
         </Centralizer>
-      </ScrollView>
-    </Container>
+      </Scroller>
+    </MainLayout>
   );
 };
 
-const Container = styled.SafeAreaView`
-  flex: 1;
-  align-items: center;
-  background-color: black;
-`;
-
 const Centralizer = styled.View`
-  justify-content: center;
   align-items: center;
 `;
 
-const Top = styled.View`
+const Scroller = styled.ScrollView`
   width: 100%;
-  flex-direction: row;
 `;
 
 const Bottom = styled.View`
@@ -71,15 +55,13 @@ const Bottom = styled.View`
 `;
 
 const Oven = styled.Text`
-  font-size: 50;
+  font-size: 20;
   margin-left: 30;
-  color: white;
   font-weight: 700;
 `;
 
 const Title = styled.Text`
   font-size: 25;
-  color: white;
   font-weight: 700;
 `;
 
@@ -91,9 +73,8 @@ const User = styled.Text`
 const SearchButton = styled(FontAwesome)`
   margin-left: auto;
   margin-right: 20;
-  margin-top: 10;
+  margin-top: 0;
   align-items: center;
-  color: white;
 `;
 
 export default HomeScreen;

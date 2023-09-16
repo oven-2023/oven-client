@@ -6,6 +6,7 @@ import {
   ChatHomeScreen,
   MyPageScreen,
 } from '../screens';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,24 +14,48 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator initialRouteName="HomeScreen" independent={true}>
       <Tab.Screen
-        name="홈"
+        name="home"
         component={HomeScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          title: '홈',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="home" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
-        name="구독"
+        name="subscription"
         component={SubscriptionScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          title: '구독',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="search" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
-        name="채팅"
+        name="chathome"
         component={ChatHomeScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          title: '채팅',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="message" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
-        name="마이페이지"
+        name="mypage"
         component={MyPageScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          title: '마이페이지',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="person" color={color} size={size} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );

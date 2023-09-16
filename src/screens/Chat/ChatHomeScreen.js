@@ -5,6 +5,7 @@ import OttList from '../../components/Main/DetailScreen/OttList';
 import OttButtonList from '../../components/Chat/OttButtonList';
 import ChatRoomButton from '../../components/Chat/ChatRoomButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import MainLayout from '../../components/Layout/MainLayout';
 
 const ChatHomeScreen = ({ navigation }) => {
   const rooms = [
@@ -52,7 +53,7 @@ const ChatHomeScreen = ({ navigation }) => {
     },
   ];
   return (
-    <Container>
+    <MainLayout>
       <OttBtnContainer>
         <OttButtonList />
       </OttBtnContainer>
@@ -74,14 +75,9 @@ const ChatHomeScreen = ({ navigation }) => {
           </ChatRoomListContainer>
         </Scroller>
       </Centralizer>
-    </Container>
+    </MainLayout>
   );
 };
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-  align-items: center;
-`;
 
 const Touchable = styled.TouchableOpacity`
   width: 100%;

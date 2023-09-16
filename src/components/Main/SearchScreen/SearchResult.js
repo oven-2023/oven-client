@@ -15,7 +15,12 @@ import { useRecoilState } from 'recoil';
 import { searchedResultState } from '../../../states';
 import { useNavigation } from '@react-navigation/native';
 
-const SearchResult = ({ onEndReached, onEndReachedThreshold, isLoading }) => {
+const SearchResult = ({
+  onEndReached,
+  onEndReachedThreshold,
+  isLoading,
+  disableVirtualization,
+}) => {
   const navigation = useNavigation();
   const [searchedResult, setSearchedResult] =
     useRecoilState(searchedResultState);
@@ -36,6 +41,7 @@ const SearchResult = ({ onEndReached, onEndReachedThreshold, isLoading }) => {
       }}
       onEndReached={onEndReached}
       onEndReachedThreshold={onEndReachedThreshold}
+      disableVirtualization={disableVirtualization}
       ListFooterComponent={isLoading && <ActivityIndicator />}
     >
       {/* <Movies>

@@ -37,10 +37,8 @@ const SearchScreen = () => {
 
   const getData = async () => {
     setIsLoading(true);
-    if (searchInput !== '') {
-      setInterval(() => testSearchAPI(),1000);
-      // testSearchAPI();
-    } else infAPI();
+    if (searchInput !== '') testSearchAPI(); // 검색어 입력
+    else infAPI(); // 초기
     // await testSearchAPI();
     setIsLoading(false);
   };
@@ -60,7 +58,17 @@ const SearchScreen = () => {
       )
       .then((response) => {
         console.log('데이터 가져오기 성공');
-        setSearchedResult(response.data.results);
+        console.log(pageParams);
+        // setSearchedResult(response.data.results);
+        const newResults = response.data.results;
+        // setSearchedResult(response.data.results);
+        if (pageParams === 1) {
+          // 첫 번째 페이지인 경우에는 초기화
+          setSearchedResult(newResults);
+        } else {
+          // 그 외의 경우에는 이전 결과에 새로운 결과를 추가
+          setSearchedResult((prevResults) => [...prevResults, ...newResults]);
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -82,7 +90,15 @@ const SearchScreen = () => {
       )
       .then((response) => {
         console.log('검색 api');
-        setSearchedResult(response.data.results);
+        const newResults = response.data.results;
+        // setSearchedResult(response.data.results);
+        if (pageParams === 1) {
+          // 첫 번째 페이지인 경우에는 초기화
+          setSearchedResult(newResults);
+        } else {
+          // 그 외의 경우에는 이전 결과에 새로운 결과를 추가
+          setSearchedResult((prevResults) => [...prevResults, ...newResults]);
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -126,8 +142,9 @@ const SearchScreen = () => {
       />
       <SearchResult
         onEndReached={onEndReached}
-        onEndReachedThreshold={0.6}
+        onEndReachedThreshold={0.7}
         isLoading={isLoading}
+        disableVirtualization={false}
       />
     </Container>
   );

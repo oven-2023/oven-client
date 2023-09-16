@@ -1,42 +1,40 @@
 import React from 'react';
+import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 import styled from 'styled-components';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Button,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
 
-const OttList = () => {
+const OttButtonList = () => {
   const otts = [
     {
       id: 1,
       ottname: 'Netflix',
-      src: require('../../../img/Netflix.png'),
+      src: require('../../img/Netflix.png'),
     },
     {
       id: 2,
       ottname: 'Watcha',
-      src: require('../../../img/Watcha.png'),
+      src: require('../../img/Watcha.png'),
     },
     {
       id: 3,
       ottname: 'Wavve',
-      src: require('../../../img/Wavve.png'),
+      src: require('../../img/Wavve.png'),
     },
     {
       id: 4,
       ottname: 'Tving',
-      src: require('../../../img/Tving.png'),
+      src: require('../../img/Tving.png'),
     },
   ];
+
   return (
-    <Container>
+    <Container showsVerticalScrollIndicator={false} horizontal={true}>
+      <Ott>
+        <OvenLogo source={require('../../img/oven.png')} />
+        <OttName>전체</OttName>
+      </Ott>
       {otts.map(({ id, ottname, src }) => (
         <Ott key={id}>
-          <OttLogo source={src} />
+          <OttLogo source={src} resizeMode="contain" />
           <OttName>{ottname}</OttName>
         </Ott>
       ))}
@@ -44,8 +42,7 @@ const OttList = () => {
   );
 };
 
-const Container = styled.View`
-  width: 80%;
+const Container = styled.ScrollView`
   flex-direction: row;
   margin-top: 10px;
 `;
@@ -56,17 +53,20 @@ const Ott = styled.View`
   align-items: center;
 `;
 
-const OttLogo = styled.Image`
+const OvenLogo = styled.Image`
   width: 70px;
   height: 70px;
+`;
+
+const OttLogo = styled(OvenLogo)`
   border-radius: 15px;
-  border: 1px solid white;
+  border: 1px solid black;
 `;
 
 const OttName = styled.Text`
   margin-top: 5px;
   align-items: center;
-  color: white;
+  font-weight: 600;
 `;
 
-export default OttList;
+export default OttButtonList;

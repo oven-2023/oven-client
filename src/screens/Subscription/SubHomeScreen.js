@@ -1,66 +1,84 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, FlatList, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import MainLayout from '../../components/Layout/MainLayout';
 import OttButtonList from '../../components/Subscription/OttButtonList';
 import ChatRoomButton from '../../components/Chat/ChatRoomButton';
+import { useRecoilState } from 'recoil';
+import { clickedOttState } from '../../states';
 
-const SubscriptionScreen = () => {
+const SubscriptionScreen = ({ navigation }) => {
+  const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
+
   const rooms = [
     {
       id: 1,
       name: '구독방1',
-      desc: '구독방1번입니다.',
+      desc: '넷플릭스방입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 1,
     },
     {
       id: 2,
       name: '구독방2',
-      desc: '구독방2번입니다.',
+      desc: '왓챠방입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 2,
     },
     {
       id: 3,
       name: '구독방3',
-      desc: '구독방3번입니다.',
+      desc: '웨이브방입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 3,
     },
     {
       id: 4,
       name: '구독방4',
-      desc: '구독방4번입니다.',
+      desc: '티빙방입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 4,
     },
     {
-      id: 4,
-      name: '구독방4',
-      desc: '구독방4번입니다.',
+      id: 5,
+      name: '구독방5',
+      desc: '넷플릭스방입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 5,
     },
     {
-      id: 4,
-      name: '구독방4',
-      desc: '구독방4번입니다.',
+      id: 6,
+      name: '구독방6',
+      desc: '왓챠방입니다',
       wholenum: 4,
       leftnum: 0,
+      ottid: 6,
     },
   ];
+
+  const filteredRooms = clickedOtt
+    ? rooms.filter((room) => room.ottid === clickedOtt)
+    : rooms;
+
   return (
     <MainLayout>
       <OttBtnContainer>
         <OttButtonList />
       </OttBtnContainer>
       <Centralizer>
-        <Scroller>
+        <Scroller onEndReachedThreshold={0.9}>
           <SubTitle>참여 가능한 구독방</SubTitle>
           <ChatRoomListContainer>
-            {rooms.map(({ id, name, desc, wholenum, leftnum }) => (
-              <Touchable onPress={() => navigation.navigate('ChatRoomScreen')}>
+            {filteredRooms.map(({ id, name, desc, wholenum, leftnum }) => (
+              <Touchable
+                key={id}
+                onPress={() => navigation.navigate('ChatRoomScreen')}
+              >
                 <ChatRoomButton
                   id={id}
                   name={name}

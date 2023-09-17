@@ -42,7 +42,7 @@ const SearchResult = ({
       onEndReached={onEndReached}
       onEndReachedThreshold={onEndReachedThreshold}
       disableVirtualization={disableVirtualization}
-      ListFooterComponent={isLoading && <ActivityIndicator />}
+      ListFooterComponent={isLoading && <ActivityIndicator size="large" />}
     >
       {/* <Movies>
           {searchedResult.map(({ poster, title, workId }) => (

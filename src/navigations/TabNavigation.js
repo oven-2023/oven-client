@@ -12,7 +12,13 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
-    <Tab.Navigator initialRouteName="HomeScreen" independent={true}>
+    <Tab.Navigator
+      initialRouteName="HomeScreen"
+      independent={true}
+      screenOptions={{
+        tabBarActiveTintColor: 'red',
+      }}
+    >
       <Tab.Screen
         name="home"
         component={HomeScreen}

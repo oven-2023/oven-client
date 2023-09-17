@@ -30,3 +30,8 @@ export const detailMovieState = atom({
   key: `detailMovie/${v1()}`,
   default: [],
 });
+
+export const clickedOttState = atom({
+  key: `clickedOtt/${v1()}`,
+  default: null,
+});

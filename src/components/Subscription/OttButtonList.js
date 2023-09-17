@@ -1,6 +1,15 @@
-import React from 'react';
-import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import styled from 'styled-components';
+import { clickedOttState } from '../../states';
 
 const OttButtonList = () => {
   const otts = [
@@ -26,14 +35,26 @@ const OttButtonList = () => {
     },
   ];
 
+  const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
+
+  const onWholeBtnHandler = () => {
+    console.log(0);
+    setClickedOtt(null);
+  };
+
+  const onSortBtnHandler = (id) => {
+    console.log(id);
+    setClickedOtt(id);
+  };
+
   return (
     <Container showsVerticalScrollIndicator={false} horizontal={true}>
-      <Ott>
+      <Ott onPress={onWholeBtnHandler}>
         <OvenLogo source={require('../../img/oven.png')} />
         <OttName>전체</OttName>
       </Ott>
       {otts.map(({ id, ottname, src }) => (
-        <Ott key={id}>
+        <Ott key={id} onPress={() => onSortBtnHandler(id)}>
           <OttLogo source={src} resizeMode="contain" />
           <OttName>{ottname}</OttName>
         </Ott>
@@ -47,7 +68,7 @@ const Container = styled.ScrollView`
   margin-top: 10px;
 `;
 
-const Ott = styled.View`
+const Ott = styled.TouchableOpacity`
   margin-right: 20px;
   margin-top: 10px;
   align-items: center;

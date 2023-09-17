@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import MainLayout from '../../components/Layout/MainLayout';
@@ -6,10 +6,18 @@ import OttButtonList from '../../components/Subscription/OttButtonList';
 import ChatRoomButton from '../../components/Chat/ChatRoomButton';
 import { useRecoilState } from 'recoil';
 import { clickedOttState } from '../../states';
+import { useIsFocused } from '@react-navigation/native';
 
 const SubscriptionScreen = ({ navigation }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
+  const isFocused = useIsFocused(); 
 
+  useEffect(() => {
+    if (!isFocused) {
+      setClickedOtt(null);
+    }
+  }, [isFocused]);
+  
   const rooms = [
     {
       id: 1,

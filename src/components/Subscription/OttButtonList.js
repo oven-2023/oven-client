@@ -38,23 +38,32 @@ const OttButtonList = () => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
 
   const onWholeBtnHandler = () => {
-    console.log(0);
     setClickedOtt(null);
   };
 
   const onSortBtnHandler = (id) => {
-    console.log(id);
     setClickedOtt(id);
   };
 
   return (
     <Container showsVerticalScrollIndicator={false} horizontal={true}>
-      <Ott onPress={onWholeBtnHandler}>
+      <Ott
+        style={{
+          opacity: clickedOtt === null ? 1 : 0.3,
+        }}
+        onPress={() => onSortBtnHandler(null)}
+      >
         <OvenLogo source={require('../../img/oven.png')} />
         <OttName>전체</OttName>
       </Ott>
       {otts.map(({ id, ottname, src }) => (
-        <Ott key={id} onPress={() => onSortBtnHandler(id)}>
+        <Ott
+          key={id}
+          style={{
+            opacity: clickedOtt === id ? 1 : 0.3,
+          }}
+          onPress={() => onSortBtnHandler(id)}
+        >
           <OttLogo source={src} resizeMode="contain" />
           <OttName>{ottname}</OttName>
         </Ott>

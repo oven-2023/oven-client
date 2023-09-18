@@ -7,6 +7,8 @@ import ChatRoomButton from '../../components/Chat/ChatRoomButton';
 import { useRecoilState } from 'recoil';
 import { clickedOttState } from '../../states';
 import { useIsFocused } from '@react-navigation/native';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const SubscriptionScreen = ({ navigation }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
@@ -70,6 +72,13 @@ const SubscriptionScreen = ({ navigation }) => {
     },
   ];
 
+  const actions = [
+    {
+      icon: require('../../img/addIcon.png'),
+      name: '구독 방 생성하기',
+    },
+  ];
+
   const filteredRooms = clickedOtt
     ? rooms.filter((room) => room.ottid === clickedOtt)
     : rooms;
@@ -112,6 +121,14 @@ const SubscriptionScreen = ({ navigation }) => {
             ))}
           </ChatRoomListContainer>
         </Scroller>
+        <FloatingView>
+          <ActionButton
+            buttonColor="red"
+            onPress={() => {
+              console.log('hi');
+            }}
+          />
+        </FloatingView>
       </Centralizer>
     </MainLayout>
   );
@@ -130,6 +147,7 @@ const Centralizer = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const OttBtnContainer = styled.View`
@@ -148,6 +166,14 @@ const SubTitle = styled.Text`
   margin-left: 20px;
   font-size: 26px;
   font-weight: 500;
+`;
+
+const FloatingView = styled.View`
+  flex: 1;
+  background-color: red;
+  position: absolute;
+  right: 60px;
+  top: 440px;
 `;
 
 export default SubscriptionScreen;

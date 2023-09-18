@@ -12,16 +12,16 @@ const ChatHomeScreen = ({ navigation }) => {
     {
       id: 1,
       name: '참여방1',
-      desc: '참여방1번입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 1,
     },
     {
       id: 2,
       name: '참여방2',
-      desc: '참여방2번입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 2,
     },
     {
       id: 3,
@@ -29,6 +29,7 @@ const ChatHomeScreen = ({ navigation }) => {
       desc: '참여방3번입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 3,
     },
     {
       id: 4,
@@ -36,6 +37,7 @@ const ChatHomeScreen = ({ navigation }) => {
       desc: '참여방4번입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 4,
     },
     {
       id: 4,
@@ -43,6 +45,7 @@ const ChatHomeScreen = ({ navigation }) => {
       desc: '참여방4번입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 1,
     },
     {
       id: 4,
@@ -50,26 +53,28 @@ const ChatHomeScreen = ({ navigation }) => {
       desc: '참여방4번입니다.',
       wholenum: 4,
       leftnum: 0,
+      ottid: 2,
     },
   ];
   return (
     <MainLayout>
-        <Scroller>
-          <SubTitle>내가 참여 중인 구독방</SubTitle>
-          <ChatRoomListContainer>
-            {rooms.map(({ id, name, desc, wholenum, leftnum }) => (
-              <Touchable onPress={() => navigation.navigate('ChatRoomScreen')}>
-                <ChatRoomButton
-                  id={id}
-                  name={name}
-                  desc={desc}
-                  wholenum={wholenum}
-                  leftnum={leftnum}
-                />
-              </Touchable>
-            ))}
-          </ChatRoomListContainer>
-        </Scroller>
+      <Scroller>
+        <SubTitle>내가 참여 중인 구독방</SubTitle>
+        <ChatRoomListContainer>
+          {rooms.map(({ id, name, desc, wholenum, leftnum, ottid }) => (
+            <Touchable onPress={() => navigation.navigate('ChatRoomScreen')}>
+              <ChatRoomButton
+                id={id}
+                name={name}
+                desc={desc}
+                wholenum={wholenum}
+                leftnum={leftnum}
+                ottid={ottid}
+              />
+            </Touchable>
+          ))}
+        </ChatRoomListContainer>
+      </Scroller>
     </MainLayout>
   );
 };

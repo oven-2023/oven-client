@@ -9,6 +9,7 @@ import DetailScreen from './Main/DetailScreen';
 import MyHeartScreen from './Mypage/MyHeartScreen';
 import MyStarScreen from './Mypage/MyStarScreen';
 import ChatRoomScreen from './Chat/ChatRoomScreen';
+import MkSubRoomScreen from './Subscription/MkSubRoomScreen';
 
 export {
   LoginScreen,
@@ -22,4 +23,5 @@ export {
   MyHeartScreen,
   MyStarScreen,
   ChatRoomScreen,
+  MkSubRoomScreen,
 };

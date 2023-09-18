@@ -25,7 +25,6 @@ const SubscriptionScreen = ({ navigation }) => {
     {
       id: 1,
       name: '구독방1',
-      desc: '넷플릭스방입니다.',
       wholenum: 4,
       leftnum: 0,
       ottid: 1,
@@ -33,7 +32,6 @@ const SubscriptionScreen = ({ navigation }) => {
     {
       id: 2,
       name: '구독방2',
-      desc: '왓챠방입니다.',
       wholenum: 4,
       leftnum: 0,
       ottid: 2,
@@ -41,7 +39,6 @@ const SubscriptionScreen = ({ navigation }) => {
     {
       id: 3,
       name: '구독방3',
-      desc: '웨이브방입니다.',
       wholenum: 4,
       leftnum: 0,
       ottid: 3,
@@ -49,7 +46,6 @@ const SubscriptionScreen = ({ navigation }) => {
     {
       id: 4,
       name: '구독방4',
-      desc: '티빙방입니다.',
       wholenum: 4,
       leftnum: 0,
       ottid: 4,
@@ -57,7 +53,6 @@ const SubscriptionScreen = ({ navigation }) => {
     {
       id: 5,
       name: '구독방5',
-      desc: '넷플릭스방입니다.',
       wholenum: 4,
       leftnum: 0,
       ottid: 5,
@@ -65,7 +60,6 @@ const SubscriptionScreen = ({ navigation }) => {
     {
       id: 6,
       name: '구독방6',
-      desc: '왓챠방입니다',
       wholenum: 4,
       leftnum: 0,
       ottid: 6,
@@ -108,14 +102,14 @@ const SubscriptionScreen = ({ navigation }) => {
         <Scroller onEndReachedThreshold={0.9}>
           <SubTitle>참여 가능한 구독방</SubTitle>
           <ChatRoomListContainer>
-            {filteredRooms.map(({ id, name, desc, wholenum, leftnum }) => (
+            {filteredRooms.map(({ id, name, wholenum, leftnum, ottid }) => (
               <Touchable key={id} onPress={() => onClickHandler(name)}>
                 <ChatRoomButton
                   id={id}
                   name={name}
-                  desc={desc}
                   wholenum={wholenum}
                   leftnum={leftnum}
+                  ottid={ottid}
                 />
               </Touchable>
             ))}
@@ -124,9 +118,7 @@ const SubscriptionScreen = ({ navigation }) => {
         <FloatingView>
           <ActionButton
             buttonColor="red"
-            onPress={() => {
-              console.log('hi');
-            }}
+            onPress={() => navigation.navigate('MkSubRoomScreen')}
           />
         </FloatingView>
       </Centralizer>

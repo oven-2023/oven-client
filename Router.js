@@ -19,6 +19,8 @@ import { MyHeartScreen } from './src/screens';
 import { MyStarScreen } from './src/screens';
 import ChatHomeScreen from './src/screens/Chat/ChatHomeScreen';
 import ChatRoomScreen from './src/screens/Chat/ChatRoomScreen';
+import { SubscriptionScreen } from './src/screens';
+import { MkSubRoomScreen } from './src/screens';
 
 export default function Router() {
   const Stack = createStackNavigator();
@@ -92,6 +94,20 @@ export default function Router() {
                   component={ChatRoomScreen}
                   options={{
                     title: '채팅 방',
+                  }}
+                />
+                <Stack.Screen
+                  name="SubScriptionScreen"
+                  component={SubscriptionScreen}
+                  options={{
+                    title: '구독 홈',
+                  }}
+                />
+                <Stack.Screen
+                  name="MkSubRoomScreen"
+                  component={MkSubRoomScreen}
+                  options={{
+                    title: '구독 생성',
                   }}
                 />
               </>

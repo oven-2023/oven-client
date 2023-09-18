@@ -2,11 +2,32 @@ import React from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 import styled from 'styled-components';
 
-const ChatRoomButton = ({ id, name, desc, wholenum, leftnum }) => {
+const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
+  const otts = [
+    {
+      ottid: 1,
+      ottname: 'Netflix',
+    },
+    {
+      ottid: 2,
+      ottname: 'Watcha',
+    },
+    {
+      ottid: 3,
+      ottname: 'Wavve',
+    },
+    {
+      ottid: 4,
+      ottname: 'Tving',
+    },
+  ];
+
+  const findOtt = otts.find((item) => item.ottid === ottid);
+
   return (
     <Container index={id}>
       <RoomName>{name}</RoomName>
-      <RoomDesc>{desc}</RoomDesc>
+      <Ott>{findOtt ? findOtt.ottname : ''}</Ott>
       <LeftNum>
         {leftnum}명/{wholenum}명
       </LeftNum>
@@ -27,7 +48,7 @@ const RoomName = styled.Text`
   font-size: 20px;
 `;
 
-const RoomDesc = styled.Text`
+const Ott = styled.Text`
   margin-top: 5px;
 `;
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, ScrollView } from 'react-native';
+import { View, Text, FlatList, ScrollView, Alert } from 'react-native';
 import styled from 'styled-components';
 import MainLayout from '../../components/Layout/MainLayout';
 import OttButtonList from '../../components/Subscription/OttButtonList';
@@ -10,14 +10,15 @@ import { useIsFocused } from '@react-navigation/native';
 
 const SubscriptionScreen = ({ navigation }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
-  const isFocused = useIsFocused(); 
+  const [clickedRoom, setClickedRoom] = useState('');
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     if (!isFocused) {
       setClickedOtt(null);
     }
   }, [isFocused]);
-  
+
   const rooms = [
     {
       id: 1,
@@ -73,6 +74,22 @@ const SubscriptionScreen = ({ navigation }) => {
     ? rooms.filter((room) => room.ottid === clickedOtt)
     : rooms;
 
+  const onClickHandler = (name) => {
+    setClickedRoom(name);
+    Alert.alert(
+      `${name}`,
+      '구독방에 입장하시겠습니까?',
+      [
+        {
+          text: '아니요',
+          style: 'cancel',
+        },
+        { text: '네', onPress: () => navigation.navigate('ChatRoomScreen') },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <MainLayout>
       <OttBtnContainer>
@@ -83,10 +100,7 @@ const SubscriptionScreen = ({ navigation }) => {
           <SubTitle>참여 가능한 구독방</SubTitle>
           <ChatRoomListContainer>
             {filteredRooms.map(({ id, name, desc, wholenum, leftnum }) => (
-              <Touchable
-                key={id}
-                onPress={() => navigation.navigate('ChatRoomScreen')}
-              >
+              <Touchable key={id} onPress={() => onClickHandler(name)}>
                 <ChatRoomButton
                   id={id}
                   name={name}

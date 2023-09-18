@@ -3,7 +3,6 @@ import { Text, View, SafeAreaView, Button } from 'react-native';
 import AuthNavigation from './src/navigations/AuthNavigation';
 import TabNavigation from './src/navigations/TabNavigation';
 import styled from 'styled-components/native';
-import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { isLoginState } from './src/states';
 import React from 'react';
@@ -21,10 +20,12 @@ import ChatHomeScreen from './src/screens/Chat/ChatHomeScreen';
 import ChatRoomScreen from './src/screens/Chat/ChatRoomScreen';
 import { SubscriptionScreen } from './src/screens';
 import { MkSubRoomScreen } from './src/screens';
+import * as Font from 'expo-font';
 
 export default function Router() {
   const Stack = createStackNavigator();
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+
   return (
     <SafeAreaProvider>
       <Container>

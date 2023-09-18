@@ -55,6 +55,7 @@ const Title = styled.Text`
   margin-top: 20px;
   margin-right: auto;
   margin-left: 20;
+  font-family: 'dunggeunmo';
 `;
 
 const MenuButton = styled.TouchableOpacity`
@@ -77,6 +78,7 @@ const MenuText = styled.Text`
   color: black;
   font-size: 20px;
   font-weight: 700;
+  font-family: 'dunggeunmo';
 `;
 
 export default MyPageScreen;

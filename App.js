@@ -1,15 +1,22 @@
 import Router from './Router';
 import { RecoilRoot } from 'recoil';
+import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function App() {
-  SplashScreen.preventAutoHideAsync();
+  const [isFont, setIsFont] = useState(false);
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      dunggeunmo: require('./assets/fonts/DungGeunMo.ttf'),
+    });
+    setIsFont(true);
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hideAsync();
-    }, 2000);
+    loadFonts();
   }, []);
+
   return (
     <RecoilRoot>
       <Router />

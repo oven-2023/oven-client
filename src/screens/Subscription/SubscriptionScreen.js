@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { clickedOttState } from '../../states';
 import { useIsFocused } from '@react-navigation/native';
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
+import * as Font from 'expo-font';
 
 const SubscriptionScreen = ({ navigation }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
@@ -146,6 +146,7 @@ const OttBtnContainer = styled.View`
   margin: 0px 20px;
   height: 130px;
   flex-direction: column;
+  
 `;
 
 const ChatRoomListContainer = styled.View`
@@ -158,6 +159,7 @@ const SubTitle = styled.Text`
   margin-left: 20px;
   font-size: 26px;
   font-weight: 500;
+  font-family: 'dunggeunmo';
 `;
 
 const FloatingView = styled.View`

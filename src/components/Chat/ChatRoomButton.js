@@ -46,14 +46,17 @@ const Container = styled.View`
 const RoomName = styled.Text`
   font-weight: 600;
   font-size: 20px;
+  font-family: 'dunggeunmo';
 `;
 
 const Ott = styled.Text`
   margin-top: 5px;
+  font-family: 'dunggeunmo';
 `;
 
 const LeftNum = styled.Text`
   margin-left: auto;
+  font-family: 'dunggeunmo';
 `;
 
 export default ChatRoomButton;

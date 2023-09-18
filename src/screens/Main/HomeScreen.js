@@ -54,15 +54,10 @@ const Bottom = styled.View`
   margin-top: 20px;
 `;
 
-const Oven = styled.Text`
-  font-size: 20;
-  margin-left: 30;
-  font-weight: 700;
-`;
-
 const Title = styled.Text`
   font-size: 25;
   font-weight: 700;
+  font-family: 'dunggeunmo';
 `;
 
 const User = styled.Text`

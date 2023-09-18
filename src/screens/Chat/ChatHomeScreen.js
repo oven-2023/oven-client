@@ -99,6 +99,7 @@ const SubTitle = styled.Text`
   font-size: 26px;
   font-weight: 500;
   margin-top: 8px;
+  font-family: 'dunggeunmo';
 `;
 
 export default ChatHomeScreen;

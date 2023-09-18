@@ -32,11 +32,13 @@ const Text1 = styled.Text`
   margin-bottom: 10;
   margin-top: 5px;
   font-weight: 700;
+  font-family: 'dunggeunmo';
 `;
 
 const Text2 = styled.Text`
   font-size: 20px;
   font-weight: 500;
+  font-family: 'dunggeunmo';
 `;
 
 const Ott = styled.Text`

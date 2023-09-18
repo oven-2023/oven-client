@@ -8,8 +8,9 @@ const Logo = () => {
 
 const LogoText = styled.Text`
   font-weight: 800;
-  font-size: 40px;
+  font-size: 50px;
   margin-left: 20px;
+  font-family: 'dunggeunmo';
 `;
 
 export default Logo;

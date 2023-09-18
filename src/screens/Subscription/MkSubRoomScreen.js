@@ -108,6 +108,7 @@ const Title = styled.Text`
   font-size: 30px;
   font-weight: 500;
   margin: 30px 0px;
+  font-family: 'dunggeunmo';
 `;
 
 const NameInput = styled.TextInput`
@@ -116,6 +117,7 @@ const NameInput = styled.TextInput`
   border: 3px solid black;
   font-size: 20px;
   padding: 0px 10px;
+  font-family: 'dunggeunmo';
 `;
 
 const MkButton = styled.TouchableOpacity`
@@ -130,6 +132,7 @@ const MkButton = styled.TouchableOpacity`
 const ButtonText = styled.Text`
   font-weight: 700;
   font-size: 20px;
+  font-family: 'dunggeunmo';
 `;
 
 const StyledDropDownPicker = styled(DropDownPicker)`
@@ -138,6 +141,7 @@ const StyledDropDownPicker = styled(DropDownPicker)`
   border: 3px solid black;
   border-radius: 0px;
   font-size: 20px;
+  font-family: 'dunggeunmo';
 `;
 
 export default MkSubRoomScreen;

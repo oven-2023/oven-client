@@ -97,6 +97,7 @@ const OttName = styled.Text`
   margin-top: 5px;
   align-items: center;
   font-weight: 600;
+  font-family: 'dunggeunmo';
 `;
 
 export default OttButtonList;

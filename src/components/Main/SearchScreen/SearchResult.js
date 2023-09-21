@@ -33,6 +33,11 @@ const SearchResult = ({
         return (
           <Movies>
             <Movie>
+              {item.poster ? (
+                <MoviePoster src={item.poster} />
+              ) : (
+                <MoviePoster />
+              )}
               {/* <MoviePoster src={item.poster} /> */}
               <MovieTitle>{item.title}</MovieTitle>
             </Movie>
@@ -60,7 +65,7 @@ const SearchResult = ({
 };
 
 const MovieContainer = styled.FlatList`
-  width: 80%;
+  width: 90%;
   flex-direction: row;
   flex-wrap: wrap;
   background-color: pink;

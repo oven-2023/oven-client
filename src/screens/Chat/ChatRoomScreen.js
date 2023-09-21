@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -6,19 +6,21 @@ import {
   Button,
   SafeAreaView,
   Image,
-} from "react-native";
-import WebSocket from "react-native-websocket";
-import styled from "styled-components";
-import { Dimensions } from "react-native";
+} from 'react-native';
+import WebSocket from 'react-native-websocket';
+import styled from 'styled-components';
+import { Dimensions, TouchableOpacity } from 'react-native';
+import RoomInfo from '../../components/Chat/ChatRoomScreen/RoomInfo';
+import ChatInput from '../../components/Chat/ChatRoomScreen/ChatInput';
+import ChatBoard from '../../components/Chat/ChatRoomScreen/ChatBoard';
 
 const ChatRoomScreen = ({ navigation }) => {
   const [ws, setWs] = useState(null);
-  const [message, setMessage] = useState("");
-  const [receivedMessage, setReceivedMessage] = useState("");
+  const [receivedMessage, setReceivedMessage] = useState('');
 
   useEffect(() => {
     // 웹소켓 서버 주소를 설정합니다.
-    const serverUrl = "ws://your-websocket-server-url";
+    const serverUrl = 'ws://your-websocket-server-url';
     // WebSocket 인스턴스를 생성하고 서버와 연결합니다.
     const wsInstance = new WebSocket(serverUrl);
     setWs(wsInstance);
@@ -38,23 +40,19 @@ const ChatRoomScreen = ({ navigation }) => {
 
   // 메시지를 전송하는 함수
   const sendMessage = () => {
-    if (ws && message.trim() !== "") {
+    if (ws && message.trim() !== '') {
       ws.send(message);
-      setMessage("");
+      setMessage('');
     }
-    alert("전송");
+    alert('전송');
   };
 
   return (
     <SafeAreaView>
       <ScreenContainer>
-        <MsgContainer>
-          <SingleMsg>
-            <UserImg />
-            <UserName>임채리</UserName>
-          </SingleMsg>
-        </MsgContainer>
-        <MsgInput value={message} onChangeText={setMessage} />
+        <RoomInfo />
+        <ChatBoard />
+        <ChatInput />
       </ScreenContainer>
     </SafeAreaView>
 
@@ -72,14 +70,15 @@ const ChatRoomScreen = ({ navigation }) => {
 };
 
 const ScreenContainer = styled.View`
-  width: 100%;
+  width: ${Dimensions.get('window').width}px;
+  height: ${Dimensions.get('window').height}px;
   align-items: center;
 `;
 
 const MsgContainer = styled.View`
   background-color: skyblue;
   width: 100%;
-  height: ${Dimensions.get("window").height * 0.6}px;
+  height: 60%;
 `;
 
 const SingleMsg = styled.View``;
@@ -88,6 +87,6 @@ const UserImg = styled.Image``;
 
 const UserName = styled.Text``;
 
-const MsgInput = styled.TextInput``;
+const BtnText = styled.Text``;
 
 export default ChatRoomScreen;

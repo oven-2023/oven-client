@@ -3,7 +3,7 @@ import { View, Text, FlatList, ScrollView, Alert } from 'react-native';
 import styled from 'styled-components';
 import MainLayout from '../../components/Layout/MainLayout';
 import OttButtonList from '../../components/Subscription/OttButtonList';
-import ChatRoomButton from '../../components/Chat/ChatRoomButton';
+import ChatRoomButton from '../../components/Chat/ChatHomeScreen/ChatRoomButton';
 import { useRecoilState } from 'recoil';
 import { clickedOttState } from '../../states';
 import { useIsFocused } from '@react-navigation/native';

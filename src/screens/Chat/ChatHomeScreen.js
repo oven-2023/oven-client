@@ -3,7 +3,7 @@ import { SafeAreaView, Text, Button, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import OttList from '../../components/Main/DetailScreen/OttList';
 import OttButtonList from '../../components/Subscription/OttButtonList';
-import ChatRoomButton from '../../components/Chat/ChatRoomButton';
+import ChatRoomButton from '../../components/Chat/ChatHomeScreen/ChatRoomButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MainLayout from '../../components/Layout/MainLayout';
 

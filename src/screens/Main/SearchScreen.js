@@ -153,7 +153,7 @@ const SearchScreen = () => {
 const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  background-color: black;
+  background-color: white;
 `;
 
 const SearchInput = styled.TextInput`

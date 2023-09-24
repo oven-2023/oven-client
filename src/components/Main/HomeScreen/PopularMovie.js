@@ -46,6 +46,8 @@ const PopularMovie = () => {
 const MovieContainer = styled.ScrollView`
   margin-top: 20px;
   height: 170px;
+  background-color: white;
+  border-radius: 20px;
 `;
 
 const MoviePoster = styled.Image`

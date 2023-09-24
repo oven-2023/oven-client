@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 import { FontAwesome } from '@expo/vector-icons';
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import MainLayout from '../../components/Layout/MainLayout';
+import { BEIGE, RED, BROWN } from '../../css/theme';
 
 const MyPageScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
@@ -29,18 +30,19 @@ const MyPageScreen = ({ navigation }) => {
             navigation.navigate('MyHeartScreen');
           }}
         >
-          <FontAwesome name="heart" size={34} color="black" />
+          <FontAwesome name="heart" size={34} color={BEIGE} />
           <MenuText> 내가 찜한 작품 보기</MenuText>
         </MenuButton>
         <MenuButton
           isFiled={false}
           onPress={() => navigation.navigate('MyStarScreen')}
         >
-          <FontAwesome name="star" size={34} color="black" />
+          <FontAwesome name="star" size={34} color={BEIGE} />
           <MenuText> 내가 평가한 작품 보기</MenuText>
         </MenuButton>
         <LogoutButton isFiled={false} onPress={HandleLogout}>
-          <MenuText>로그아웃</MenuText>
+          <FontAwesome name="sign-out" size={34} color={BEIGE} />
+          <MenuText style={{ color: 'white' }}>로그아웃</MenuText>
         </LogoutButton>
       </ButtonContainer>
     </MainLayout>
@@ -59,10 +61,10 @@ const Title = styled.Text`
 `;
 
 const MenuButton = styled.TouchableOpacity`
-  height: 50px;
-  width: 280px;
-  background-color: pink;
-  border-radius: 4px;
+  height: 60px;
+  width: 290px;
+  background-color: white;
+  border-radius: 10px;
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -71,14 +73,15 @@ const MenuButton = styled.TouchableOpacity`
 `;
 
 const LogoutButton = styled(MenuButton)`
-  background-color: #ae0c18;
+  background-color: ${BROWN};
 `;
 
 const MenuText = styled.Text`
-  color: black;
+  color: ${BROWN};
   font-size: 20px;
   font-weight: 700;
   font-family: 'dunggeunmo';
+  margin-left: 5px;
 `;
 
 export default MyPageScreen;

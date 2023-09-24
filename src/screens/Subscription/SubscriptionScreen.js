@@ -55,14 +55,14 @@ const SubscriptionScreen = ({ navigation }) => {
       name: '구독방5',
       wholenum: 4,
       leftnum: 0,
-      ottid: 5,
+      ottid: 4,
     },
     {
       id: 6,
       name: '구독방6',
       wholenum: 4,
       leftnum: 0,
-      ottid: 6,
+      ottid: 3,
     },
   ];
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 import styled from 'styled-components';
+import { BEIGE, RED } from '../../../css/theme';
+import DashedLine from '../../../css/DashedLine';
 
 const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
   const otts = [
@@ -26,11 +28,22 @@ const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
 
   return (
     <Container index={id}>
-      <RoomName>{name}</RoomName>
-      <Ott>{findOtt ? findOtt.ottname : ''}</Ott>
-      <LeftNum>
-        {leftnum}명/{wholenum}명
-      </LeftNum>
+      <OttView
+        style={{
+          borderStyle: 'dashed',
+          borderWidth: 1,
+          borderRightColor: 'white',
+        }}
+      >
+        <Ott>{findOtt ? findOtt.ottname : ''}</Ott>
+      </OttView>
+      <DashedLine />
+      <Column>
+        <RoomName>{name}</RoomName>
+        <LeftNum>
+          {leftnum}명/{wholenum}명
+        </LeftNum>
+      </Column>
     </Container>
   );
 };
@@ -38,25 +51,42 @@ const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
 const Container = styled.View`
   width: 90%;
   height: 100px;
-  border: 1px solid black;
-  padding: 15px;
   margin: 5px 0px;
+  background-color: white;
+  border-radius: 20px;
+  flex-direction: row;
+  flex: 1;
 `;
 
 const RoomName = styled.Text`
-  font-weight: 600;
+  font-weight: 800;
   font-size: 20px;
   font-family: 'dunggeunmo';
 `;
 
+const OttView = styled.View`
+  width: 30%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Ott = styled.Text`
-  margin-top: 5px;
   font-family: 'dunggeunmo';
+  color: ${RED};
+  font-size: 18px;
 `;
 
 const LeftNum = styled.Text`
-  margin-left: auto;
   font-family: 'dunggeunmo';
+  margin-top: 10px;
+`;
+
+const Column = styled.View`
+  flex-direction: column;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default ChatRoomButton;

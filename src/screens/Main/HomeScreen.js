@@ -9,6 +9,7 @@ import { isLoginState, userState } from '../../states';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import PopularMovie from '../../components/Main/HomeScreen/PopularMovie';
 import MainLayout from '../../components/Layout/MainLayout';
+import { ORANGE, BROWN } from '../../css/theme';
 
 const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useRecoilState(userState);
@@ -16,14 +17,17 @@ const HomeScreen = ({ navigation }) => {
   return (
     <MainLayout>
       <Scroller>
-          <SearchButton
-            name="search"
-            size={34}
-            color="black"
-            onPress={() => navigation.navigate('SearchScreen')}
-          />
+        <SearchButton
+          name="search"
+          size={34}
+          color={BROWN}
+          onPress={() => navigation.navigate('SearchScreen')}
+        />
         <Centralizer>
-          <OttRmd />
+          <Bottom>
+            <Title>나에게 맞는 OTT</Title>
+            <OttRmd />
+          </Bottom>
           <Bottom>
             <Title>실시간 인기작</Title>
             <PopularMovie />
@@ -49,20 +53,21 @@ const Scroller = styled.ScrollView`
 `;
 
 const Bottom = styled.View`
-  width: 80%;
   flex-direction: column;
   margin-top: 20px;
+  width: 80%;
 `;
 
 const Title = styled.Text`
   font-size: 25;
   font-weight: 700;
   font-family: 'dunggeunmo';
+  color: ${BROWN}
 `;
 
 const User = styled.Text`
   font-size: 30;
-  color: #ae0c18;
+  color: ${ORANGE};
 `;
 
 const SearchButton = styled(FontAwesome)`

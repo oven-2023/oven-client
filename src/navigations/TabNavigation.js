@@ -15,8 +15,15 @@ const TabNavigation = () => {
     <Tab.Navigator
       initialRouteName="HomeScreen"
       independent={true}
+      tabBarOptions={{
+        activeTintColor: '#d72201',
+        inactiveTintColor: '#4f2416',
+        shadowOpacity: 0.7,
+        shadowRadius: 40,
+        elevation: 24,
+      }}
       screenOptions={{
-        tabBarActiveTintColor: 'red',
+        tabBarStyle: { backgroundColor: 'whitesmoke' },
       }}
     >
       <Tab.Screen
@@ -25,8 +32,8 @@ const TabNavigation = () => {
         options={{
           headerShown: false,
           title: '홈',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="home" color={color} size={size} />
+          tabBarIcon: ({ color }) => (
+            <Icon name="home" color={color} size={30} />
           ),
         }}
       />
@@ -36,8 +43,8 @@ const TabNavigation = () => {
         options={{
           headerShown: false,
           title: '구독',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="search" color={color} size={size} />
+          tabBarIcon: ({ color }) => (
+            <Icon name="search" color={color} size={30} />
           ),
         }}
       />
@@ -47,8 +54,8 @@ const TabNavigation = () => {
         options={{
           headerShown: false,
           title: '채팅',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="message" color={color} size={size} />
+          tabBarIcon: ({ color }) => (
+            <Icon name="message" color={color} size={30} />
           ),
         }}
       />
@@ -57,9 +64,9 @@ const TabNavigation = () => {
         component={MyPageScreen}
         options={{
           headerShown: false,
-          title: '마이페이지',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="person" color={color} size={size} />
+          title: '내 정보',
+          tabBarIcon: ({ color }) => (
+            <Icon name="person" color={color} size={30} />
           ),
         }}
       />

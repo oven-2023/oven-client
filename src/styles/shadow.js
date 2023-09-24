@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const shadowStyles = StyleSheet.create({
   boxView: {
     backgroundColor: 'white',
-    shadowColor: '#000',
+    shadowColor: 'gray',
     shadowOffset: {
       width: 0,
       height: 4,

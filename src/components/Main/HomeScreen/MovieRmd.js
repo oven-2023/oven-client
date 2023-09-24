@@ -48,6 +48,9 @@ const MovieContainer = styled.View`
   margin-top: 20px;
   width: 100%;
   margin-bottom: 50px;
+  background-color: white;
+  border-radius: 20px;
+  min-height: 400px;
 `;
 
 const Movies = styled.View`

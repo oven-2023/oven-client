@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 import { searchedResultState } from '../../states';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
+import { BROWN, BEIGE } from '../../css/theme.js';
 
 const SearchScreen = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -153,18 +154,17 @@ const SearchScreen = () => {
 const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  background-color: white;
+  background-color: ${BEIGE};
 `;
 
 const SearchInput = styled.TextInput`
   background-color: white;
-  border: 1px solid gray;
   width: 80%;
   height: 40px;
   margin: 20px 0px;
   padding: 0px 20px;
-  border-radius: 10px;
-  color: black;
+  border-radius: 20px;
+  color: brown;
   font-size: 16px;
   font-family: 'dunggeunmo';
 `;

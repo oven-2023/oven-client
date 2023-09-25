@@ -9,18 +9,22 @@ const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
     {
       ottid: 1,
       ottname: 'Netflix',
+      src: require('../../../img/Netflix.png'),
     },
     {
       ottid: 2,
       ottname: 'Watcha',
+      src: require('../../../img/Watcha.png'),
     },
     {
       ottid: 3,
       ottname: 'Wavve',
+      src: require('../../../img/Wavve.png'),
     },
     {
       ottid: 4,
       ottname: 'Tving',
+      src: require('../../../img/Tving.png'),
     },
   ];
 
@@ -35,9 +39,11 @@ const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
           borderRightColor: 'white',
         }}
       >
-        <Ott>{findOtt ? findOtt.ottname : ''}</Ott>
+        <OttLogo source={findOtt.src} />
       </OttView>
+
       <DashedLine />
+
       <Column>
         <RoomName>{name}</RoomName>
         <LeftNum>
@@ -64,17 +70,17 @@ const RoomName = styled.Text`
   font-family: 'dunggeunmo';
 `;
 
+const OttLogo = styled.Image`
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+`;
+
 const OttView = styled.View`
   width: 30%;
   height: 100%;
   justify-content: center;
   align-items: center;
-`;
-
-const Ott = styled.Text`
-  font-family: 'dunggeunmo';
-  color: ${RED};
-  font-size: 18px;
 `;
 
 const LeftNum = styled.Text`

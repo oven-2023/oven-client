@@ -62,7 +62,7 @@ const Title = styled.Text`
   font-size: 25;
   font-weight: 700;
   font-family: 'dunggeunmo';
-  color: ${BROWN}
+  color: ${BROWN};
 `;
 
 const User = styled.Text`

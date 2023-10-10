@@ -16,6 +16,8 @@ import { isModalState, detailMovieState } from '../../states';
 import RatingModal from '../../components/Main/DetailScreen/RatingModal';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
+import { BEIGE } from '../../css/theme';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const DetailScreen = ({ route }) => {
   const { workId } = route.params;
@@ -46,21 +48,25 @@ const DetailScreen = ({ route }) => {
   };
 
   return (
-    <Container>
-      {isModalOpened ? <RatingModal /> : <></>}
-      <MovieInfoBox />
-      {/* <OttList /> */}
-      <MovieInfoText />
-    </Container>
+    <Scroll>
+      <Container>
+        {isModalOpened ? <RatingModal /> : <></>}
+        <MovieInfoBox />
+        {/* <OttList /> */}
+        <MovieInfoText />
+      </Container>
+    </Scroll>
   );
 };
-
-const StyledButton = styled.TouchableOpacity``;
 
 const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  background-color: black;
+  background-color: ${BEIGE};
+`;
+
+const Scroll = styled.ScrollView`
+  width: 100%;
 `;
 
 export default DetailScreen;

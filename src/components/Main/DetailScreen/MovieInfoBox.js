@@ -5,11 +5,12 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
 import { detailMovieState, isHeartState } from '../../../states';
 import { isModalState } from '../../../states';
+import { BROWN } from '../../../css/theme';
 
 const MovieInfoBox = () => {
   const [isHearted, setIsHearted] = useRecoilState(isHeartState);
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
-  const [detailMovie] = useRecoilState(detailMovieState)
+  const [detailMovie] = useRecoilState(detailMovieState);
 
   const toggleHeart = () => {
     setIsHearted((previousState) => !previousState);
@@ -28,7 +29,7 @@ const MovieInfoBox = () => {
           <Genre>장르: {detailMovie.genre}</Genre>
           <Actor>출연: {detailMovie.actor}</Actor>
           <Director>감독: {detailMovie.director}</Director>
-          {/* <OTT>시청 가능한 곳: {detailMovie.providerList}</OTT> */}
+          <OTT>OTT: {detailMovie.providerList}</OTT>
         </TextContainer>
         <ButtonContainer>
           <Column>
@@ -42,11 +43,7 @@ const MovieInfoBox = () => {
           </Column>
           <Column>
             {isHearted ? (
-              <HeartBtn
-                name="heart"
-                onPress={toggleHeart}
-                size={34}
-              />
+              <HeartBtn name="heart" onPress={toggleHeart} size={34} />
             ) : (
               <HeartBtn
                 name="heart-o"
@@ -75,6 +72,7 @@ const MoviePoster = styled.Image`
   width: 100%;
   height: 200px;
   position: relative;
+  border-radius: 20px;
 `;
 const TextContainer = styled.View`
   width: 100%;
@@ -82,24 +80,24 @@ const TextContainer = styled.View`
 `;
 const Title = styled.Text`
   font-size: 26px;
-  color: white;
+  color: ${BROWN};
   font-weight: 700;
 `;
 const Rate = styled.Text`
   margin-left: 20px;
-  color: white;
+  color: ${BROWN};
+  font-family: 'dunggeunmo';
   font-weight: 700;
 `;
 const Actor = styled.Text`
   font-size: 16px;
   margin-top: 10px;
-  color: white;
+  color: ${BROWN};
   font-weight: 500;
+  font-family: 'dunggeunmo';
 `;
-const Director = styled(Actor)`
-`;
-const Genre = styled(Actor)`
-`;
+const Director = styled(Actor)``;
+const Genre = styled(Actor)``;
 
 const OTT = styled(Actor)``;
 
@@ -111,11 +109,11 @@ const ButtonContainer = styled.View`
 `;
 const RatingBtn = styled(FontAwesome)`
   padding: 10px;
-  color: white;
+  color: ${BROWN};
 `;
 const HeartBtn = styled(FontAwesome)`
   padding: 10px;
-  color: white;
+  color: ${BROWN};
 `;
 
 const Row = styled.View`
@@ -132,8 +130,9 @@ const Column = styled.View`
 `;
 
 const WhiteText = styled.Text`
-  color: white;
+  color: ${BROWN};
   font-weight: 700;
+  font-family: 'dunggeunmo';
 `;
 
 export default MovieInfoBox;

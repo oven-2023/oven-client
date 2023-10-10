@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { isModalState } from '../../../states';
 import { FontAwesome } from '@expo/vector-icons';
+import { BEIGE, BROWN, RED } from '../../../css/theme';
 
 const RatingModal = () => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
@@ -20,7 +21,7 @@ const RatingModal = () => {
 
   const onHandleSubmit = () => {
     // postRatingAPI();
-    Alert.alert('평점 등록 완료!');
+    Alert.alert('평점 등록을 완료했습니다');
     setIsModalOpened(false);
   };
 
@@ -76,7 +77,7 @@ const ModalBackground = styled.SafeAreaView`
   height: 100%;
   align-items: center;
   justify-content: center;
-  background-color: black;
+  background-color: ${BEIGE};
 `;
 
 const ModalView = styled.SafeAreaView`
@@ -92,6 +93,8 @@ const Title = styled.Text`
   font-size: 30px;
   margin-top: 20px;
   font-weight: 700;
+  font-family: 'dunggeunmo';
+  color: ${BROWN};
 `;
 
 const Stars = styled.View`
@@ -103,6 +106,7 @@ const Stars = styled.View`
 
 const Star = styled(FontAwesome)`
   margin: 7px;
+  color: ${BROWN};
 `;
 
 const StyledButton = styled.TouchableOpacity``;
@@ -110,12 +114,15 @@ const StyledButton = styled.TouchableOpacity``;
 const Close = styled.Text`
   font-size: 20px;
   font-weight: 700;
+  color: ${BROWN};
+  font-family: 'dunggeunmo';
 `;
 
 const Submit = styled.Text`
   font-size: 20px;
   color: #ae0c18;
   font-weight: 700;
+  font-family: 'dunggeunmo';
 `;
 
 const ButtonContainer = styled.View`

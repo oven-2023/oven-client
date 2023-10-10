@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../../api/client';
+import { BEIGE } from '../../../css/theme';
 
 const MovieRmd = () => {
   const [recommendations, setRecommendations] = useState([]);
@@ -61,8 +62,10 @@ const Movies = styled.View`
 `;
 
 const MoviePoster = styled.Image`
-  background-color: white;
+  background-color: ${BEIGE};
   height: 140px;
+  width: 100;
+  border-radius: 20;
 `;
 
 const Movie = styled.TouchableOpacity`
@@ -76,6 +79,7 @@ const MovieTitle = styled.Text`
   text-align: center;
   color: white;
   font-weight: 700;
+  font-family: 'dunggeunmo';
 `;
 
 export default MovieRmd;

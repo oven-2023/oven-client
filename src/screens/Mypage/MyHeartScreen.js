@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BEIGE, BROWN } from '../../css/theme';
 
 const MyHeartScreen = ({ navigation }) => {
   const [heartedMovie, setHeartedMovie] = useState([]);
@@ -74,13 +75,16 @@ const MyHeartScreen = ({ navigation }) => {
 
 const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: black;
   align-items: center;
+  background-color: ${BEIGE};
 `;
 
 const MovieContainer = styled.ScrollView`
   margin-top: 20px;
-  height: 170;
+  min-height: 170;
+  background-color: white;
+  width: 85%;
+  border-radius: 20px;
 `;
 
 const Movies = styled.View`
@@ -109,11 +113,13 @@ const MovieTitle = styled.Text`
 `;
 
 const Title = styled.Text`
-  color: white;
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 10px;
   margin-top: 30px;
+  color: ${BROWN};
+  font-weight: 800;
+  font-family: 'dunggeunmo';
 `;
 
 export default MyHeartScreen;

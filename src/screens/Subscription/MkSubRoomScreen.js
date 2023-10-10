@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { BEIGE, BROWN, RED } from '../../css/theme';
 
 const MkSubRoomScreen = ({ navigation }) => {
   const [roomname, setRoomname] = useState('');
@@ -88,14 +89,16 @@ const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   justify-content: center;
+  background-color: ${BEIGE};
 `;
 
 const MkBox = styled.View`
   width: 80%;
   height: ${Dimensions.get('window').height * 0.6}px;
-  border: 1px solid black;
   align-items: center;
   padding: 10px;
+  background-color: white;
+  border-radius: 20px;
 `;
 
 const Centralize = styled.View`
@@ -109,15 +112,18 @@ const Title = styled.Text`
   font-weight: 500;
   margin: 30px 0px;
   font-family: 'dunggeunmo';
+  color: ${BROWN};
 `;
 
 const NameInput = styled.TextInput`
   width: 200px;
   height: 50px;
-  border: 3px solid black;
   font-size: 20px;
   padding: 0px 10px;
   font-family: 'dunggeunmo';
+  color: ${BROWN};
+  border-radius: 10px;
+  background-color: ${BEIGE};
 `;
 
 const MkButton = styled.TouchableOpacity`
@@ -125,23 +131,26 @@ const MkButton = styled.TouchableOpacity`
   height: 50px;
   align-items: center;
   justify-content: center;
-  border: 3px solid black;
-  background-color: gray;
+  border-radius: 10px;
+  background-color: ${BROWN};
 `;
 
 const ButtonText = styled.Text`
   font-weight: 700;
   font-size: 20px;
   font-family: 'dunggeunmo';
+  color: ${BEIGE};
 `;
 
 const StyledDropDownPicker = styled(DropDownPicker)`
   width: 200px;
   height: 50px;
-  border: 3px solid black;
-  border-radius: 0px;
+  border: none;
   font-size: 20px;
   font-family: 'dunggeunmo';
+  color: ${BROWN};
+  border-radius: 10px;
+  background-color: ${BEIGE};
 `;
 
 export default MkSubRoomScreen;

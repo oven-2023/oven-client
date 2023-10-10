@@ -9,6 +9,7 @@ import { clickedOttState } from '../../states';
 import { useIsFocused } from '@react-navigation/native';
 import ActionButton from 'react-native-action-button';
 import * as Font from 'expo-font';
+import { BROWN } from '../../css/theme';
 
 const SubscriptionScreen = ({ navigation }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
@@ -159,14 +160,15 @@ const SubTitle = styled.Text`
   font-size: 26px;
   font-weight: 500;
   font-family: 'dunggeunmo';
+  color: ${BROWN};
 `;
 
 const FloatingView = styled.View`
   flex: 1;
   background-color: red;
   position: absolute;
-  right: 60px;
-  top: 440px;
+  right: 50px;
+  top: 480px;
 `;
 
 export default SubscriptionScreen;

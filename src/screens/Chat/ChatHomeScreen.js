@@ -6,6 +6,7 @@ import OttButtonList from '../../components/Subscription/OttButtonList';
 import ChatRoomButton from '../../components/Chat/ChatHomeScreen/ChatRoomButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MainLayout from '../../components/Layout/MainLayout';
+import { BROWN } from '../../css/theme';
 
 const ChatHomeScreen = ({ navigation }) => {
   const rooms = [
@@ -99,6 +100,7 @@ const SubTitle = styled.Text`
   font-size: 26px;
   font-weight: 500;
   margin-top: 8px;
+  color: ${BROWN};
   font-family: 'dunggeunmo';
 `;
 

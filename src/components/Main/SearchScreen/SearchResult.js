@@ -77,6 +77,7 @@ const SearchResultBox = styled.View`
   background-color: white;
   border-radius: 20px;
   padding: 10px;
+  align-items: center;
 `;
 
 const MovieContainer = styled.FlatList``;

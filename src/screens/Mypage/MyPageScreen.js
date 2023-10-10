@@ -58,6 +58,7 @@ const Title = styled.Text`
   margin-right: auto;
   margin-left: 20;
   font-family: 'dunggeunmo';
+  color: ${BEIGE};
 `;
 
 const MenuButton = styled.TouchableOpacity`

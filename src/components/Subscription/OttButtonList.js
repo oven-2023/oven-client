@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import { clickedOttState } from '../../states';
+import { BROWN } from '../../css/theme';
 
 const OttButtonList = () => {
   const otts = [
@@ -90,7 +91,7 @@ const OvenLogo = styled.Image`
 
 const OttLogo = styled(OvenLogo)`
   border-radius: 15px;
-  border: 1px solid black;
+  border: 1px solid ${BROWN};
 `;
 
 const OttName = styled.Text`
@@ -98,6 +99,7 @@ const OttName = styled.Text`
   align-items: center;
   font-weight: 600;
   font-family: 'dunggeunmo';
+  color: ${BROWN};
 `;
 
 export default OttButtonList;

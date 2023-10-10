@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
+import { BEIGE, BROWN } from '../../css/theme';
 
 const MyStarScreen = ({ navigation }) => {
   //테스팅
@@ -50,13 +51,16 @@ const MyStarScreen = ({ navigation }) => {
 
 const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: black;
   align-items: center;
+  background-color: ${BEIGE};
 `;
 
 const MovieContainer = styled.ScrollView`
   margin-top: 20px;
-  height: 170;
+  min-height: 170;
+  background-color: white;
+  width: 85%;
+  border-radius: 20px;
 `;
 
 const Movies = styled.View`
@@ -87,9 +91,11 @@ const MovieTitle = styled.Text`
 const Title = styled.Text`
   color: white;
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 10px;
   margin-top: 30px;
+  color: ${BROWN};
+  font-family: 'dunggeunmo';
 `;
 
 export default MyStarScreen;

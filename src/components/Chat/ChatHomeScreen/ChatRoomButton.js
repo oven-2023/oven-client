@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 import styled from 'styled-components';
-import { BEIGE, RED } from '../../../css/theme';
+import { BEIGE, RED,BROWN } from '../../../css/theme';
 import DashedLine from '../../../css/DashedLine';
 
 const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
@@ -68,6 +68,7 @@ const RoomName = styled.Text`
   font-weight: 800;
   font-size: 20px;
   font-family: 'dunggeunmo';
+  color: ${BROWN};
 `;
 
 const OttLogo = styled.Image`
@@ -86,6 +87,7 @@ const OttView = styled.View`
 const LeftNum = styled.Text`
   font-family: 'dunggeunmo';
   margin-top: 10px;
+  color: ${BROWN};
 `;
 
 const Column = styled.View`

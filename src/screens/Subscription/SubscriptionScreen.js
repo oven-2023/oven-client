@@ -146,7 +146,6 @@ const OttBtnContainer = styled.View`
   margin: 0px 20px;
   height: 130px;
   flex-direction: column;
-  
 `;
 
 const ChatRoomListContainer = styled.View`

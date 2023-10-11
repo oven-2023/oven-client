@@ -23,14 +23,15 @@ const Input = ({ placeholder, value, onChangeText, secureTextEntry }) => {
 };
 
 const StyledTextInput = styled.TextInput`
-  background-color: whitesmoke;
+  background-color: white;
   width: ${({ width }) => Dimensions.get('window').width - 60}px;
   height: 50px;
-  margin: 20px 0px;
+  margin: 10px 0px;
   padding: 0px 20px;
-  border-radius: 10px;
+  border-radius: 20px;
   color: black;
   font-size: 20px;
   font-weight: 600;
+  font-family: 'dunggeunmo';
 `;
 export default Input;

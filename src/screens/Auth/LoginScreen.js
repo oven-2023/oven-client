@@ -18,6 +18,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BEIGE, BROWN, RED, ORANGE } from '../../css/theme';
+import SplashLogo from '../../components/Layout/SplashLogo';
 
 const LoginScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
@@ -45,13 +47,14 @@ const LoginScreen = ({ navigation }) => {
       })
       .catch(function (error) {
         console.log(error);
-        alert('로그인 실패');
+        Alert.alert('로그인 실패');
       });
   };
 
   return (
     <Container>
-      <Title>Oven</Title>
+      <SplashLogo />
+      {/* <OvenText>Oven</OvenText> */}
       <Title>로그인</Title>
       <Input placeholder="아이디" value={id} onChangeText={HandleChangeId} />
       <Input
@@ -74,14 +77,28 @@ const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: ${BEIGE};
+`;
+
+const OvenText = styled.Text`
+  color: ${ORANGE};
+  font-size: 70px;
+  font-weight: 800;
+  margin: 20px 0px;
+  font-family: 'dunggeunmo';
 `;
 
 const Title = styled.Text`
-  color: white;
+  color: ${BROWN};
   font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-weight: 500;
+  margin: 20px 0px;
+  font-family: 'dunggeunmo';
+`;
+
+const OvenLogo = styled.Image`
+  width: 100px;
+  height: 100px;
 `;
 
 export default LoginScreen;

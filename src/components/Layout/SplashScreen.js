@@ -3,13 +3,13 @@ import { Animated, View, Image } from 'react-native';
 import styled from 'styled-components';
 import { BEIGE } from '../../css/theme';
 
-const SplashLogo = () => {
+const SplashScreen = () => {
   const translateY = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     const moveAnimation = Animated.sequence([
       Animated.timing(translateY, {
-        toValue: -20, // 위로 이동할 거리
+        toValue: -30, // 위로 이동할 거리
         duration: 1500,
         useNativeDriver: true,
       }),
@@ -38,13 +38,15 @@ const SplashLogo = () => {
 };
 
 const Container = styled.View`
+  flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: ${BEIGE};
 `;
 
 const SplashImage = styled.Image`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
 `;
 
-export default SplashLogo;
+export default SplashScreen;

@@ -1,5 +1,6 @@
 import { Text, Button, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
+import { BEIGE, BROWN } from '../../css/theme';
 
 const AuthButton = ({ text, onPress }) => {
   return (
@@ -12,8 +13,8 @@ const AuthButton = ({ text, onPress }) => {
 const StyledButton = styled.TouchableOpacity`
   height: 50px;
   width: 300px;
-  background-color: #ae0c18;
-  border-radius: 4px;
+  background-color: ${BROWN};
+  border-radius: 20px;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
@@ -21,9 +22,10 @@ const StyledButton = styled.TouchableOpacity`
 `;
 
 const StyledText = styled.Text`
-  color: white;
+  color: ${BEIGE};
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 800;
+  font-family: 'dunggeunmo';
 `;
 
 export default AuthButton;

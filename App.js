@@ -2,7 +2,7 @@ import Router from './Router';
 import { RecoilRoot } from 'recoil';
 import * as Font from 'expo-font';
 import { useState, useEffect } from 'react';
-import SplashLogo from './src/components/Layout/SplashLogo';
+import SplashScreen from './src/components/Layout/SplashScreen';
 
 export default function App() {
   const [isFont, setIsFont] = useState(false);
@@ -24,5 +24,5 @@ export default function App() {
     }, 3000);
   }, []);
 
-  return <RecoilRoot>{showSplash ? <SplashLogo /> : <Router />}</RecoilRoot>;
+  return <RecoilRoot>{showSplash ? <SplashScreen /> : <Router />}</RecoilRoot>;
 }

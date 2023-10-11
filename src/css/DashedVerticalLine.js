@@ -2,7 +2,7 @@ import React from 'react';
 import Svg, { Line } from 'react-native-svg';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 
-const DashedLine = () => {
+const DashedVerticalLine = () => {
   return (
     <View
       style={{
@@ -26,4 +26,4 @@ const DashedLine = () => {
   );
 };
 
-export default DashedLine;
+export default DashedVerticalLine;

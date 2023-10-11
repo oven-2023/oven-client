@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import { BEIGE, RED,BROWN } from '../../../css/theme';
-import DashedLine from '../../../css/DashedLine';
+import DashedVerticalLine from '../../../css/DashedVerticalLine';
 
 const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
   const otts = [
@@ -42,7 +42,7 @@ const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
         <OttLogo source={findOtt.src} />
       </OttView>
 
-      <DashedLine />
+      <DashedVerticalLine />
 
       <Column>
         <RoomName>{name}</RoomName>

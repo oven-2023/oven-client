@@ -52,7 +52,7 @@ const OttButtonList = () => {
         style={{
           opacity: clickedOtt === null ? 1 : 0.3,
         }}
-        onPress={() => onSortBtnHandler(null)}
+        onPress={onWholeBtnHandler}
       >
         <OvenLogo source={require('../../img/oven.png')} />
         <OttName>전체</OttName>

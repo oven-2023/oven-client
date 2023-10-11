@@ -130,6 +130,7 @@ const SubscriptionScreen = ({ navigation }) => {
 const Touchable = styled.TouchableOpacity`
   width: 100%;
   align-items: center;
+  height: 110px;
 `;
 
 const Scroller = styled.ScrollView`

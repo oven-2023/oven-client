@@ -10,6 +10,7 @@ import {
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Chat from './Chat';
+import { BEIGE } from '../../../css/theme';
 
 const ChatBoard = () => {
   return (
@@ -20,9 +21,9 @@ const ChatBoard = () => {
 };
 
 const MsgContainer = styled.View`
-  background-color: skyblue;
+  background-color: ${BEIGE};
   width: 100%;
-  height: 60%;
+  height: 70%;
 `;
 
 export default ChatBoard;

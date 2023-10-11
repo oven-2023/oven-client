@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Chat = () => {
   const [msgtxt, setMsgtxt] = useState('메세지입ㄹㅇㄴㄹㅇㄴㄹㄴㄹ니다.');
-  const [isMe, setIsMe] = useState(true);
+  const [isMe, setIsMe] = useState(false);
 
   return isMe ? (
     <MyChatContainer>
@@ -41,6 +41,7 @@ const Chat = () => {
 
 const MyChatContainer = styled.View`
   margin-left: auto;
+  padding: 10px;
 `;
 
 const OthersChatContainer = styled(MyChatContainer)`
@@ -48,12 +49,14 @@ const OthersChatContainer = styled(MyChatContainer)`
 `;
 
 const User = styled.View`
-  margin: 10px;
+  margin: 0px 20px;
 `;
 
 const UserImg = styled(Icon)``;
 
-const UserName = styled.Text``;
+const UserName = styled.Text`
+  font-family: 'dunggeunmo';
+`;
 
 const Row = styled.View`
   flex-direction: row;
@@ -62,17 +65,19 @@ const Row = styled.View`
 
 const TextView = styled.View`
   background-color: white;
-  width: ${(props) => props.msgLength * 15}px;
-  border: 1px solid gray;
+  width: ${(props) => props.msgLength * 18}px;
   border-radius: 10px;
-  padding: 10px;
-  margin: 0px 10px;
+  padding: 15px;
+  margin: 10px;
 `;
 
-const MsgText = styled.Text``;
+const MsgText = styled.Text`
+  font-family: 'dunggeunmo';
+`;
 
 const TimeText = styled.Text`
-  margin: 0px 10px;
+  margin: 0px 5px;
+  font-family: 'dunggeunmo';
 `;
 
 export default Chat;

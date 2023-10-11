@@ -14,6 +14,7 @@ import RoomInfo from '../../components/Chat/ChatRoomScreen/RoomInfo';
 import ChatInput from '../../components/Chat/ChatRoomScreen/ChatInput';
 import ChatBoard from '../../components/Chat/ChatRoomScreen/ChatBoard';
 import * as StompJs from '@stomp/stompjs';
+import { BEIGE, BROWN, GREEN, ORANGE, RED } from '../../css/theme';
 
 const ChatRoomScreen = ({ navigation }) => {
   const [ws, setWs] = useState(null);
@@ -141,10 +142,11 @@ const ScreenContainer = styled.View`
   width: ${Dimensions.get('window').width}px;
   height: ${Dimensions.get('window').height}px;
   align-items: center;
+  background-color: ${BEIGE};
 `;
 
 const MsgContainer = styled.View`
-  background-color: skyblue;
+  background-color: ${BEIGE};
   width: 100%;
   height: 60%;
 `;

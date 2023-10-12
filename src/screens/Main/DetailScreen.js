@@ -30,20 +30,17 @@ const DetailScreen = ({ route }) => {
 
   const getWorkDetailAPI = async () => {
     await axios
-      .get(
-        `http://ec2-3-34-203-105.ap-northeast-2.compute.amazonaws.com/works/${workId}`,
-        {
-          params: {
-            workId: workId,
-          },
-        }
-      )
+      .get(`${baseURL}/works/2`, {
+        params: {
+          workId: 2,
+        },
+      })
       .then((response) => {
         console.log('detail', response.data.data);
         setDetailMovie(response.data.data);
       })
       .catch(function (error) {
-        console.log(error);
+        console.log('detail', error);
       });
   };
 
@@ -51,7 +48,7 @@ const DetailScreen = ({ route }) => {
     <Scroll>
       <Container>
         {isModalOpened ? <RatingModal /> : <></>}
-        <MovieInfoBox />
+        {detailMovie ? <MovieInfoBox /> : <></>}
         {/* <OttList /> */}
         <MovieInfoText />
       </Container>

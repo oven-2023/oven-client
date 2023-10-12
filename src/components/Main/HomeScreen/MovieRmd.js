@@ -29,7 +29,7 @@ const MovieRmd = () => {
   return (
     <MovieContainer>
       <Movies>
-        {recommendations.map(({ poster, title, workId }) => (
+        {recommendations ? recommendations.map(({ poster, title, workId }) => (
           <View>
             <Movie
               key={workId}
@@ -39,7 +39,7 @@ const MovieRmd = () => {
               <MovieTitle>{title}</MovieTitle>
             </Movie>
           </View>
-        ))}
+        )): <></>}
       </Movies>
     </MovieContainer>
   );

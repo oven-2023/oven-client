@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView, Text, Button } from 'react-native';
+import { View, SafeAreaView, Text, Button, Dimensions } from 'react-native';
 import styled from 'styled-components';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
@@ -8,10 +8,12 @@ import { BROWN } from '../../../css/theme';
 
 const MovieInfoText = () => {
   const [detailMovie] = useRecoilState(detailMovieState);
+  const width = Dimensions.get('window').width;
+
   return (
     <Container>
-      <Title>작품 정보</Title>
       <SummaryContainer>
+        <Title>작품 정보</Title>
         <MovieSummary>{detailMovie.summary}</MovieSummary>
       </SummaryContainer>
     </Container>
@@ -19,16 +21,19 @@ const MovieInfoText = () => {
 };
 
 const Container = styled.View`
-  width: 80%;
   height: 350px;
+  margin-top: 10px;
+  width: ${({ width }) => Dimensions.get('window').width - 50}px;
+  
 `;
 
 const Title = styled.Text`
   font-size: 20px;
-  margin-bottom: 20px;
   color: ${BROWN};
   font-weight: 700;
   font-family: 'dunggeunmo';
+  padding-top: 20px;
+  padding-left: 20px;
 `;
 
 const MovieSummary = styled.Text`
@@ -36,11 +41,12 @@ const MovieSummary = styled.Text`
   color: ${BROWN};
   font-weight: 600;
   font-family: 'dunggeunmo';
+  padding: 20px;
 `;
 
 const SummaryContainer = styled.View`
   width: 100%;
-  min-height: 200px;
+  min-height: 120px;
   background-color: white;
   border-radius: 20px;
 `;

@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView, Text, Button, Image } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  Text,
+  Button,
+  Image,
+  Dimensions,
+} from 'react-native';
 import styled from 'styled-components';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
@@ -11,6 +18,7 @@ const MovieInfoBox = () => {
   const [isHearted, setIsHearted] = useRecoilState(isHeartState);
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
   const [detailMovie] = useRecoilState(detailMovieState);
+  const width = Dimensions.get('window').width;
 
   const toggleHeart = () => {
     setIsHearted((previousState) => !previousState);
@@ -19,42 +27,49 @@ const MovieInfoBox = () => {
 
   return (
     <Container>
+      <Title>{detailMovie.titleKr}</Title>
       <MoviePoster src={detailMovie.poster} />
-      <Row>
-        <TextContainer>
-          <Row>
-            <Title>{detailMovie.titleKr}</Title>
-            <Rate>평점</Rate>
-          </Row>
-          <Genre>장르: {detailMovie.genre}</Genre>
-          <Actor>출연: {detailMovie.actor}</Actor>
-          <Director>감독: {detailMovie.director}</Director>
-          <OTT>OTT: {detailMovie.providerList}</OTT>
-        </TextContainer>
-        <ButtonContainer>
-          <Column>
-            <RatingBtn
-              name="star-o"
-              onPress={() => setIsModalOpened(true)}
+      <ButtonContainer>
+        <Column>
+          <RatingBtn
+            name="star-o"
+            onPress={() => setIsModalOpened(true)}
+            size={34}
+            color="black"
+          />
+          <WhiteText>평가하기</WhiteText>
+        </Column>
+        <Column>
+          {isHearted ? (
+            <HeartBtn name="heart" onPress={toggleHeart} size={34} />
+          ) : (
+            <HeartBtn
+              name="heart-o"
+              onPress={toggleHeart}
               size={34}
               color="black"
             />
-            <WhiteText>평가하기</WhiteText>
-          </Column>
-          <Column>
-            {isHearted ? (
-              <HeartBtn name="heart" onPress={toggleHeart} size={34} />
+          )}
+          <WhiteText>찜하기</WhiteText>
+        </Column>
+      </ButtonContainer>
+      <Row>
+        <TextContainer>
+          <Rate>평점:</Rate>
+          <Genre>장르: {detailMovie.genre}</Genre>
+          <Actor>출연: {detailMovie.actor.split('/').join(',')}</Actor>
+          <Director>감독: {detailMovie.director}</Director>
+          <OTT>
+            OTT:
+            {detailMovie.providerList ? (
+              detailMovie.providerList
+                .map((provider) => provider.name)
+                .join(', ')
             ) : (
-              <HeartBtn
-                name="heart-o"
-                onPress={toggleHeart}
-                size={34}
-                color="black"
-              />
+              <></>
             )}
-            <WhiteText>찜하기</WhiteText>
-          </Column>
-        </ButtonContainer>
+          </OTT>
+        </TextContainer>
       </Row>
     </Container>
   );
@@ -63,8 +78,6 @@ const MovieInfoBox = () => {
 const Container = styled.View`
   align-items: center;
   width: 80%;
-  height: 470px;
-  margin-top: 40px;
 `;
 
 const MoviePoster = styled.Image`
@@ -75,26 +88,29 @@ const MoviePoster = styled.Image`
   border-radius: 20px;
 `;
 const TextContainer = styled.View`
-  width: 100%;
-  height: 200px;
+  min-height: 160px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  width: ${({ width }) => Dimensions.get('window').width - 50}px;
 `;
 const Title = styled.Text`
   font-size: 26px;
   color: ${BROWN};
   font-weight: 700;
+  margin: 20px 0px;
 `;
-const Rate = styled.Text`
-  margin-left: 20px;
-  color: ${BROWN};
-  font-family: 'dunggeunmo';
-  font-weight: 700;
-`;
+
 const Actor = styled.Text`
   font-size: 16px;
-  margin-top: 10px;
+  margin: 5px 0px;
   color: ${BROWN};
   font-weight: 500;
   font-family: 'dunggeunmo';
+`;
+
+const Rate = styled(Actor)`
+  font-weight: 700;
 `;
 const Director = styled(Actor)``;
 const Genre = styled(Actor)``;
@@ -103,9 +119,7 @@ const OTT = styled(Actor)``;
 
 const ButtonContainer = styled.View`
   flex-direction: row;
-  position: absolute;
-  right: 0px;
-  top: 10px;
+  margin-top: 10px;
 `;
 const RatingBtn = styled(FontAwesome)`
   padding: 10px;
@@ -119,14 +133,13 @@ const HeartBtn = styled(FontAwesome)`
 const Row = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 10px 0px;
 `;
 
 const Column = styled.View`
   flex-direction: column;
   align-items: center;
-  margin-right: 10px;
+  margin: 0px 7px;
 `;
 
 const WhiteText = styled.Text`

@@ -33,15 +33,38 @@ const LoginScreen = ({ navigation }) => {
     setPassword(password);
   };
 
+  // const storeData = (key, value) => {
+  //   try {
+  //     AsyncStorage.setItem(key, value);
+  //   } catch (e) {
+  //     console.error(e.message);
+  //   }
+  // };
+
+  // AsyncStorage.getItem('key').then((value) => {
+  //   console.log(value);
+  // });
+
   const postLoginAPI = async () => {
     await axios
-      .post(`${baseURL}/login`, {
+      .post(`${baseURL}/auth/login`, {
         password: password,
-        userName: id,
+        username: id,
       })
       .then((response) => {
-        console.log(response.data.token);
-        AsyncStorage.setItem('token', JSON.stringify(response.data.token));
+        console.log(response.data.data.accessToken);
+        AsyncStorage.setItem('accessToken', response.data.data.accessToken);
+        AsyncStorage.setItem('refreshToken', response.data.data.refreshToken);
+        // storeData('accessToken', response.data.data.accessToken);
+        // storeData('accessToken', response.data.data.refreshToken);
+        // AsyncStorage.setItem(
+        //   'accessToken',
+        //   JSON.stringify(response.data.data.accessToken)
+        // );
+        // AsyncStorage.setItem(
+        //   'refreshToken',
+        //   JSON.stringify(response.data.data.refreshToken)
+        // );
         setIsLogin(true);
         navigation.navigate('HomeScreen');
       })

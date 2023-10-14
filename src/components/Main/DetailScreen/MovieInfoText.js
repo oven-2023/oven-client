@@ -14,7 +14,7 @@ const MovieInfoText = () => {
     <Container>
       <SummaryContainer>
         <Title>작품 정보</Title>
-        <MovieSummary>{detailMovie.summary}</MovieSummary>
+        <MovieSummary>{detailMovie?.summary || ''}</MovieSummary>
       </SummaryContainer>
     </Container>
   );
@@ -24,7 +24,7 @@ const Container = styled.View`
   height: 350px;
   margin-top: 10px;
   width: ${({ width }) => Dimensions.get('window').width - 50}px;
-  
+
 `;
 
 const Title = styled.Text`

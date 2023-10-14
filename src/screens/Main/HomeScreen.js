@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { FontAwesome } from '@expo/vector-icons';
 import OttRmd from '../../components/Main/HomeScreen/OttRmd';
 import MovieRmd from '../../components/Main/HomeScreen/MovieRmd';
-import { isLoginState, userState } from '../../states';
+import { userState } from '../../states';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import PopularMovie from '../../components/Main/HomeScreen/PopularMovie';
 import MainLayout from '../../components/Layout/MainLayout';
@@ -25,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
         />
         <Centralizer>
           <Bottom>
-            <Title>나에게 맞는 OTT</Title>
+            <Title>이번달 나에게 맞는 OTT</Title>
             <OttRmd />
           </Bottom>
           <Bottom>

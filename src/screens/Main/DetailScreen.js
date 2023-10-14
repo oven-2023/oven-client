@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   SafeAreaView,
@@ -18,6 +18,7 @@ import axios from 'axios';
 import { baseURL } from '../../api/client';
 import { BEIGE } from '../../css/theme';
 import { ScrollView } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DetailScreen = ({ route }) => {
   const { workId } = route.params;
@@ -25,22 +26,32 @@ const DetailScreen = ({ route }) => {
   const [detailMovie, setDetailMovie] = useRecoilState(detailMovieState);
 
   useEffect(() => {
-    getWorkDetailAPI();
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        getWorkDetailAPI(value);
+      })
+      .catch((error) => {
+        console.log('Error getting access token:', error);
+      });
   }, []);
 
-  const getWorkDetailAPI = async () => {
+  const getWorkDetailAPI = async (accessToken) => {
     await axios
-      .get(`${baseURL}/works/2`, {
+      .get(`${baseURL}/works/4`, {
+        headers: {
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
+        },
         params: {
-          workId: 2,
+          workId: 4,
         },
       })
       .then((response) => {
-        console.log('detail', response.data.data);
+        console.log('detail success', response.data.data);
         setDetailMovie(response.data.data);
       })
       .catch(function (error) {
-        console.log('detail', error);
+        console.log('detail err', error);
       });
   };
 

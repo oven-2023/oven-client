@@ -27,8 +27,8 @@ const MovieInfoBox = () => {
 
   return (
     <Container>
-      <Title>{detailMovie.titleKr}</Title>
-      <MoviePoster src={detailMovie.poster} />
+      <Title>{detailMovie?.titleKr || detailMovie?.titleEng || ''}</Title>
+      <MoviePoster src={detailMovie?.poster || null} />
       <ButtonContainer>
         <Column>
           <RatingBtn
@@ -56,18 +56,21 @@ const MovieInfoBox = () => {
       <Row>
         <TextContainer>
           <Rate>평점:</Rate>
-          <Genre>장르: {detailMovie.genre}</Genre>
-          <Actor>출연: {detailMovie.actor.split('/').join(',')}</Actor>
-          <Director>감독: {detailMovie.director}</Director>
+          <Genre>장르: {detailMovie?.genre || ''}</Genre>
+          <Actor>출연: {detailMovie?.actor.split('/').join(',') || ''}</Actor>
+          <Director>
+            감독:{' '}
+            {detailMovie?.director
+              ? detailMovie.director.split('/').join(',')
+              : ''}
+          </Director>
           <OTT>
             OTT:
-            {detailMovie.providerList ? (
-              detailMovie.providerList
-                .map((provider) => provider.name)
-                .join(', ')
-            ) : (
-              <></>
-            )}
+            {detailMovie?.providerList
+              ? detailMovie.providerList
+                  .map((provider) => provider.name)
+                  .join(', ')
+              : ''}
           </OTT>
         </TextContainer>
       </Row>

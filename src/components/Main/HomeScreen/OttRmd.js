@@ -8,9 +8,9 @@ const OttRmd = () => {
 
   return (
     <OttRmdContainer>
-      <Text1>이번달 당신에게 맞는 OTT는</Text1>
+      {/* <Text1>이번달 당신에게 맞는 OTT는</Text1> */}
       <Text1>
-        <Ott>{ott}</Ott>입니다
+        <Ott>{ott}</Ott>
       </Text1>
     </OttRmdContainer>
   );

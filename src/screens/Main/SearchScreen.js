@@ -7,6 +7,7 @@ import { searchedResultState } from '../../states';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import { BROWN, BEIGE } from '../../css/theme.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SearchScreen = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -106,11 +107,12 @@ const SearchScreen = () => {
       });
   };
 
-  const getSearchAPI = async () => {
+  const getSearchAPI = async (accessToken) => {
     await axios
       .get(`${baseURL}/search`, {
         headers: {
           'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
         },
         params: {
           keyword: searchInput,
@@ -125,6 +127,16 @@ const SearchScreen = () => {
         console.log(error);
       });
   };
+
+  // useEffect(() => {
+  //   AsyncStorage.getItem('accessToken')
+  //     .then((value) => {
+  //       getSearchAPI(value);
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error getting access token:', error);
+  //     });
+  // }, []);
 
   useEffect(() => {
     if (searchInput !== '') {

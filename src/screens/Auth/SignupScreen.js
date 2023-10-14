@@ -38,11 +38,11 @@ const SignUpScreen = ({ navigation }) => {
 
   const postJoinAPI = async () => {
     await axios
-      .post(`${baseURL}/join`, {
+      .post(`${baseURL}/auth/join`, {
           nickName: name,
           password: password,
-          pwConfirm: passwordConfirm,
-          userName: id,
+          // pwConfirm: passwordConfirm,
+          username: id,
       })
       .then((response) => {
         console.log(response);

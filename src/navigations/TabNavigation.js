@@ -23,7 +23,7 @@ const TabNavigation = () => {
         elevation: 24,
       }}
       screenOptions={{
-        tabBarStyle: { backgroundColor: 'whitesmoke' },
+        tabBarStyle: { backgroundColor: 'white' },
       }}
     >
       <Tab.Screen

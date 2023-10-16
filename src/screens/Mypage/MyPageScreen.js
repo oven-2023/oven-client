@@ -17,11 +17,11 @@ const MyPageScreen = ({ navigation }) => {
   const HandleLogout = async () => {
     try {
       setIsLogin(false);
-      await AsyncStorage.removeItem(token);
-      navigation.navigate('LoginScreen');
-    } catch {
-      Alert.alert('다시 시도하세요');
-    }
+      await AsyncStorage.removeItem(accessToken);
+      await AsyncStorage.removeItem(refreshToken);
+      // navigation.navigate('LoginScreen');
+      console.log('로그아웃 성공');
+    } catch {}
   };
 
   return (

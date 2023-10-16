@@ -21,7 +21,7 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       setShowSplash(false);
-    }, 3000);
+    }, 2000);
   }, []);
 
   return <RecoilRoot>{showSplash ? <SplashScreen /> : <Router />}</RecoilRoot>;

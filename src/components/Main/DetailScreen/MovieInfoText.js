@@ -42,6 +42,7 @@ const MovieSummary = styled.Text`
   font-weight: 600;
   font-family: 'dunggeunmo';
   padding: 20px;
+  line-height: 20px;
 `;
 
 const SummaryContainer = styled.View`

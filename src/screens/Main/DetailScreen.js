@@ -37,13 +37,13 @@ const DetailScreen = ({ route }) => {
 
   const getWorkDetailAPI = async (accessToken) => {
     await axios
-      .get(`${baseURL}/works/4`, {
+      .get(`${baseURL}/works/5`, {
         headers: {
           'Content-Type': `application/json`,
           Authorization: `Bearer ${accessToken}`,
         },
         params: {
-          workId: 4,
+          workId: 5,
         },
       })
       .then((response) => {

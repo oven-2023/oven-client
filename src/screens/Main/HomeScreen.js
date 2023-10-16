@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import { FontAwesome } from '@expo/vector-icons';
 import OttRmd from '../../components/Main/HomeScreen/OttRmd';
 import MovieRmd from '../../components/Main/HomeScreen/MovieRmd';
-import { userState } from '../../states';
+import { userState, isLoginState } from '../../states';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import PopularMovie from '../../components/Main/HomeScreen/PopularMovie';
 import MainLayout from '../../components/Layout/MainLayout';
@@ -13,6 +13,11 @@ import { ORANGE, BROWN } from '../../css/theme';
 
 const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useRecoilState(userState);
+  const [isLogin,] = useRecoilState(isLoginState);
+  
+  useEffect(() => {
+   console.log(isLogin) 
+  },[])
 
   return (
     <MainLayout>

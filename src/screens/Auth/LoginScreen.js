@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Text,
   View,
@@ -33,17 +33,9 @@ const LoginScreen = ({ navigation }) => {
     setPassword(password);
   };
 
-  // const storeData = (key, value) => {
-  //   try {
-  //     AsyncStorage.setItem(key, value);
-  //   } catch (e) {
-  //     console.error(e.message);
-  //   }
-  // };
-
-  // AsyncStorage.getItem('key').then((value) => {
-  //   console.log(value);
-  // });
+  useEffect(() => {
+    console.log(isLogin);
+  }, []);
 
   const postLoginAPI = async () => {
     await axios
@@ -55,18 +47,8 @@ const LoginScreen = ({ navigation }) => {
         console.log(response.data.data.accessToken);
         AsyncStorage.setItem('accessToken', response.data.data.accessToken);
         AsyncStorage.setItem('refreshToken', response.data.data.refreshToken);
-        // storeData('accessToken', response.data.data.accessToken);
-        // storeData('accessToken', response.data.data.refreshToken);
-        // AsyncStorage.setItem(
-        //   'accessToken',
-        //   JSON.stringify(response.data.data.accessToken)
-        // );
-        // AsyncStorage.setItem(
-        //   'refreshToken',
-        //   JSON.stringify(response.data.data.refreshToken)
-        // );
         setIsLogin(true);
-        navigation.navigate('HomeScreen');
+        // navigation.navigate('HomeScreen');
       })
       .catch(function (error) {
         console.log(error);

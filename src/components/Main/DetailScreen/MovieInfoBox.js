@@ -57,12 +57,12 @@ const MovieInfoBox = () => {
         <TextContainer>
           <Rate>평점:</Rate>
           <Genre>장르: {detailMovie?.genre || ''}</Genre>
-          <Actor>출연: {detailMovie?.actor.split('/').join(',') || ''}</Actor>
+          <Actor>
+            출연: {detailMovie.actor?.split('/').slice(0, -1).join(',') || ''}
+          </Actor>
           <Director>
             감독:{' '}
-            {detailMovie?.director
-              ? detailMovie.director.split('/').join(',')
-              : ''}
+            {detailMovie.director?.split('/').slice(0, -1).join(',') || ''}
           </Director>
           <OTT>
             OTT:
@@ -86,7 +86,7 @@ const Container = styled.View`
 const MoviePoster = styled.Image`
   background-color: white;
   width: 100%;
-  height: 200px;
+  min-height: 400px;
   position: relative;
   border-radius: 20px;
 `;

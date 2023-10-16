@@ -13,7 +13,7 @@ import Input from '../../components/Auth/Input';
 import AuthButton from '../../components/Auth/AuthButton';
 import TabNavigation from '../../navigations/TabNavigation';
 import { useRecoilState } from 'recoil';
-import { isLoginState } from '../../states';
+import { isLoginState, userState } from '../../states';
 import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
@@ -23,6 +23,7 @@ import SplashLogo from '../../components/Layout/SplashLogo';
 
 const LoginScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const [user, setUser] = useRecoilState(userState);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -44,9 +45,16 @@ const LoginScreen = ({ navigation }) => {
         username: id,
       })
       .then((response) => {
-        console.log(response.data.data.accessToken);
-        AsyncStorage.setItem('accessToken', response.data.data.accessToken);
-        AsyncStorage.setItem('refreshToken', response.data.data.refreshToken);
+        console.log(response.data.data.nickname);
+        AsyncStorage.setItem(
+          'accessToken',
+          response.data.data.jwtTokenResponse.accessToken
+        );
+        AsyncStorage.setItem(
+          'refreshToken',
+          response.data.data.jwtTokenResponse.refreshToken
+        );
+        setUser(response.data.data.nickname);
         setIsLogin(true);
         // navigation.navigate('HomeScreen');
       })

@@ -7,15 +7,17 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  Dimensions,
 } from 'react-native';
 import Input from '../../components/Auth/Input';
 import styled from 'styled-components';
 import AuthButton from '../../components/Auth/AuthButton';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
-import { BEIGE, BROWN } from '../../css/theme';
+import { BEIGE, BROWN, ORANGE } from '../../css/theme';
 
 const SignUpScreen = ({ navigation }) => {
+  const width = Dimensions.get('window').width;
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -35,6 +37,26 @@ const SignUpScreen = ({ navigation }) => {
 
   const HandleChangePasswordConfirm = (passwordConfirm) => {
     setPasswordConfirm(passwordConfirm);
+    setId('');
+  };
+
+  const postDuplicateAPI = async () => {
+    await axios
+      .post(`${baseURL}/auth/id/exists`, {
+        username: id,
+      })
+      .then((response) => {
+        console.log(response.data.data.idExists);
+        if (response.data.data.idExists) {
+          Alert.alert('사용 중인 아이디입니다');
+          setId('');
+        } else {
+          Alert.alert('사용 가능한 아이디입니다');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const postJoinAPI = async () => {
@@ -63,7 +85,12 @@ const SignUpScreen = ({ navigation }) => {
       <OvenLogo source={require('../../img/oven.png')} />
       <Title>회원가입</Title>
       <Input placeholder="이름" value={name} onChangeText={HandleChangeName} />
-      <Input placeholder="아이디" value={id} onChangeText={HandleChangeId} />
+      <Relative>
+        <Input placeholder="아이디" value={id} onChangeText={HandleChangeId} />
+        <DuplicateButton onPress={postDuplicateAPI}>
+          <DuplicationText>중복 체크</DuplicationText>
+        </DuplicateButton>
+      </Relative>
       <Input
         placeholder="비밀번호"
         value={password}
@@ -99,6 +126,28 @@ const Container = styled.SafeAreaView`
 const OvenLogo = styled.Image`
   width: 100px;
   height: 100px;
+`;
+
+const Relative = styled.View`
+  position: relative;
+`;
+
+const DuplicateButton = styled.TouchableOpacity`
+  width: 100px;
+  height: 35px;
+  background-color: ${ORANGE};
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 15px;
+  top: 18px;
+`;
+
+const DuplicationText = styled.Text`
+  color: white;
+  font-family: 'dunggeunmo';
+  font-size: 16px;
 `;
 
 export default SignUpScreen;

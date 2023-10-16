@@ -114,7 +114,7 @@ const PopularMovie = () => {
 
 const MovieContainer = styled.ScrollView`
   margin-top: 20px;
-  height: 170px;
+  height: 180px;
   border-radius: 20px;
 `;
 

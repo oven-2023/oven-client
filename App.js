@@ -3,6 +3,9 @@ import { RecoilRoot } from 'recoil';
 import * as Font from 'expo-font';
 import { useState, useEffect } from 'react';
 import SplashScreen from './src/components/Layout/SplashScreen';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 
 export default function App() {
   const [isFont, setIsFont] = useState(false);

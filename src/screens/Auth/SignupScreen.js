@@ -5,7 +5,8 @@ import {
   SafeAreaView,
   Button,
   TouchableOpacity,
-  Alert, Image
+  Alert,
+  Image,
 } from 'react-native';
 import Input from '../../components/Auth/Input';
 import styled from 'styled-components';
@@ -37,22 +38,24 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   const postJoinAPI = async () => {
-    await axios
-      .post(`${baseURL}/auth/join`, {
+    if (password !== passwordConfirm) Alert.alert('비밀번호가 다릅니다.');
+    else {
+      await axios
+        .post(`${baseURL}/auth/join`, {
           nickName: name,
           password: password,
-          // pwConfirm: passwordConfirm,
           username: id,
-      })
-      .then((response) => {
-        console.log(response);
-        Alert.alert('회원가입 완료');
-        navigation.navigate('LoginScreen');
-      })
-      .catch(function (error) {
-        console.log(error);
-        Alert.alert('회원가입을 실패했습니다. 다시 시도하세요.');
-      });
+        })
+        .then((response) => {
+          console.log(response);
+          Alert.alert('회원가입 완료');
+          navigation.navigate('LoginScreen');
+        })
+        .catch(function (error) {
+          console.log(error);
+          Alert.alert('회원가입을 실패했습니다. 다시 시도하세요.');
+        });
+    }
   };
 
   return (

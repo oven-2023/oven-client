@@ -12,7 +12,7 @@ import MovieInfoBox from '../../components/Main/DetailScreen/MovieInfoBox';
 import MovieInfoText from '../../components/Main/DetailScreen/MovieInfoText';
 import OttList from '../../components/Main/DetailScreen/OttList';
 import { useRecoilState } from 'recoil';
-import { isModalState, detailMovieState } from '../../states';
+import { isModalState, detailMovieState, clickedWorkState } from '../../states';
 import RatingModal from '../../components/Main/DetailScreen/RatingModal';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
@@ -24,8 +24,11 @@ const DetailScreen = ({ route }) => {
   const { workId } = route.params;
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
   const [detailMovie, setDetailMovie] = useRecoilState(detailMovieState);
+  const [clickedMovie, setClickedMovie] = useRecoilState(clickedWorkState);
 
   useEffect(() => {
+    console.log('workId?:', { workId }.workId);
+    setClickedMovie({ workId }.workId);
     AsyncStorage.getItem('accessToken')
       .then((value) => {
         getWorkDetailAPI(value);
@@ -37,13 +40,13 @@ const DetailScreen = ({ route }) => {
 
   const getWorkDetailAPI = async (accessToken) => {
     await axios
-      .get(`${baseURL}/works/5`, {
+      .get(`${baseURL}/works/${clickedMovie}`, {
         headers: {
           'Content-Type': `application/json`,
           Authorization: `Bearer ${accessToken}`,
         },
         params: {
-          workId: 5,
+          workId: clickedMovie,
         },
       })
       .then((response) => {

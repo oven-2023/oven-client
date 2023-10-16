@@ -28,6 +28,7 @@ const RoomInfoContainer = styled.View`
   background-color: ${BROWN};
   align-items: center;
   justify-content: space-evenly;
+  padding: 20px 0px;
 `;
 
 const RoomName = styled.Text`
@@ -35,7 +36,6 @@ const RoomName = styled.Text`
   font-weight: 700;
   font-family: 'dunggeunmo';
   color: ${BEIGE};
-  padding: 10px;
 `;
 
 const PayDate = styled.Text`

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   SafeAreaView,
@@ -10,19 +10,57 @@ import {
 import styled from 'styled-components';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
-import { detailMovieState, isHeartState } from '../../../states';
+import {
+  detailMovieState,
+  isHeartState,
+  clickedWorkState,
+} from '../../../states';
 import { isModalState } from '../../../states';
 import { BROWN } from '../../../css/theme';
+import { baseURL } from '../../../api/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const MovieInfoBox = () => {
   const [isHearted, setIsHearted] = useRecoilState(isHeartState);
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
   const [detailMovie] = useRecoilState(detailMovieState);
-  const width = Dimensions.get('window').width;
+  const [clickedMovie, setClickedMovie] = useRecoilState(clickedWorkState);
+  const [token, setToken] = useState('');
+  useEffect(() => {
+    console.log(clickedMovie);
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        setToken(value);
+      })
+      .catch((error) => {
+        console.log('Error heart:', error);
+      });
+  }, []);
 
-  const toggleHeart = () => {
-    setIsHearted((previousState) => !previousState);
-    // postHeartedAPI();
+  const postHeartedAPI = async () => {
+    await axios
+      .post(
+        `${baseURL}/works/${clickedMovie}/like`,
+        { body: null },
+        {
+          headers: {
+            'Content-Type': `application/json`,
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            workId: clickedMovie,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.isSuccess)
+          setIsHearted((previousState) => !previousState);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -41,11 +79,11 @@ const MovieInfoBox = () => {
         </Column>
         <Column>
           {isHearted ? (
-            <HeartBtn name="heart" onPress={toggleHeart} size={34} />
+            <HeartBtn name="heart" onPress={postHeartedAPI} size={34} />
           ) : (
             <HeartBtn
               name="heart-o"
-              onPress={toggleHeart}
+              onPress={postHeartedAPI}
               size={34}
               color="black"
             />
@@ -55,8 +93,7 @@ const MovieInfoBox = () => {
       </ButtonContainer>
       <Row>
         <TextContainer>
-          <Rate>평점:</Rate>
-          <Genre>장르: {detailMovie?.genre || ''}</Genre>
+          <Genre>장르: {detailMovie?.genre.slice(0, -2) || ''}</Genre>
           <Actor>
             출연: {detailMovie.actor?.split('/').slice(0, -1).join(',') || ''}
           </Actor>
@@ -65,7 +102,7 @@ const MovieInfoBox = () => {
             {detailMovie.director?.split('/').slice(0, -1).join(',') || ''}
           </Director>
           <OTT>
-            OTT:
+            OTT:{' '}
             {detailMovie?.providerList
               ? detailMovie.providerList
                   .map((provider) => provider.name)
@@ -112,9 +149,6 @@ const Actor = styled.Text`
   font-family: 'dunggeunmo';
 `;
 
-const Rate = styled(Actor)`
-  font-weight: 700;
-`;
 const Director = styled(Actor)``;
 const Genre = styled(Actor)``;
 

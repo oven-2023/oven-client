@@ -35,3 +35,8 @@ export const clickedOttState = atom({
   key: `clickedOtt/${v1()}`,
   default: null,
 });
+
+export const clickedWorkState = atom({
+  key: `clickedWork/${v1()}`,
+  default: null,
+});

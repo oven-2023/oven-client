@@ -12,10 +12,12 @@ const MovieInfoText = () => {
 
   return (
     <Container>
-      <SummaryContainer>
-        <Title>작품 정보</Title>
-        <MovieSummary>{detailMovie?.summary || ''}</MovieSummary>
-      </SummaryContainer>
+      {detailMovie ? (
+        <SummaryContainer>
+          <Title>작품 정보</Title>
+          <MovieSummary>{detailMovie?.summary || ''}</MovieSummary>
+        </SummaryContainer>)
+        : <></>}
     </Container>
   );
 };

@@ -5,9 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../../api/client';
 import { BEIGE } from '../../../css/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PopularMovie = () => {
-  const [populars, setPopulars] = useState();
+  const [populars, setPopulars] = useState([]);
 
   // const getPopularsAPI = async () => {
   //   await axios
@@ -48,7 +49,7 @@ const PopularMovie = () => {
   //     },
   //   })
 
-  const getPopularsAPI = async () => {
+  const getPopularsssAPI = async () => {
     await axios({
       method: 'get',
       url: 'https://hs-ceos.shop/mypage/likes',
@@ -64,27 +65,49 @@ const PopularMovie = () => {
   };
 
   useEffect(() => {
-    getPopularsAPI();
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        getPopularsAPI(value);
+      })
+      .catch((error) => {
+        console.log('Error getting access token:', error);
+      });
   }, []);
+
+  const getPopularsAPI = async (accessToken) => {
+    await axios
+      .get(`${baseURL}/home/populars`, {
+        headers: {
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((response) => {
+        setPopulars(response.data.data);
+        console.log(populars);
+      })
+      .catch(function (error) {
+        console.log('detail errrrr', error);
+      });
+  };
 
   const navigation = useNavigation();
 
   return (
     <MovieContainer showsVerticalScrollIndicator={false} horizontal={true}>
       {populars ? (
-        populars.map(({ poster, title, workId }) => {
+        populars.map(({ poster, title, workId }) => (
           <Movie
             key={workId}
             onPress={() => navigation.navigate('DetailScreen', { workId })}
           >
             {poster ? <MoviePoster src={poster} /> : <Block />}
             <MovieTitle>{title}</MovieTitle>
-          </Movie>;
-        })
+          </Movie>
+        ))
       ) : (
         <></>
       )}
-      <Movie onPress={() => navigation.navigate('DetailScreen', 1)} />
     </MovieContainer>
   );
 };
@@ -92,7 +115,6 @@ const PopularMovie = () => {
 const MovieContainer = styled.ScrollView`
   margin-top: 20px;
   height: 170px;
-  background-color: white;
   border-radius: 20px;
 `;
 
@@ -113,14 +135,13 @@ const Block = styled.View`
 const Movie = styled.TouchableOpacity`
   margin-right: 10px;
   width: 110px;
-  background-color: pink;
 `;
 
 const MovieTitle = styled.Text`
   font-size: 10px;
   margin-top: 5px;
   text-align: center;
-  color: white;
+  color: black;
   font-weight: 700;
   font-family: 'dunggeunmo';
 `;

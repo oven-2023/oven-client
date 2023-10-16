@@ -14,10 +14,6 @@ import { ORANGE, BROWN } from '../../css/theme';
 const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useRecoilState(userState);
   const [isLogin,] = useRecoilState(isLoginState);
-  
-  useEffect(() => {
-   console.log(isLogin) 
-  },[])
 
   return (
     <MainLayout>

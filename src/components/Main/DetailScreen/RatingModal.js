@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   SafeAreaView,
@@ -11,19 +11,28 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { isModalState } from '../../../states';
+import { isModalState, clickedWorkState } from '../../../states';
 import { FontAwesome } from '@expo/vector-icons';
 import { BEIGE, BROWN, RED } from '../../../css/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { baseURL } from '../../../api/client';
 
 const RatingModal = () => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
   const [selectedStars, setSelectedStars] = useState(0);
+  const [clickedMovie, setClickedMovie] = useRecoilState(clickedWorkState);
+  const [token, setToken] = useState('');
 
-  const onHandleSubmit = () => {
-    // postRatingAPI();
-    Alert.alert('평점 등록을 완료했습니다');
-    setIsModalOpened(false);
-  };
+  useEffect(() => {
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        setToken(value);
+      })
+      .catch((error) => {
+        console.log('Error star:', error);
+      });
+  }, [clickedMovie]);
 
   const handleRatingChange = (stars) => {
     setSelectedStars(stars);
@@ -45,6 +54,33 @@ const RatingModal = () => {
     return stars;
   };
 
+  const postRatingAPI = async () => {
+    await axios
+      .post(
+        `${baseURL}/works/${clickedMovie}/rating`,
+        { rating: selectedStars },
+        {
+          headers: {
+            'Content-Type': `application/json`,
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            workId: clickedMovie,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        Alert.alert('평점 등록을 완료했습니다');
+        setIsModalOpened(false);
+        // if (response.data.isSuccess)
+        //   setIsHearted((previousState) => !previousState);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <ModalContainer animationType="fade">
       <ModalBackground>
@@ -55,7 +91,7 @@ const RatingModal = () => {
             <StyledButton onPress={() => setIsModalOpened(false)}>
               <Close>닫기</Close>
             </StyledButton>
-            <StyledButton onPress={onHandleSubmit}>
+            <StyledButton onPress={postRatingAPI}>
               <Submit>등록</Submit>
             </StyledButton>
           </ButtonContainer>

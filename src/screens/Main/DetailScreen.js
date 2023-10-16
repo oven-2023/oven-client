@@ -17,7 +17,6 @@ import RatingModal from '../../components/Main/DetailScreen/RatingModal';
 import { BEIGE } from '../../css/theme';
 
 const DetailScreen = ({ route }) => {
-  // const { workId } = route.params;
   const [isModalOpened] = useRecoilState(isModalState);
   const [detailMovie] = useRecoilState(detailMovieState);
   const [, setClickedMovie] = useRecoilState(clickedWorkState);

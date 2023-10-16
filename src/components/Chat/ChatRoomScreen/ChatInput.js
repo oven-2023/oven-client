@@ -36,10 +36,11 @@ const MsgInput = styled.TextInput`
   width: 80%;
   /* margin-right: auto; */
   height: 50px;
-  border: 1px solid ${BROWN};
+  border: 3px solid ${BROWN};
   font-size: 16px;
   border-radius: 20px;
   font-family: 'dunggeunmo';
+  padding: 0px 20px;
 `;
 
 const SendBtn = styled.TouchableOpacity`
@@ -47,8 +48,8 @@ const SendBtn = styled.TouchableOpacity`
   width: 15%;
   height: 50px;
   justify-content: center;
+  border: 3px solid white;
   align-items: center;
-  border: 1px solid ${BROWN};
   border-radius: 20px;
   padding: 5px;
 `;

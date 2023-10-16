@@ -41,22 +41,24 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   const postDuplicateAPI = async () => {
-    await axios
-      .post(`${baseURL}/auth/id/exists`, {
-        username: id,
-      })
-      .then((response) => {
-        console.log(response.data.data.idExists);
-        if (response.data.data.idExists) {
-          Alert.alert('사용 중인 아이디입니다');
-          setId('');
-        } else {
-          Alert.alert('사용 가능한 아이디입니다');
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (id !== '') {
+      await axios
+        .post(`${baseURL}/auth/id/exists`, {
+          username: id,
+        })
+        .then((response) => {
+          console.log(response.data.data.idExists);
+          if (response.data.data.idExists) {
+            Alert.alert('사용 중인 아이디입니다');
+            setId('');
+          } else {
+            Alert.alert('사용 가능한 아이디입니다');
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else Alert.alert('아이디를 입력하세요');
   };
 
   const postJoinAPI = async () => {

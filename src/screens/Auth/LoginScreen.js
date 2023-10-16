@@ -39,29 +39,32 @@ const LoginScreen = ({ navigation }) => {
   }, []);
 
   const postLoginAPI = async () => {
-    await axios
-      .post(`${baseURL}/auth/login`, {
-        password: password,
-        username: id,
-      })
-      .then((response) => {
-        console.log(response.data.data.nickname);
-        AsyncStorage.setItem(
-          'accessToken',
-          response.data.data.jwtTokenResponse.accessToken
-        );
-        AsyncStorage.setItem(
-          'refreshToken',
-          response.data.data.jwtTokenResponse.refreshToken
-        );
-        setUser(response.data.data.nickname);
-        setIsLogin(true);
-        // navigation.navigate('HomeScreen');
-      })
-      .catch(function (error) {
-        console.log(error);
-        Alert.alert('로그인 실패');
-      });
+    if (id !== '' & password !== '') {
+      await axios
+        .post(`${baseURL}/auth/login`, {
+          password: password,
+          username: id,
+        })
+        .then((response) => {
+          console.log(response.data.data.nickname);
+          AsyncStorage.setItem(
+            'accessToken',
+            response.data.data.jwtTokenResponse.accessToken
+          );
+          AsyncStorage.setItem(
+            'refreshToken',
+            response.data.data.jwtTokenResponse.refreshToken
+          );
+          setUser(response.data.data.nickname);
+          setIsLogin(true);
+          // navigation.navigate('HomeScreen');
+        })
+        .catch(function (error) {
+          console.log(error);
+          Alert.alert('아이디나 비밀번호가 잘못되었습니다');
+        });
+    }
+    else Alert.alert('아이디와 비밀번호를 모두 입력하세요');
   };
 
   return (

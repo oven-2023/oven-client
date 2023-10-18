@@ -38,11 +38,13 @@ const SearchResult = ({
         renderItem={({ item }) => {
           return (
             // <Movies>
-            <Movie>
-              {item.poster_path ? (
-                <MoviePoster
-                  src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                />
+            <Movie
+              onPress={() =>
+                navigation.navigate('DetailScreen', { workId: item.workId })
+              }
+            >
+              {item.poster ? (
+                <MoviePoster src={item.poster} />
               ) : (
                 <MoviePoster />
               )}
@@ -78,6 +80,7 @@ const SearchResultBox = styled.View`
   border-radius: 20px;
   padding: 10px;
   align-items: center;
+  min-height: 650px;
 `;
 
 const MovieContainer = styled.FlatList``;

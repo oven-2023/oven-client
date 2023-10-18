@@ -139,6 +139,10 @@ const MovieInfoBox = ({ route }) => {
                 .join(', ')) ||
               ''}
           </OTT>
+          <OTT>
+            관람 가능 연령: 
+            {detailMovie?.ageRating}
+          </OTT>
         </TextContainer>
       </Row>
     </Container>

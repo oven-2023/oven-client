@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { SafeAreaView, Text, Button, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import OttList from '../../components/Main/DetailScreen/OttList';
@@ -7,50 +7,76 @@ import ChatRoomButton from '../../components/Chat/ChatHomeScreen/ChatRoomButton'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MainLayout from '../../components/Layout/MainLayout';
 import { BROWN } from '../../css/theme';
+import { baseURL } from '../../api/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const ChatHomeScreen = ({ navigation }) => {
+  const [myChatRooms, setMyChatRooms] = useState('');
+
+  useEffect(() => {
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        getMyChatRoomsAPI(value);
+      })
+      .catch((error) => {
+        console.log('Error getting access token:', error);
+      });
+  }, []);
+
+  const getMyChatRoomsAPI = async (accessToken) => {
+    await axios
+      .get(`${baseURL}/chatrooms`, {
+        headers: {
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data.data);
+        setMyChatRooms(response.data.data);
+      })
+      .catch(function (error) {
+        console.log('getMyChatRooms', error);
+      });
+  };
+
   const rooms = [
     {
-      id: 1,
-      name: '참여방1',
+      title: '참여방1',
       wholenum: 4,
       leftnum: 0,
       ottid: 1,
     },
     {
-      id: 2,
-      name: '참여방2',
+      title: '참여방2',
       wholenum: 4,
       leftnum: 0,
       ottid: 2,
     },
     {
-      id: 3,
-      name: '참여방3',
+      title: '참여방3',
       desc: '참여방3번입니다.',
       wholenum: 4,
       leftnum: 0,
       ottid: 3,
     },
     {
-      id: 4,
-      name: '참여방4',
+      title: '참여방4',
       desc: '참여방4번입니다.',
       wholenum: 4,
       leftnum: 0,
       ottid: 4,
     },
     {
-      id: 4,
-      name: '참여방4',
+      title: '참여방4',
       desc: '참여방4번입니다.',
       wholenum: 4,
       leftnum: 0,
       ottid: 1,
     },
     {
-      id: 4,
-      name: '참여방4',
+      title: '참여방4',
       desc: '참여방4번입니다.',
       wholenum: 4,
       leftnum: 0,
@@ -62,11 +88,11 @@ const ChatHomeScreen = ({ navigation }) => {
       <Scroller>
         <SubTitle>내가 참여 중인 구독방</SubTitle>
         <ChatRoomListContainer>
-          {rooms.map(({ id, name, desc, wholenum, leftnum, ottid }) => (
+          {rooms.map(({ index, title, desc, wholenum, leftnum, ottid }) => (
             <Touchable onPress={() => navigation.navigate('ChatRoomScreen')}>
               <ChatRoomButton
-                id={id}
-                name={name}
+                index={index}
+                title={title}
                 desc={desc}
                 wholenum={wholenum}
                 leftnum={leftnum}

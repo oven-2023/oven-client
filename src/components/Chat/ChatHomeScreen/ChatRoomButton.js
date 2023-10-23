@@ -1,37 +1,49 @@
 import React from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 import styled from 'styled-components';
-import { BEIGE, RED,BROWN } from '../../../css/theme';
+import { BEIGE, RED, BROWN } from '../../../css/theme';
 import DashedVerticalLine from '../../../css/DashedVerticalLine';
+import { useRecoilState } from 'recoil';
+import { clickedOttState } from '../../../states/index';
 
-const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
+const ChatRoomButton = ({ index, title, wholenum, leftnum, ottid }) => {
+  const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
+
   const otts = [
     {
       ottid: 1,
-      ottname: 'Netflix',
       src: require('../../../img/Netflix.png'),
     },
     {
       ottid: 2,
-      ottname: 'Watcha',
-      src: require('../../../img/Watcha.png'),
+      src: require('../../../img/Tving.png'),
     },
     {
       ottid: 3,
-      ottname: 'Wavve',
       src: require('../../../img/Wavve.png'),
     },
     {
       ottid: 4,
-      ottname: 'Tving',
-      src: require('../../../img/Tving.png'),
+      src: require('../../../img/DisneyPlus.jpeg'),
+    },
+    {
+      ottid: 5,
+      src: require('../../../img/CoupangPlay.png'),
+    },
+    {
+      ottid: 6,
+      src: require('../../../img/Watcha.png'),
+    },
+    {
+      ottid: 7,
+      src: require('../../../img/AppleTv.png'),
     },
   ];
 
-  const findOtt = otts.find((item) => item.ottid === ottid);
+  const findOtt = otts.find((item) => item.ottid === ottid); // clickedOtt로 바꾸기
 
   return (
-    <Container index={id}>
+    <Container index={index}>
       <OttView
         style={{
           borderStyle: 'dashed',
@@ -45,7 +57,7 @@ const ChatRoomButton = ({ id, name, wholenum, leftnum, ottid }) => {
       <DashedVerticalLine />
 
       <Column>
-        <RoomName>{name}</RoomName>
+        <RoomName>{title}</RoomName>
         <LeftNum>
           {leftnum}명/{wholenum}명
         </LeftNum>

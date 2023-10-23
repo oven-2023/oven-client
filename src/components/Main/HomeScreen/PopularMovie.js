@@ -10,60 +10,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const PopularMovie = () => {
   const [populars, setPopulars] = useState([]);
 
-  // const getPopularsAPI = async () => {
-  //   await axios
-  //     .get(`${baseURL}/mypage/ratings`, {})
-  //     // .get(`${baseURL}/home/populars`, {})
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setPopulars(response.data.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log('popular', error);
-  //     });
-  // };
-
-  // const getPopularsAPI = async () => {
-  //   await axios
-  //     .get(`${baseURL}/works/1`, {
-  //       responseType: 'json',
-  //       // headers: {
-  //       //   'Content-Type': `application/json`,
-  //       // },
-  //     })
-  //     .then((response) => {
-  //       console.log('hi11');
-  //       console.log(response.data);
-  //       console.log('hi22');
-  //       console.log(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
-
-  // await axios
-  //   .get('https://hs-ceos.shop/works/1', {
-  //     headers: {
-  //       'Content-Type': `application/json`,
-  //     },
-  //   })
-
-  const getPopularsssAPI = async () => {
-    await axios({
-      method: 'get',
-      url: 'https://hs-ceos.shop/mypage/likes',
-    })
-      .then((response) => {
-        console.log('안녕!');
-        console.log(response.data.data);
-        setPopulars(response.data.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
   useEffect(() => {
     AsyncStorage.getItem('accessToken')
       .then((value) => {

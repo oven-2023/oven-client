@@ -16,23 +16,38 @@ const OttButtonList = () => {
   const otts = [
     {
       id: 1,
-      ottname: 'Netflix',
+      ottname: '넷플릭스',
       src: require('../../img/Netflix.png'),
     },
     {
       id: 2,
-      ottname: 'Watcha',
-      src: require('../../img/Watcha.png'),
+      ottname: '티빙',
+      src: require('../../img/Tving.png'),
     },
     {
       id: 3,
-      ottname: 'Wavve',
+      ottname: '웨이브',
       src: require('../../img/Wavve.png'),
     },
     {
       id: 4,
-      ottname: 'Tving',
-      src: require('../../img/Tving.png'),
+      ottname: '디즈니플러스',
+      src: require('../../img/DisneyPlus.jpeg'),
+    },
+    {
+      id: 5,
+      ottname: '쿠팡플레이',
+      src: require('../../img/CoupangPlay.png'),
+    },
+    {
+      id: 6,
+      ottname: '왓챠',
+      src: require('../../img/Watcha.png'),
+    },
+    {
+      id: 7,
+      ottname: '애플티비',
+      src: require('../../img/AppleTv.png'),
     },
   ];
 

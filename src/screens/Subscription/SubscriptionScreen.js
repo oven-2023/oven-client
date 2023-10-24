@@ -110,13 +110,13 @@ const SubscriptionScreen = ({ navigation }) => {
   ];
 
   const filteredRooms = clickedOtt
-    ? rooms.filter((room) => room.ottid === clickedOtt)
-    : rooms;
+    ? rooms.filter((room) => room.ottid === clickedOtt) //chatRooms로 바꾸기
+    : rooms; // chatRooms로 바꾸기
 
   const onClickHandler = (title) => {
-    setClickedRoom(name);
+    setClickedRoom(title);
     Alert.alert(
-      `${name}`,
+      `${title}`,
       '구독방에 입장하시겠습니까?',
       [
         {

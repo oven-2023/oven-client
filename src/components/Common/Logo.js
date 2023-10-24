@@ -13,6 +13,7 @@ const LogoText = styled.Text`
   margin-left: 20px;
   font-family: 'dunggeunmo';
   color: ${RED};
+  padding-bottom: 10px;
 `;
 
 export default Logo;

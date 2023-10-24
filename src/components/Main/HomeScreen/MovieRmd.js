@@ -5,32 +5,43 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../../api/client';
 import { BEIGE } from '../../../css/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MovieRmd = () => {
   const [recommendations, setRecommendations] = useState([]);
 
-  const getRecommendationsAPI = async () => {
+  useEffect(() => {
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        getRecommendationsAPI(value);
+      })
+      .catch((error) => {
+        console.log('Error getting access token:', error);
+      });
+  }, []);
+
+  const getRecommendationsAPI = async (accessToken) => {
     await axios
-      .get(`${baseURL}/home/recommendation/works`, {})
+      .get(`${baseURL}/home/recommendation/works`, {
+        headers: {
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
-        console.log('rec', response.data.data);
+        console.log('get recommend', response.data.data);
         setRecommendations(response.data.data);
       })
       .catch(function (error) {
-        console.log('rcm', error);
+        console.log('get recommend', error);
       });
   };
-
-  useEffect(() => {
-    getRecommendationsAPI();
-  }, []);
 
   const navigation = useNavigation();
   return (
     <MovieContainer>
       <Movies>
         {recommendations ? recommendations.map(({ poster, title, workId }) => (
-          <View>
             <Movie
               key={workId}
               onPress={() => navigation.navigate('DetailScreen', { workId })}
@@ -38,7 +49,6 @@ const MovieRmd = () => {
               <MoviePoster src={poster} />
               <MovieTitle>{title}</MovieTitle>
             </Movie>
-          </View>
         )): <></>}
       </Movies>
     </MovieContainer>
@@ -47,37 +57,35 @@ const MovieRmd = () => {
 
 const MovieContainer = styled.View`
   margin-top: 20px;
-  width: 100%;
-  margin-bottom: 50px;
-  background-color: white;
-  border-radius: 20px;
+  margin-bottom: 100px;
   min-height: 400px;
+  justify-content: center;
+  align-content: center;
 `;
 
 const Movies = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 const MoviePoster = styled.Image`
   background-color: ${BEIGE};
   height: 140px;
-  width: 100;
-  border-radius: 20;
+  width: 100px;
+  border-radius: 20px;
 `;
 
 const Movie = styled.TouchableOpacity`
-  width: 100px;
+  width: 110px;
   padding: 5px;
 `;
 
 const MovieTitle = styled.Text`
-  font-size: 13px;
+  font-size: 10px;
   margin-top: 5px;
   text-align: center;
-  color: white;
   font-weight: 700;
   font-family: 'dunggeunmo';
 `;

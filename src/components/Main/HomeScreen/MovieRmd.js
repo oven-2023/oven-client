@@ -74,7 +74,7 @@ const Movies = styled.View`
 `;
 
 const MoviePoster = styled.Image`
-  background-color: ${BEIGE};
+  background-color: white;
   height: 140px;
   width: 100px;
   border-radius: 20px;

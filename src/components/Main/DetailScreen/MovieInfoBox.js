@@ -12,7 +12,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
 import {
   detailMovieState,
-  isHeartState,
   clickedWorkState,
 } from '../../../states';
 import { isModalState } from '../../../states';
@@ -23,7 +22,8 @@ import axios from 'axios';
 
 const MovieInfoBox = ({ route }) => {
   const { workId } = route.params;
-  const [isHearted, setIsHearted] = useRecoilState(isHeartState);
+  const [isHearted, setIsHearted] = useState(false);
+  const [isStared, setIsStared] = useState(false);
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
   const [detailMovie, setDetailMovie] = useRecoilState(detailMovieState);
   const [clickedMovie, setClickedMovie] = useRecoilState(clickedWorkState);
@@ -55,6 +55,10 @@ const MovieInfoBox = ({ route }) => {
       .then((response) => {
         console.log('detail success', response.data.data);
         setDetailMovie(response.data.data);
+        if (response.data.data.liked) setIsHearted(true);
+        else setIsHearted(false);
+        if (response.data.data.rating === null) setIsStared(false);
+        else setIsStared(false);
       })
       .catch(function (error) {
         console.log('detail err', error);
@@ -92,24 +96,26 @@ const MovieInfoBox = ({ route }) => {
       <MoviePoster src={detailMovie?.poster || null} />
       <ButtonContainer>
         <Column>
-          <RatingBtn
-            name="star-o"
-            onPress={() => setIsModalOpened(true)}
-            size={34}
-            color="black"
-          />
+          {isStared ? (
+            <RatingBtn
+              name="star"
+              onPress={() => setIsModalOpened(true)}
+              size={34}
+            />
+          ) : (
+            <RatingBtn
+              name="star-o"
+              onPress={() => setIsModalOpened(true)}
+              size={34}
+            />
+          )}
           <WhiteText>평가하기</WhiteText>
         </Column>
         <Column>
           {isHearted ? (
             <HeartBtn name="heart" onPress={postHeartedAPI} size={34} />
           ) : (
-            <HeartBtn
-              name="heart-o"
-              onPress={postHeartedAPI}
-              size={34}
-              color="black"
-            />
+            <HeartBtn name="heart-o" onPress={postHeartedAPI} size={34} />
           )}
           <WhiteText>찜하기</WhiteText>
         </Column>
@@ -139,10 +145,6 @@ const MovieInfoBox = ({ route }) => {
                 .join(', ')) ||
               ''}
           </OTT>
-          <OTT>
-            관람 가능 연령: 
-            {detailMovie?.ageRating}
-          </OTT>
         </TextContainer>
       </Row>
     </Container>
@@ -160,6 +162,7 @@ const MoviePoster = styled.Image`
   min-height: 400px;
   position: relative;
   border-radius: 20px;
+  border: 3px solid white;
 `;
 const TextContainer = styled.View`
   min-height: 160px;
@@ -173,6 +176,7 @@ const Title = styled.Text`
   color: ${BROWN};
   font-weight: 700;
   margin: 20px 0px;
+  font-family: 'dunggeunmo';
 `;
 
 const Actor = styled.Text`

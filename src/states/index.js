@@ -11,11 +11,6 @@ export const userState = atom({
   default: '임채리',
 });
 
-export const isHeartState = atom({
-  key: `isHeart/${v1()}`,
-  default: false,
-});
-
 export const isModalState = atom({
   key: `isModal/${v1()}`,
   default: false,

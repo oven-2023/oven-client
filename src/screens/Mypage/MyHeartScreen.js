@@ -8,48 +8,34 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BEIGE, BROWN } from '../../css/theme';
 
 const MyHeartScreen = ({ navigation }) => {
-  const [heartedMovie, setHeartedMovie] = useState([]);
-  const [token, setToken] = useState('');
+  const [heartedMovie, setHeartedMovie] = useState('');
 
-  const getHeartedAPI = async () => {
+  useEffect(() => {
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        getHeartedAPI(value);
+      })
+      .catch((error) => {
+        console.log('Error get token:', error);
+      });
+  }, []);
+
+  const getHeartedAPI = async (accessToken) => {
     await axios
       .get(`${baseURL}/mypage/likes`, {
         headers: {
-          Authorization: token,
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((response) => {
-        console.log(token);
-        console.log('hearted');
-        console.log(response);
+        console.log(response.data);
         setHeartedMovie(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
-
-  const getPopularsAPI = async () => {
-    await axios
-      .get(`${baseURL}/home/populars`, {})
-      .then((response) => {
-        console.log(response);
-        setHeartedMovie(response.data.data);
-      })
-      .catch(function (error) {
-        console.log('popular', error);
-      });
-  };
-
-  useEffect(() => {
-    const tokenFunction = async () => {
-      const token = await AsyncStorage.getItem('token');
-    };
-    console.log('hsefsf');
-    tokenFunction();
-    // getHeartedAPI();
-    getPopularsAPI();
-  }, []);
 
   // const navigation = useNavigation();
 
@@ -58,15 +44,19 @@ const MyHeartScreen = ({ navigation }) => {
       <Title>내가 찜한 작품</Title>
       <MovieContainer>
         <Movies>
-          {heartedMovie.map(({ poster, title, workId }) => (
-            <Movie
-              key={workId}
-              onPress={() => navigation.navigate('DetailScreen', { workId })}
-            >
-              <MoviePoster src={poster} />
-              <MovieTitle>{title}</MovieTitle>
-            </Movie>
-          ))}
+          {heartedMovie ? (
+            heartedMovie.map(({ poster, title, workId }) => (
+              <Movie
+                key={workId}
+                onPress={() => navigation.navigate('DetailScreen', { workId })}
+              >
+                <MoviePoster src={poster} />
+                <MovieTitle>{title}</MovieTitle>
+              </Movie>
+            ))
+          ) : (
+            <></>
+          )}
         </Movies>
       </MovieContainer>
     </Container>
@@ -97,6 +87,7 @@ const Movies = styled.View`
 const MoviePoster = styled.Image`
   background-color: white;
   height: 140;
+  border-radius: 20px;
 `;
 
 const Movie = styled.TouchableOpacity`
@@ -108,8 +99,9 @@ const MovieTitle = styled.Text`
   font-size: 13px;
   margin-top: 5;
   text-align: center;
-  color: white;
+  color: ${BROWN};
   font-weight: 700;
+  font-family: 'dunggeunmo';
 `;
 
 const Title = styled.Text`

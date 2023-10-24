@@ -6,7 +6,7 @@ import DashedVerticalLine from '../../../css/DashedVerticalLine';
 import { useRecoilState } from 'recoil';
 import { clickedOttState } from '../../../states/index';
 
-const ChatRoomButton = ({ index, title, wholenum, leftnum, ottid }) => {
+const ChatRoomButton = ({ index, title, wholeNum, count, providerId }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
 
   const otts = [
@@ -40,7 +40,7 @@ const ChatRoomButton = ({ index, title, wholenum, leftnum, ottid }) => {
     },
   ];
 
-  const findOtt = otts.find((item) => item.ottid === ottid); // clickedOtt로 바꾸기
+  const findOtt = otts.find((item) => item.ottid === providerId); // clickedOtt로 바꾸기
 
   return (
     <Container index={index}>
@@ -59,7 +59,7 @@ const ChatRoomButton = ({ index, title, wholenum, leftnum, ottid }) => {
       <Column>
         <RoomName>{title}</RoomName>
         <LeftNum>
-          {leftnum}명/{wholenum}명
+          {count}명/{wholeNum}명
         </LeftNum>
       </Column>
     </Container>

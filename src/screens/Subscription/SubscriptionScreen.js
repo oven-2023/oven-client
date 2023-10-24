@@ -13,6 +13,7 @@ import { BROWN } from '../../css/theme';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { baseURL } from '../../api/client';
+import SubLayout from '../../components/Layout/SubLayout';
 
 const SubscriptionScreen = ({ navigation }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
@@ -61,44 +62,65 @@ const SubscriptionScreen = ({ navigation }) => {
     {
       id: 1,
       title: '구독방1',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 1,
+      wholeNum: 4,
+      count: 0,
+      providerId: 1,
     },
     {
       id: 2,
       title: '구독방2',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 2,
+      wholeNum: 4,
+      count: 0,
+      providerId: 2,
     },
     {
       id: 3,
       title: '구독방3',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 3,
+      wholeNum: 4,
+      count: 0,
+      providerId: 3,
     },
     {
       id: 4,
       title: '구독방4',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 4,
+      wholeNum: 4,
+      count: 4,
+      providerId: 4,
     },
     {
       id: 5,
       title: '구독방5',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 4,
+      wholeNum: 4,
+      count: 0,
+      providerId: 4,
     },
     {
       id: 6,
       title: '구독방6',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 3,
+      wholeNum: 4,
+      count: 0,
+      providerId: 3,
+    },
+    {
+      id: 7,
+      title: '구독방6',
+      wholeNum: 4,
+      count: 0,
+      providerId: 3,
+    },
+    {
+      id: 8,
+      title: '구독방6',
+      wholeNum: 4,
+      count: 0,
+      providerId: 3,
+    },
+    {
+      id: 9,
+      title: '구독방6',
+      wholeNum: 4,
+      count: 0,
+      providerId: 3,
     },
   ];
 
@@ -110,7 +132,7 @@ const SubscriptionScreen = ({ navigation }) => {
   ];
 
   const filteredRooms = clickedOtt
-    ? rooms.filter((room) => room.ottid === clickedOtt) //chatRooms로 바꾸기
+    ? rooms.filter((room) => room.providerId === clickedOtt) //chatRooms로 바꾸기
     : rooms; // chatRooms로 바꾸기
 
   const onClickHandler = (title) => {
@@ -130,25 +152,27 @@ const SubscriptionScreen = ({ navigation }) => {
   };
 
   return (
-    <MainLayout>
+    <SubLayout>
       <OttBtnContainer>
         <OttButtonList />
       </OttBtnContainer>
       <Centralizer>
-        <Scroller onEndReachedThreshold={0.9}>
+        <Scroller>
           <SubTitle>참여 가능한 구독방</SubTitle>
           <ChatRoomListContainer>
-            {filteredRooms.map(({ index, title, wholenum, leftnum, ottid }) => (
-              <Touchable key={index} onPress={() => onClickHandler(title)}>
-                <ChatRoomButton
-                  index={index}
-                  title={title}
-                  wholenum={wholenum}
-                  leftnum={leftnum}
-                  ottid={ottid}
-                />
-              </Touchable>
-            ))}
+            {filteredRooms.map(
+              ({ index, title, wholeNum, count, providerId }) => (
+                <Touchable key={index} onPress={() => onClickHandler(title)}>
+                  <ChatRoomButton
+                    index={index}
+                    title={title}
+                    wholeNum={wholeNum}
+                    count={count}
+                    providerId={providerId}
+                  />
+                </Touchable>
+              )
+            )}
           </ChatRoomListContainer>
         </Scroller>
         <FloatingView>
@@ -158,7 +182,7 @@ const SubscriptionScreen = ({ navigation }) => {
           />
         </FloatingView>
       </Centralizer>
-    </MainLayout>
+    </SubLayout>
   );
 };
 
@@ -170,6 +194,8 @@ const Touchable = styled.TouchableOpacity`
 
 const Scroller = styled.ScrollView`
   width: 100%;
+  margin-bottom: 100px;
+  height: 100%;
 `;
 
 const Centralizer = styled.View`
@@ -188,6 +214,7 @@ const OttBtnContainer = styled.View`
 const ChatRoomListContainer = styled.View`
   width: 100%;
   margin-top: 10px;
+  margin-bottom: 100px;
 `;
 
 const SubTitle = styled.Text`

@@ -44,43 +44,39 @@ const ChatHomeScreen = ({ navigation }) => {
   const rooms = [
     {
       title: '참여방1',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 1,
+      wholeNum: 4,
+      count: 0,
+      providerId: 1,
     },
     {
       title: '참여방2',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 2,
+      wholeNum: 4,
+      count: 1,
+      providerId: 2,
     },
     {
       title: '참여방3',
-      desc: '참여방3번입니다.',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 3,
+      wholeNum: 4,
+      count: 2,
+      providerId: 3,
     },
     {
       title: '참여방4',
-      desc: '참여방4번입니다.',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 4,
+      wholeNum: 4,
+      count: 3,
+      providerId: 4,
     },
     {
       title: '참여방4',
-      desc: '참여방4번입니다.',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 1,
+      wholeNum: 4,
+      count: 0,
+      providerId: 1,
     },
     {
       title: '참여방4',
-      desc: '참여방4번입니다.',
-      wholenum: 4,
-      leftnum: 0,
-      ottid: 2,
+      wholeNum: 4,
+      count: 0,
+      providerId: 2,
     },
   ];
   return (
@@ -88,15 +84,14 @@ const ChatHomeScreen = ({ navigation }) => {
       <Scroller>
         <SubTitle>내가 참여 중인 구독방</SubTitle>
         <ChatRoomListContainer>
-          {rooms.map(({ index, title, desc, wholenum, leftnum, ottid }) => (
+          {rooms.map(({ index, title, wholeNum, count, providerId }) => (
             <Touchable onPress={() => navigation.navigate('ChatRoomScreen')}>
               <ChatRoomButton
                 index={index}
                 title={title}
-                desc={desc}
-                wholenum={wholenum}
-                leftnum={leftnum}
-                ottid={ottid}
+                wholeNum={wholeNum}
+                count={count}
+                providerId={providerId}
               />
             </Touchable>
           ))}

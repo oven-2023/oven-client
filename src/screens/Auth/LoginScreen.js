@@ -34,10 +34,6 @@ const LoginScreen = ({ navigation }) => {
     setPassword(password);
   };
 
-  useEffect(() => {
-    console.log(isLogin);
-  }, []);
-
   const postLoginAPI = async () => {
     if (id !== '' & password !== '') {
       await axios

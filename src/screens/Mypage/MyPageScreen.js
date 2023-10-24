@@ -1,27 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, Button, Alert } from 'react-native';
 import styled from 'styled-components';
 import { userState } from '../../states/index';
 import { isLoginState } from '../../states/index';
 import { useRecoilState } from 'recoil';
 import { FontAwesome } from '@expo/vector-icons';
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import MainLayout from '../../components/Layout/MainLayout';
 import { BEIGE, RED, BROWN, ORANGE, GREEN } from '../../css/theme';
 import DashedHorizonalLine from '../../css/DashedHorizonalLine';
+import { baseURL } from '../../api/client';
+import axios from 'axios';
 
 const MyPageScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
-  const [name] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(userState);
+  const [refreshToken, setRefreshToken] = useState('');
 
-  const HandleLogout = async () => {
-    try {
-      setIsLogin(false);
-      await AsyncStorage.removeItem(accessToken);
-      await AsyncStorage.removeItem(refreshToken);
-      // navigation.navigate('LoginScreen');
-      console.log('로그아웃 성공');
-    } catch {}
+  useEffect(() => {
+    AsyncStorage.getItem('refreshToken')
+      .then((value) => {
+        setRefreshToken(value);
+      })
+      .catch((error) => {
+        console.log('Error getting access token:', error);
+      });
+  }, []);
+
+  const postLogoutAPI = async () => {
+    await axios
+      .post(`${baseURL}/auth/logout`, {
+        refreshToken: refreshToken,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setUser('');
+        setIsLogin(false);
+        AsyncStorage.removeItem(accessToken);
+        AsyncStorage.removeItem(refreshToken);
+        console.log('로그아웃 성공');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -30,7 +51,7 @@ const MyPageScreen = ({ navigation }) => {
       <ButtonContainer>
         <ProfileBox>
           <FontAwesome name="user" size={70} color={BEIGE} />
-          <ProfileText>{name}</ProfileText>
+          <ProfileText>{user}</ProfileText>
         </ProfileBox>
         <DashedHorizonalLine />
         <MenuButton
@@ -49,7 +70,7 @@ const MyPageScreen = ({ navigation }) => {
           <FontAwesome name="star" size={34} color={BROWN} />
           <MenuText> 내가 평가한 작품 보기</MenuText>
         </MenuButton>
-        <LogoutButton isFiled={false} onPress={HandleLogout}>
+        <LogoutButton isFiled={false} onPress={postLogoutAPI}>
           <FontAwesome name="sign-out" size={34} color={BEIGE} />
           <MenuText style={{ color: BEIGE }}>로그아웃</MenuText>
         </LogoutButton>

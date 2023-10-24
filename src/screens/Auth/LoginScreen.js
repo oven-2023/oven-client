@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
           username: id,
         })
         .then((response) => {
-          console.log(response.data.data.nickname);
+          console.log('username',response.data.data);
           AsyncStorage.setItem(
             'accessToken',
             response.data.data.jwtTokenResponse.accessToken

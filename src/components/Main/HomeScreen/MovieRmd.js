@@ -29,7 +29,6 @@ const MovieRmd = () => {
         },
       })
       .then((response) => {
-        console.log('get recommend', response.data.data);
         setRecommendations(response.data.data);
       })
       .catch(function (error) {
@@ -41,7 +40,8 @@ const MovieRmd = () => {
   return (
     <MovieContainer>
       <Movies>
-        {recommendations ? recommendations.map(({ poster, title, workId }) => (
+        {recommendations ? (
+          recommendations.map(({ poster, title, workId }) => (
             <Movie
               key={workId}
               onPress={() => navigation.navigate('DetailScreen', { workId })}
@@ -49,7 +49,10 @@ const MovieRmd = () => {
               <MoviePoster src={poster} />
               <MovieTitle>{title}</MovieTitle>
             </Movie>
-        )): <></>}
+          ))
+        ) : (
+          <></>
+        )}
       </Movies>
     </MovieContainer>
   );

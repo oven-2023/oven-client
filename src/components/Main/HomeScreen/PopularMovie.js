@@ -30,7 +30,6 @@ const PopularMovie = () => {
       })
       .then((response) => {
         setPopulars(response.data.data);
-        console.log(populars);
       })
       .catch(function (error) {
         console.log('detail errrrr', error);

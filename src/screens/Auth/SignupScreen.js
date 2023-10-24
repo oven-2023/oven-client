@@ -22,6 +22,7 @@ const SignUpScreen = ({ navigation }) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [isDupChecked, setIsDupChecked] = useState(false);
 
   const HandleChangeName = (name) => {
     setName(name);
@@ -37,7 +38,6 @@ const SignUpScreen = ({ navigation }) => {
 
   const HandleChangePasswordConfirm = (passwordConfirm) => {
     setPasswordConfirm(passwordConfirm);
-    setId('');
   };
 
   const postDuplicateAPI = async () => {
@@ -53,6 +53,7 @@ const SignUpScreen = ({ navigation }) => {
             setId('');
           } else {
             Alert.alert('사용 가능한 아이디입니다');
+            setIsDupChecked(true);
           }
         })
         .catch(function (error) {
@@ -63,10 +64,18 @@ const SignUpScreen = ({ navigation }) => {
 
   const postJoinAPI = async () => {
     if (password !== passwordConfirm) Alert.alert('비밀번호가 다릅니다.');
+    else if (
+      name === '' ||
+      id === '' ||
+      password === '' ||
+      passwordConfirm === ''
+    )
+      Alert.alert('모든 정보를 입력하세요.');
+    else if (!isDupChecked) Alert.alert('아이디 중복 체크를 해주세요.');
     else {
       await axios
         .post(`${baseURL}/auth/join`, {
-          nickName: name,
+          nickname: name,
           password: password,
           username: id,
         })

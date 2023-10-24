@@ -51,7 +51,7 @@ const MyPageScreen = ({ navigation }) => {
       <ButtonContainer>
         <ProfileBox>
           <FontAwesome name="user" size={70} color={BEIGE} />
-          <ProfileText>{user}</ProfileText>
+          <ProfileText numberOfLines={2}>{user} 님</ProfileText>
         </ProfileBox>
         <DashedHorizonalLine />
         <MenuButton
@@ -134,7 +134,12 @@ const ProfileBox = styled.View`
 const ProfileText = styled(MenuText)`
   color: ${BEIGE};
   font-size: 35px;
-  margin-left: 45px;
+  margin-left: 30px;
+  align-items: center;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export default MyPageScreen;

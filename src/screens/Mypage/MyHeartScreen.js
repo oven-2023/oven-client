@@ -85,19 +85,21 @@ const Movies = styled.View`
 `;
 
 const MoviePoster = styled.Image`
-  background-color: white;
+  background-color: ${BEIGE};
   height: 140;
   border-radius: 20px;
+  width: 100px;
 `;
 
 const Movie = styled.TouchableOpacity`
-  margin: 10px;
-  width: 110px;
+  width: 100px;
+  padding: 8px;
+  margin: 0px 6px;
 `;
 
 const MovieTitle = styled.Text`
-  font-size: 13px;
-  margin-top: 5;
+  font-size: 10px;
+  margin-top: 5px;
   text-align: center;
   color: ${BROWN};
   font-weight: 700;

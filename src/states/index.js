@@ -3,7 +3,7 @@ import { v1 } from 'uuid'; // key duplicate 방지를 위한 라이브러리
 
 export const isLoginState = atom({
   key: `isLogin/${v1()}`,
-  default: true,
+  default: false,
 });
 
 export const userState = atom({

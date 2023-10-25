@@ -7,47 +7,19 @@ import { baseURL } from '../../../api/client';
 import { LIGHTBROWN, RED } from '../../../css/theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const MovieRmd = () => {
-  const [recommendations, setRecommendations] = useState([]);
-
-  useEffect(() => {
-    AsyncStorage.getItem('accessToken')
-      .then((value) => {
-        getRecommendationsAPI(value);
-      })
-      .catch((error) => {
-        console.log('Error getting access token:', error);
-      });
-  }, []);
-
-  const getRecommendationsAPI = async (accessToken) => {
-    await axios
-      .get(`${baseURL}/home/recommendation/works`, {
-        headers: {
-          'Content-Type': `application/json`,
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((response) => {
-        setRecommendations(response.data.data);
-      })
-      .catch(function (error) {
-        console.log('get recommend', error);
-      });
-  };
-
+const MovieRmd = ({ recommendations }) => {
   const navigation = useNavigation();
   return (
     <MovieContainer>
       {recommendations ? (
         recommendations.map(({ poster, title, workId }) => (
-            <Movie
-              key={workId}
-              onPress={() => navigation.navigate('DetailScreen', { workId })}
-            >
-              <MoviePoster src={poster} />
-              <MovieTitle>{title}</MovieTitle>
-            </Movie>
+          <Movie
+            key={workId}
+            onPress={() => navigation.navigate('DetailScreen', { workId })}
+          >
+            <MoviePoster src={poster} />
+            <MovieTitle>{title}</MovieTitle>
+          </Movie>
         ))
       ) : (
         <></>

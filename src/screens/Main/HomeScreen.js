@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, RefreshControl } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { FontAwesome } from '@expo/vector-icons';
@@ -10,13 +10,57 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import PopularMovie from '../../components/Main/HomeScreen/PopularMovie';
 import MainLayout from '../../components/Layout/MainLayout';
 import { ORANGE, BROWN } from '../../css/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { baseURL } from '../../api/client';
 
 const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useRecoilState(userState);
+  const [recommendations, setRecommendations] = useState('');
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [token, setToken] = useState('');
+
+  const handleRefresh = async () => {
+    console.log('handleRefreshStore');
+    setIsRefreshing(true);
+    await getRecommendationsAPI(token);
+    setIsRefreshing(false);
+  };
+
+  useEffect(() => {
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        setToken(value);
+        getRecommendationsAPI(value);
+      })
+      .catch((error) => {
+        console.log('Error getting access token:', error);
+      });
+  }, []);
+
+  const getRecommendationsAPI = async (accessToken) => {
+    await axios
+      .get(`${baseURL}/home/recommendation/works`, {
+        headers: {
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((response) => {
+        setRecommendations(response.data.data);
+      })
+      .catch(function (error) {
+        console.log('get recommend', error);
+      });
+  };
 
   return (
     <MainLayout>
-      <Scroller>
+      <Scroller
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
+        }
+      >
         <Centralizer>
           <Bottom>
             <Title>이번달 나에게 맞는 OTT</Title>
@@ -30,18 +74,10 @@ const HomeScreen = ({ navigation }) => {
             <Title>
               <User>{user}</User> 님 맞춤 추천작
             </Title>
-            <MovieRmd />
+            <MovieRmd recommendations={recommendations} />
           </Bottom>
         </Centralizer>
       </Scroller>
-      {/* <FloatingView styles={{shadowStyles}}>
-        <SearchButton
-          name="search"
-          size={34}
-          color={BROWN}
-          onPress={() => navigation.navigate('SearchScreen')}
-        />
-      </FloatingView> */}
     </MainLayout>
   );
 };

@@ -38,7 +38,7 @@ export default function Router() {
                   component={TabNavigation}
                   options={{
                     headerShown: false,
-                    title: '메인 화면',
+                    title: '',
                   }}
                 />
                 <Stack.Screen

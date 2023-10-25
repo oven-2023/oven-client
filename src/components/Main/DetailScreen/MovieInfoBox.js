@@ -10,12 +10,19 @@ import {
 import styled from 'styled-components';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
-import { detailMovieState, clickedWorkState } from '../../../states';
-import { isModalState, ratingState, isStaredState } from '../../../states';
+import {
+  isModalState,
+  ratingState,
+  isStaredState,
+  clickedWorkState,
+  detailMovieState,
+  isSummaryLoadingState,
+} from '../../../states';
 import { BROWN } from '../../../css/theme';
 import { baseURL } from '../../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import SplashScreen from '../../Layout/SplashScreen';
 
 const MovieInfoBox = ({ route }) => {
   const { workId } = route.params;
@@ -26,8 +33,12 @@ const MovieInfoBox = ({ route }) => {
   const [detailMovie, setDetailMovie] = useRecoilState(detailMovieState);
   const [clickedMovie, setClickedMovie] = useRecoilState(clickedWorkState);
   const [token, setToken] = useState('');
+  const [isSummaryLoading, setIsSummaryLoading] = useRecoilState(
+    isSummaryLoadingState
+  );
 
   useEffect(() => {
+    setIsSummaryLoading(true);
     setClickedMovie({ workId }.workId);
     AsyncStorage.getItem('accessToken')
       .then((value) => {
@@ -58,9 +69,12 @@ const MovieInfoBox = ({ route }) => {
         if (response.data.data.rating === null) setIsStared(false);
         else setIsStared(true);
         setRating(response.data.data.rating);
+        setIsSummaryLoading(false);
+        console.log('완료');
       })
       .catch(function (error) {
         console.log('detail err', error);
+        setIsSummaryLoading(false);
       });
   };
 
@@ -90,63 +104,70 @@ const MovieInfoBox = ({ route }) => {
   };
 
   return (
-    <Container>
-      <Title>{detailMovie?.titleKr || detailMovie?.titleEng || ''}</Title>
-      <MoviePoster src={detailMovie?.poster || null} />
-      <ButtonContainer>
-        <Column>
-          {isStared ? (
-            <RatingBtn
-              name="star"
-              onPress={() => setIsModalOpened(true)}
-              size={34}
-            />
-          ) : (
-            <RatingBtn
-              name="star-o"
-              onPress={() => setIsModalOpened(true)}
-              size={34}
-            />
-          )}
-          <WhiteText>평가하기</WhiteText>
-        </Column>
-        <Column>
-          {isHearted ? (
-            <HeartBtn name="heart" onPress={postHeartedAPI} size={34} />
-          ) : (
-            <HeartBtn name="heart-o" onPress={postHeartedAPI} size={34} />
-          )}
-          <WhiteText>찜하기</WhiteText>
-        </Column>
-      </ButtonContainer>
-      <Row>
-        <TextContainer>
-          <Genre>
-            장르: {detailMovie && detailMovie.genre ? detailMovie.genre : ''}
-          </Genre>
-          <Actor>
-            출연:{' '}
-            {(detailMovie &&
-              detailMovie.actor?.split('/').slice(0, -1).join(',')) ||
-              ''}
-          </Actor>
-          <Director>
-            감독:{' '}
-            {(detailMovie &&
-              detailMovie.director?.split('/').slice(0, -1).join(',')) ||
-              ''}
-          </Director>
-          <OTT>
-            OTT:{' '}
-            {(detailMovie &&
-              detailMovie.providerList
-                ?.map((provider) => provider.name)
-                .join(', ')) ||
-              ''}
-          </OTT>
-        </TextContainer>
-      </Row>
-    </Container>
+    <>
+      {isSummaryLoading ? (
+        <SplashScreen />
+      ) : (
+        <Container>
+          <Title>{detailMovie?.titleKr || detailMovie?.titleEng || ''}</Title>
+          <MoviePoster src={detailMovie?.poster || null} />
+          <ButtonContainer>
+            <Column>
+              {isStared ? (
+                <RatingBtn
+                  name="star"
+                  onPress={() => setIsModalOpened(true)}
+                  size={34}
+                />
+              ) : (
+                <RatingBtn
+                  name="star-o"
+                  onPress={() => setIsModalOpened(true)}
+                  size={34}
+                />
+              )}
+              <WhiteText>평가하기</WhiteText>
+            </Column>
+            <Column>
+              {isHearted ? (
+                <HeartBtn name="heart" onPress={postHeartedAPI} size={34} />
+              ) : (
+                <HeartBtn name="heart-o" onPress={postHeartedAPI} size={34} />
+              )}
+              <WhiteText>찜하기</WhiteText>
+            </Column>
+          </ButtonContainer>
+          <Row>
+            <TextContainer>
+              <Genre>
+                장르:{' '}
+                {detailMovie && detailMovie.genre ? detailMovie.genre : ''}
+              </Genre>
+              <Actor>
+                출연:{' '}
+                {(detailMovie &&
+                  detailMovie.actor?.split('/').slice(0, -1).join(',')) ||
+                  ''}
+              </Actor>
+              <Director>
+                감독:{' '}
+                {(detailMovie &&
+                  detailMovie.director?.split('/').slice(0, -1).join(',')) ||
+                  ''}
+              </Director>
+              <OTT>
+                OTT:{' '}
+                {(detailMovie &&
+                  detailMovie.providerList
+                    ?.map((provider) => provider.name)
+                    .join(', ')) ||
+                  ''}
+              </OTT>
+            </TextContainer>
+          </Row>
+        </Container>
+      )}
+    </>
   );
 };
 

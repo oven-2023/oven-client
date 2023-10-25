@@ -45,3 +45,8 @@ export const isStaredState = atom({
   key: `isStaredState/${v1()}`,
   default: false,
 });
+
+export const isSummaryLoadingState = atom({
+  key: `isSummaryLoading/${v1()}`,
+  default: false,
+});

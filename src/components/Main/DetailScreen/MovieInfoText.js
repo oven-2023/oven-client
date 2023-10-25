@@ -3,22 +3,30 @@ import { View, SafeAreaView, Text, Button, Dimensions } from 'react-native';
 import styled from 'styled-components';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
-import { detailMovieState } from '../../../states';
+import { detailMovieState, isSummaryLoadingState } from '../../../states';
 import { BROWN } from '../../../css/theme';
 
 const MovieInfoText = () => {
   const [detailMovie] = useRecoilState(detailMovieState);
+  const [isSummaryLoading, setIsSummaryLoading] = useRecoilState(
+    isSummaryLoadingState
+  );
+
   const width = Dimensions.get('window').width;
 
   return (
-    <Container>
-      {detailMovie ? (
-        <SummaryContainer>
-          <Title>작품 정보</Title>
-          <MovieSummary>{detailMovie?.summary || ''}</MovieSummary>
-        </SummaryContainer>)
-        : <></>}
-    </Container>
+    <>
+      {isSummaryLoading ? (
+        ''
+      ) : (
+        <Container>
+          <SummaryContainer>
+            <Title>작품 정보</Title>
+            <MovieSummary>{detailMovie?.summary || ''}</MovieSummary>
+          </SummaryContainer>
+        </Container>
+      )}
+    </>
   );
 };
 
@@ -26,7 +34,6 @@ const Container = styled.View`
   height: 350px;
   margin-top: 10px;
   width: ${({ width }) => Dimensions.get('window').width - 50}px;
-
 `;
 
 const Title = styled.Text`

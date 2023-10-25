@@ -32,7 +32,6 @@ const RatingModal = () => {
   const [isStared, setIsStared] = useRecoilState(isStaredState);
 
   useEffect(() => {
-    console.log(rating);
     AsyncStorage.getItem('accessToken')
       .then((value) => {
         setToken(value);

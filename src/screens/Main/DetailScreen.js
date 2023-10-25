@@ -12,7 +12,11 @@ import MovieInfoBox from '../../components/Main/DetailScreen/MovieInfoBox';
 import MovieInfoText from '../../components/Main/DetailScreen/MovieInfoText';
 import OttList from '../../components/Main/DetailScreen/OttList';
 import { useRecoilState } from 'recoil';
-import { isModalState, detailMovieState, clickedWorkState } from '../../states';
+import {
+  isModalState,
+  detailMovieState,
+  clickedWorkState,
+} from '../../states';
 import RatingModal from '../../components/Main/DetailScreen/RatingModal';
 import { BEIGE } from '../../css/theme';
 

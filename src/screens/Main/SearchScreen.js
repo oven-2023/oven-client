@@ -8,6 +8,7 @@ import axios from 'axios';
 import { baseURL } from '../../api/client';
 import { BROWN, BEIGE } from '../../css/theme.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from '../../components/Layout/SplashScreen';
 
 const SearchScreen = () => {
   const [searchInput, setSearchInput] = useState(null);
@@ -15,6 +16,7 @@ const SearchScreen = () => {
     useRecoilState(searchedResultState);
   const [isLoading, setIsLoading] = useState(false);
   const [lastWorkId, setLastWorkId] = useState(null);
+  const [isAPILoading, setIsAPILoading] = useState(false);
 
   const getSearchAPI = async (accessToken) => {
     await axios
@@ -60,9 +62,11 @@ const SearchScreen = () => {
   };
 
   useEffect(() => {
+    setIsAPILoading(true);
     AsyncStorage.getItem('accessToken')
       .then((value) => {
         getSearchAPI(value);
+        setIsAPILoading(false);
       })
       .catch((error) => {
         console.log('Error getting access token:', error);
@@ -95,20 +99,26 @@ const SearchScreen = () => {
   };
 
   return (
-    <Container>
-      <SearchInput
-        placeholder="작품명을 검색해보세요."
-        value={searchInput}
-        onChange={onSearchHandler}
-        onKeyDown={onKeyDownHandler}
-      />
-      <SearchResult
-        onEndReached={onEndReached}
-        onEndReachedThreshold={0.1}
-        isLoading={isLoading}
-        disableVirtualization={false}
-      />
-    </Container>
+    <>
+      {!isAPILoading ? (
+        <Container>
+          <SearchInput
+            placeholder="작품명을 검색해보세요."
+            value={searchInput}
+            onChange={onSearchHandler}
+            onKeyDown={onKeyDownHandler}
+          />
+          <SearchResult
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.1}
+            isLoading={isLoading}
+            disableVirtualization={false}
+          />
+        </Container>
+      ) : (
+        <SplashScreen />
+      )}
+    </>
   );
 };
 

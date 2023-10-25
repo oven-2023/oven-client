@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -14,7 +14,6 @@ import AuthButton from '../../components/Auth/AuthButton';
 import TabNavigation from '../../navigations/TabNavigation';
 import { useRecoilState } from 'recoil';
 import { isLoginState, userState } from '../../states';
-import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -35,14 +34,14 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const postLoginAPI = async () => {
-    if (id !== '' & password !== '') {
+    if ((id !== '') & (password !== '')) {
       await axios
         .post(`${baseURL}/auth/login`, {
           password: password,
           username: id,
         })
         .then((response) => {
-          console.log('username',response.data.data);
+          console.log('username', response.data.data);
           AsyncStorage.setItem(
             'accessToken',
             response.data.data.jwtTokenResponse.accessToken
@@ -53,14 +52,14 @@ const LoginScreen = ({ navigation }) => {
           );
           setUser(response.data.data.nickname);
           setIsLogin(true);
-          // navigation.navigate('HomeScreen');
         })
         .catch(function (error) {
           console.log(error);
           Alert.alert('아이디나 비밀번호가 잘못되었습니다');
+          setId('');
+          setPassword('');
         });
-    }
-    else Alert.alert('아이디와 비밀번호를 모두 입력하세요');
+    } else Alert.alert('아이디와 비밀번호를 모두 입력하세요');
   };
 
   return (

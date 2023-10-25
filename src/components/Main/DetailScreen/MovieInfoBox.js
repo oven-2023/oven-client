@@ -103,6 +103,24 @@ const MovieInfoBox = ({ route }) => {
       });
   };
 
+  onHandleAnimation = () => {
+    const moveAnimation = Animated.sequence([
+      Animated.timing(translateY, {
+        toValue: -30, // 위로 이동할 거리
+        duration: 1500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(translateY, {
+        toValue: 0, // 다시 원래 위치로 이동
+        duration: 1500,
+        useNativeDriver: true,
+      }),
+    ]);
+    Animated.loop(moveAnimation).start();
+
+    return () => moveAnimation.stopAnimation();
+  };
+
   return (
     <>
       {isSummaryLoading ? (
@@ -112,27 +130,19 @@ const MovieInfoBox = ({ route }) => {
           <Title>{detailMovie?.titleKr || detailMovie?.titleEng || ''}</Title>
           <MoviePoster src={detailMovie?.poster || null} />
           <ButtonContainer>
-            <Column>
+            <Column onPress={() => setIsModalOpened(true)}>
               {isStared ? (
-                <RatingBtn
-                  name="star"
-                  onPress={() => setIsModalOpened(true)}
-                  size={34}
-                />
+                <RatingBtn name="star" size={34} />
               ) : (
-                <RatingBtn
-                  name="star-o"
-                  onPress={() => setIsModalOpened(true)}
-                  size={34}
-                />
+                <RatingBtn name="star-o" size={34} />
               )}
               <WhiteText>평가하기</WhiteText>
             </Column>
-            <Column>
+            <Column onPress={postHeartedAPI}>
               {isHearted ? (
-                <HeartBtn name="heart" onPress={postHeartedAPI} size={34} />
+                <HeartBtn name="heart" size={34} />
               ) : (
-                <HeartBtn name="heart-o" onPress={postHeartedAPI} size={34} />
+                <HeartBtn name="heart-o" size={34} />
               )}
               <WhiteText>찜하기</WhiteText>
             </Column>
@@ -231,10 +241,13 @@ const Row = styled.View`
   margin: 10px 0px;
 `;
 
-const Column = styled.View`
+const Column = styled.TouchableOpacity`
   flex-direction: column;
   align-items: center;
   margin: 0px 7px;
+  background-color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
 `;
 
 const WhiteText = styled.Text`

@@ -13,17 +13,10 @@ import { ORANGE, BROWN } from '../../css/theme';
 
 const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useRecoilState(userState);
-  const [isLogin,] = useRecoilState(isLoginState);
 
   return (
     <MainLayout>
       <Scroller>
-        <SearchButton
-          name="search"
-          size={34}
-          color={BROWN}
-          onPress={() => navigation.navigate('SearchScreen')}
-        />
         <Centralizer>
           <Bottom>
             <Title>이번달 나에게 맞는 OTT</Title>
@@ -41,6 +34,14 @@ const HomeScreen = ({ navigation }) => {
           </Bottom>
         </Centralizer>
       </Scroller>
+      {/* <FloatingView styles={{shadowStyles}}>
+        <SearchButton
+          name="search"
+          size={34}
+          color={BROWN}
+          onPress={() => navigation.navigate('SearchScreen')}
+        />
+      </FloatingView> */}
     </MainLayout>
   );
 };
@@ -69,13 +70,6 @@ const Title = styled.Text`
 const User = styled.Text`
   font-size: 30;
   color: ${ORANGE};
-`;
-
-const SearchButton = styled(FontAwesome)`
-  margin-left: auto;
-  margin-right: 20;
-  margin-top: 0;
-  align-items: center;
 `;
 
 export default HomeScreen;

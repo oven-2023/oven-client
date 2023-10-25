@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeScreen, SearchScreen, DetailScreen } from '../screens';
+import { HomeScreen, DetailScreen } from '../screens';
 
 const MainNavigation = () => {
   const Stack = createStackNavigator();
@@ -10,11 +10,6 @@ const MainNavigation = () => {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerShown: false }} // 헤더 렌더링 ❌
-      />
-      <Stack.Screen
-        name="SearchScreen"
-        component={SearchScreen}
         options={{ headerShown: false }} // 헤더 렌더링 ❌
       />
       <Stack.Screen

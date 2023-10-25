@@ -5,6 +5,7 @@ import {
   SubscriptionScreen,
   ChatHomeScreen,
   MyPageScreen,
+  SearchScreen
 } from '../screens';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -38,13 +39,24 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
+        name="search"
+        component={SearchScreen}
+        options={{
+          headerShown: false,
+          title: '작품 검색',
+          tabBarIcon: ({ color }) => (
+            <Icon name="search" color={color} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="subscription"
         component={SubscriptionScreen}
         options={{
           headerShown: false,
           title: '구독',
           tabBarIcon: ({ color }) => (
-            <Icon name="search" color={color} size={30} />
+            <Icon name="supervised-user-circle" color={color} size={30} />
           ),
         }}
       />

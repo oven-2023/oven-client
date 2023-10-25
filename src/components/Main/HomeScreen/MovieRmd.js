@@ -80,6 +80,7 @@ const Movie = styled.TouchableOpacity`
   margin: 5px;
   border-radius: 20px;
   height: 180px;
+  align-items: center;
 `;
 
 const MovieTitle = styled.Text`
@@ -89,9 +90,10 @@ const MovieTitle = styled.Text`
   font-weight: 700;
   font-family: 'dunggeunmo';
   height: 20px;
-  /* background-color: ${LIGHTBROWN}; */
   align-items: center;
   justify-content: center;
+  padding: 0px 10px;
+  width: 80px;
 `;
 
 export default MovieRmd;

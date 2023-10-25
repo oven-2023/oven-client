@@ -9,7 +9,7 @@ import { clickedOttState } from '../../states';
 import { useIsFocused } from '@react-navigation/native';
 import ActionButton from 'react-native-action-button';
 import * as Font from 'expo-font';
-import { BROWN } from '../../css/theme';
+import { BROWN, RED } from '../../css/theme';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { baseURL } from '../../api/client';
@@ -228,7 +228,7 @@ const SubTitle = styled.Text`
 
 const FloatingView = styled.View`
   flex: 1;
-  background-color: red;
+  background-color: ${RED};
   position: absolute;
   right: 50px;
   top: 480px;

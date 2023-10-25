@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../../api/client';
-import { BEIGE } from '../../../css/theme';
+import { BEIGE, LIGHTBROWN } from '../../../css/theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PopularMovie = () => {
@@ -64,10 +64,11 @@ const MovieContainer = styled.ScrollView`
 `;
 
 const MoviePoster = styled.Image`
-  background-color: ${BEIGE};
+  background-color: white;
   height: 150;
-  width: 100;
-  border-radius: 20;
+  width: 110;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 `;
 
 const Block = styled.View`
@@ -80,15 +81,20 @@ const Block = styled.View`
 const Movie = styled.TouchableOpacity`
   margin-right: 10px;
   width: 110px;
+  background-color: ${LIGHTBROWN};
+  border-radius: 20px;
 `;
 
 const MovieTitle = styled.Text`
   font-size: 10px;
-  margin-top: 5px;
+  margin-top: 7px;
   text-align: center;
   color: black;
   font-weight: 700;
   font-family: 'dunggeunmo';
+  justify-content: flex-start;
+  align-items: center;
+  height: 30px;
 `;
 
 export default PopularMovie;

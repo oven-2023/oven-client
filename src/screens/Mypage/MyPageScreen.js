@@ -51,7 +51,7 @@ const MyPageScreen = ({ navigation }) => {
       <ButtonContainer>
         <ProfileBox>
           <FontAwesome name="user" size={70} color={BEIGE} />
-          <ProfileText numberOfLines={2}>{user} 님</ProfileText>
+          <ProfileText numberOfLines={2}>{user}</ProfileText>
         </ProfileBox>
         <DashedHorizonalLine />
         <MenuButton
@@ -87,11 +87,12 @@ const ButtonContainer = styled.View`
 const Title = styled.Text`
   font-size: 30px;
   font-weight: 700;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 30px;
   margin-right: auto;
-  margin-left: 20;
+  margin-left: 35;
   font-family: 'dunggeunmo';
-  color: ${BEIGE};
+  color: ${BROWN};
 `;
 
 const MenuButton = styled.TouchableOpacity`

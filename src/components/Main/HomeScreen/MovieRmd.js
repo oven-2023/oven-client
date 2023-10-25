@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../../api/client';
-import { BEIGE } from '../../../css/theme';
+import { LIGHTBROWN, RED } from '../../../css/theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MovieRmd = () => {
@@ -39,9 +39,8 @@ const MovieRmd = () => {
   const navigation = useNavigation();
   return (
     <MovieContainer>
-      <Movies>
-        {recommendations ? (
-          recommendations.map(({ poster, title, workId }) => (
+      {recommendations ? (
+        recommendations.map(({ poster, title, workId }) => (
             <Movie
               key={workId}
               onPress={() => navigation.navigate('DetailScreen', { workId })}
@@ -49,48 +48,50 @@ const MovieRmd = () => {
               <MoviePoster src={poster} />
               <MovieTitle>{title}</MovieTitle>
             </Movie>
-          ))
-        ) : (
-          <></>
-        )}
-      </Movies>
+        ))
+      ) : (
+        <></>
+      )}
     </MovieContainer>
   );
 };
 
 const MovieContainer = styled.View`
   margin-top: 20px;
-  margin-bottom: 100px;
-  min-height: 400px;
-  justify-content: center;
+  margin-bottom: 50px;
+  min-height: 200px;
+  justify-content: flex-start;
   align-content: center;
-`;
-
-const Movies = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
 `;
 
 const MoviePoster = styled.Image`
   background-color: white;
-  height: 140px;
+  height: 150px;
   width: 100px;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 `;
 
 const Movie = styled.TouchableOpacity`
-  width: 110px;
-  padding: 5px;
+  width: 100px;
+  background-color: ${LIGHTBROWN};
+  margin: 5px;
+  border-radius: 20px;
+  height: 180px;
 `;
 
 const MovieTitle = styled.Text`
   font-size: 10px;
-  margin-top: 5px;
+  margin-top: 7px;
   text-align: center;
   font-weight: 700;
   font-family: 'dunggeunmo';
+  height: 20px;
+  /* background-color: ${LIGHTBROWN}; */
+  align-items: center;
+  justify-content: center;
 `;
 
 export default MovieRmd;

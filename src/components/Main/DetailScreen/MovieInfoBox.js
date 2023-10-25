@@ -10,11 +10,8 @@ import {
 import styled from 'styled-components';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRecoilState } from 'recoil';
-import {
-  detailMovieState,
-  clickedWorkState,
-} from '../../../states';
-import { isModalState } from '../../../states';
+import { detailMovieState, clickedWorkState } from '../../../states';
+import { isModalState, ratingState, isStaredState } from '../../../states';
 import { BROWN } from '../../../css/theme';
 import { baseURL } from '../../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,7 +20,8 @@ import axios from 'axios';
 const MovieInfoBox = ({ route }) => {
   const { workId } = route.params;
   const [isHearted, setIsHearted] = useState(false);
-  const [isStared, setIsStared] = useState(false);
+  const [isStared, setIsStared] = useRecoilState(isStaredState);
+  const [rating, setRating] = useRecoilState(ratingState);
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
   const [detailMovie, setDetailMovie] = useRecoilState(detailMovieState);
   const [clickedMovie, setClickedMovie] = useRecoilState(clickedWorkState);
@@ -39,7 +37,7 @@ const MovieInfoBox = ({ route }) => {
       .catch((error) => {
         console.log('Error heart:', error);
       });
-  }, [clickedMovie]);
+  }, []);
 
   const getWorkDetailAPI = async (accessToken, workId) => {
     await axios
@@ -58,7 +56,8 @@ const MovieInfoBox = ({ route }) => {
         if (response.data.data.liked) setIsHearted(true);
         else setIsHearted(false);
         if (response.data.data.rating === null) setIsStared(false);
-        else setIsStared(false);
+        else setIsStared(true);
+        setRating(response.data.data.rating);
       })
       .catch(function (error) {
         console.log('detail err', error);

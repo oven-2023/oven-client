@@ -42,39 +42,40 @@ const MyHeartScreen = ({ navigation }) => {
   return (
     <Container>
       <Title>내가 찜한 작품</Title>
-      <MovieContainer>
-        <Movies>
-          {heartedMovie ? (
-            heartedMovie.map(({ poster, title, workId }) => (
-              <Movie
-                key={workId}
-                onPress={() => navigation.navigate('DetailScreen', { workId })}
-              >
-                <MoviePoster src={poster} />
-                <MovieTitle>{title}</MovieTitle>
-              </Movie>
-            ))
-          ) : (
-            <></>
-          )}
-        </Movies>
-      </MovieContainer>
+        <MovieContainer>
+          <Movies>
+            {heartedMovie ? (
+              heartedMovie.map(({ poster, title, workId }) => (
+                <Movie
+                  key={workId}
+                  onPress={() =>
+                    navigation.navigate('DetailScreen', { workId })
+                  }
+                >
+                  <MoviePoster src={poster} />
+                  <MovieTitle>{title}</MovieTitle>
+                </Movie>
+              ))
+            ) : (
+              <></>
+            )}
+          </Movies>
+        </MovieContainer>
     </Container>
   );
 };
 
 const Container = styled.SafeAreaView`
-  flex: 1;
   align-items: center;
   background-color: ${BEIGE};
 `;
 
 const MovieContainer = styled.ScrollView`
-  margin-top: 20px;
-  min-height: 170;
-  background-color: white;
   width: 85%;
+  margin-top: 20px;
+  min-height: 170px;
   border-radius: 20px;
+  background-color: white;
 `;
 
 const Movies = styled.View`
@@ -82,25 +83,28 @@ const Movies = styled.View`
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
+  margin: 10px;
 `;
 
 const MoviePoster = styled.Image`
   background-color: ${BEIGE};
   height: 140;
   border-radius: 20px;
-  width: 100px;
+  width: 90px;
 `;
 
 const Movie = styled.TouchableOpacity`
   width: 100px;
-  padding: 8px;
-  margin: 0px 6px;
+  padding: 6px;
+  margin: 0px 5px;
 `;
 
 const MovieTitle = styled.Text`
   font-size: 10px;
   margin-top: 5px;
   text-align: center;
+  align-items: center;
+  justify-content: center;
   color: ${BROWN};
   font-weight: 700;
   font-family: 'dunggeunmo';

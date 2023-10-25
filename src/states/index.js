@@ -35,3 +35,13 @@ export const clickedWorkState = atom({
   key: `clickedWork/${v1()}`,
   default: null,
 });
+
+export const ratingState = atom({
+  key: `rating/${v1()}`,
+  default: null,
+});
+
+export const isStaredState = atom({
+  key: `isStaredState/${v1()}`,
+  default: false,
+});

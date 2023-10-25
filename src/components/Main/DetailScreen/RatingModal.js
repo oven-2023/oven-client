@@ -11,7 +11,12 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { isModalState, clickedWorkState } from '../../../states';
+import {
+  isModalState,
+  clickedWorkState,
+  ratingState,
+  isStaredState,
+} from '../../../states';
 import { FontAwesome } from '@expo/vector-icons';
 import { BEIGE, BROWN, RED } from '../../../css/theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,11 +25,14 @@ import { baseURL } from '../../../api/client';
 
 const RatingModal = () => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(isModalState);
-  const [selectedStars, setSelectedStars] = useState(0);
+  const [selectedStars, setSelectedStars] = useState(rating);
   const [clickedMovie, setClickedMovie] = useRecoilState(clickedWorkState);
   const [token, setToken] = useState('');
+  const [rating, setRating] = useRecoilState(ratingState);
+  const [isStared, setIsStared] = useRecoilState(isStaredState);
 
   useEffect(() => {
+    console.log(rating);
     AsyncStorage.getItem('accessToken')
       .then((value) => {
         setToken(value);
@@ -35,7 +43,7 @@ const RatingModal = () => {
   }, [clickedMovie]);
 
   const handleRatingChange = (stars) => {
-    setSelectedStars(stars);
+    setRating(stars);
   };
 
   const renderStars = (totalStars) => {
@@ -43,7 +51,7 @@ const RatingModal = () => {
     for (let i = 1; i <= totalStars; i++) {
       stars.push(
         <TouchableOpacity key={i} onPress={() => handleRatingChange(i)}>
-          {i <= selectedStars ? (
+          {i <= rating ? (
             <Star name="star" size={34} color="black" />
           ) : (
             <Star name="star-o" size={34} color="black" />
@@ -58,7 +66,7 @@ const RatingModal = () => {
     await axios
       .post(
         `${baseURL}/works/${clickedMovie}/rating`,
-        { rating: selectedStars },
+        { rating: rating },
         {
           headers: {
             'Content-Type': `application/json`,
@@ -73,8 +81,7 @@ const RatingModal = () => {
         console.log(response.data);
         Alert.alert('평점 등록을 완료했습니다');
         setIsModalOpened(false);
-        // if (response.data.isSuccess)
-        //   setIsHearted((previousState) => !previousState);
+        setIsStared(true);
       })
       .catch(function (error) {
         console.log(error);

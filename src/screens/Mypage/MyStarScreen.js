@@ -5,27 +5,37 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import { BEIGE, BROWN } from '../../css/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyStarScreen = ({ navigation }) => {
-  //테스팅
+  const [staredMovie, setStaredMovie] = useState('');
 
-  const [staredMovie, setStaredMovie] = useState([]);
+  useEffect(() => {
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        getStaredAPI(value);
+      })
+      .catch((error) => {
+        console.log('Error get token:', error);
+      });
+  }, []);
 
-  const getPopularsAPI = async () => {
+  const getStaredAPI = async (accessToken) => {
     await axios
-      .get(`${baseURL}/home/recommendation/works`, {})
+      .get(`${baseURL}/mypage/ratings`, {
+        headers: {
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         setStaredMovie(response.data.data);
       })
       .catch(function (error) {
-        console.log('popular', error);
+        console.log(error);
       });
   };
-
-  useEffect(() => {
-    getPopularsAPI();
-  }, []);
 
   // const navigation = useNavigation();
 
@@ -34,15 +44,19 @@ const MyStarScreen = ({ navigation }) => {
       <Title>내가 평가한 작품</Title>
       <MovieContainer>
         <Movies>
-          {staredMovie.map(({ poster, title, workId }) => (
-            <Movie
-              key={workId}
-              onPress={() => navigation.navigate('DetailScreen', { workId })}
-            >
-              <MoviePoster src={poster} />
-              <MovieTitle>{title}</MovieTitle>
-            </Movie>
-          ))}
+          {staredMovie ? (
+            staredMovie.map(({ poster, title, workId }) => (
+              <Movie
+                key={workId}
+                onPress={() => navigation.navigate('DetailScreen', { workId })}
+              >
+                <MoviePoster src={poster} />
+                <MovieTitle>{title}</MovieTitle>
+              </Movie>
+            ))
+          ) : (
+            <></>
+          )}
         </Movies>
       </MovieContainer>
     </Container>
@@ -56,11 +70,11 @@ const Container = styled.SafeAreaView`
 `;
 
 const MovieContainer = styled.ScrollView`
-  margin-top: 20px;
-  min-height: 170;
-  background-color: white;
   width: 85%;
+  margin-top: 20px;
+  min-height: 170px;
   border-radius: 20px;
+  background-color: white;
 `;
 
 const Movies = styled.View`
@@ -68,33 +82,40 @@ const Movies = styled.View`
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
+  margin: 10px;
 `;
 
 const MoviePoster = styled.Image`
-  background-color: white;
+  background-color: ${BEIGE};
   height: 140;
+  border-radius: 20px;
+  width: 90px;
 `;
 
 const Movie = styled.TouchableOpacity`
-  margin: 10px;
-  width: 110px;
+  width: 100px;
+  padding: 6px;
+  margin: 0px 5px;
 `;
 
 const MovieTitle = styled.Text`
-  font-size: 13px;
-  margin-top: 5;
+  font-size: 10px;
+  margin-top: 5px;
   text-align: center;
-  color: white;
+  align-items: center;
+  justify-content: center;
+  color: ${BROWN};
   font-weight: 700;
+  font-family: 'dunggeunmo';
 `;
 
 const Title = styled.Text`
-  color: white;
   font-size: 30px;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 10px;
   margin-top: 30px;
   color: ${BROWN};
+  font-weight: 800;
   font-family: 'dunggeunmo';
 `;
 

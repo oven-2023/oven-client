@@ -31,7 +31,7 @@ const SplashLogo = () => {
           transform: [{ translateY }],
         }}
       >
-        <SplashImage source={require('../../img/oven.png')} />
+        <SplashImage source={require('../../img/yellow_logo.png')} />
       </Animated.View>
     </Container>
   );
@@ -43,8 +43,9 @@ const Container = styled.View`
 `;
 
 const SplashImage = styled.Image`
-  width: 150px;
+  width: 300px;
   height: 150px;
+  object-fit: contain;
 `;
 
 export default SplashLogo;

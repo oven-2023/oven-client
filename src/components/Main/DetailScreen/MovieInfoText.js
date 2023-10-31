@@ -40,7 +40,7 @@ const Title = styled.Text`
   font-size: 20px;
   color: ${BROWN};
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
   padding-top: 20px;
   padding-left: 20px;
 `;
@@ -49,7 +49,7 @@ const MovieSummary = styled.Text`
   font-size: 16px;
   color: ${BROWN};
   font-weight: 600;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
   padding: 20px;
   line-height: 20px;
 `;

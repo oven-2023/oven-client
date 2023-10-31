@@ -42,25 +42,23 @@ const MyHeartScreen = ({ navigation }) => {
   return (
     <Container>
       <Title>내가 찜한 작품</Title>
-        <MovieContainer>
-          <Movies>
-            {heartedMovie ? (
-              heartedMovie.map(({ poster, title, workId }) => (
-                <Movie
-                  key={workId}
-                  onPress={() =>
-                    navigation.navigate('DetailScreen', { workId })
-                  }
-                >
-                  <MoviePoster src={poster} />
-                  <MovieTitle>{title}</MovieTitle>
-                </Movie>
-              ))
-            ) : (
-              <></>
-            )}
-          </Movies>
-        </MovieContainer>
+      <MovieContainer>
+        <Movies>
+          {heartedMovie ? (
+            heartedMovie.map(({ poster, title, workId }) => (
+              <Movie
+                key={workId}
+                onPress={() => navigation.navigate('DetailScreen', { workId })}
+              >
+                <MoviePoster src={poster} />
+                <MovieTitle>{title}</MovieTitle>
+              </Movie>
+            ))
+          ) : (
+            <></>
+          )}
+        </Movies>
+      </MovieContainer>
     </Container>
   );
 };
@@ -107,7 +105,7 @@ const MovieTitle = styled.Text`
   justify-content: center;
   color: ${BROWN};
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
 `;
 
 const Title = styled.Text`
@@ -117,7 +115,7 @@ const Title = styled.Text`
   margin-top: 30px;
   color: ${BROWN};
   font-weight: 800;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
 `;
 
 export default MyHeartScreen;

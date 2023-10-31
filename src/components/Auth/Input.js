@@ -32,6 +32,6 @@ const StyledTextInput = styled.TextInput`
   color: black;
   font-size: 20px;
   font-weight: 600;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 export default Input;

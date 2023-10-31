@@ -55,7 +55,7 @@ const User = styled.View`
 const UserImg = styled(Icon)``;
 
 const UserName = styled.Text`
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 const Row = styled.View`
@@ -72,12 +72,12 @@ const TextView = styled.View`
 `;
 
 const MsgText = styled.Text`
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 const TimeText = styled.Text`
   margin: 0px 5px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 export default Chat;

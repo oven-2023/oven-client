@@ -112,7 +112,7 @@ const MovieTitle = styled.Text`
   margin-top: 5;
   text-align: center;
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 export default SearchResult;

@@ -137,7 +137,7 @@ const SearchInput = styled.TextInput`
   border-radius: 20px;
   color: brown;
   font-size: 16px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 export default SearchScreen;

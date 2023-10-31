@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, Text, Button, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import OttList from '../../components/Main/DetailScreen/OttList';
@@ -122,7 +122,7 @@ const SubTitle = styled.Text`
   font-weight: 500;
   margin-top: 8px;
   color: ${BROWN};
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 export default ChatHomeScreen;

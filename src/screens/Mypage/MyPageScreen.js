@@ -91,7 +91,7 @@ const Title = styled.Text`
   margin-bottom: 30px;
   margin-right: auto;
   margin-left: 35;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
   color: ${BROWN};
 `;
 
@@ -115,9 +115,9 @@ const LogoutButton = styled(MenuButton)`
 
 const MenuText = styled.Text`
   color: ${BROWN};
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   margin-left: 5px;
 `;
 

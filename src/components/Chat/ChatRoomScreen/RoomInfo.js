@@ -34,12 +34,12 @@ const RoomInfoContainer = styled.View`
 const RoomName = styled.Text`
   font-size: 27px;
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   color: ${BEIGE};
 `;
 
 const PayDate = styled.Text`
-  font-family: 'dunggeunmo';
+  font-family: 'chakotrab';
   font-size: 17px;
   color: ${BEIGE};
 `;
@@ -54,13 +54,13 @@ const ChangeDateBtn = styled.TouchableOpacity`
 `;
 
 const BtnText = styled.Text`
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 const Pnum = styled.Text`
   margin-left: auto;
   margin-right: 20px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   font-size: 17px;
   color: ${BEIGE};
 `;

@@ -93,7 +93,7 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <OvenLogo source={require('../../img/oven.png')} />
+      <OvenLogo source={require('../../img/yellow_logo.png')} />
       <Title>회원가입</Title>
       <Input placeholder="이름" value={name} onChangeText={HandleChangeName} />
       <Relative>
@@ -121,10 +121,10 @@ const SignUpScreen = ({ navigation }) => {
 
 const Title = styled.Text`
   color: ${BROWN};
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 800;
   margin: 20px 0px;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
 `;
 
 const Container = styled.SafeAreaView`
@@ -135,8 +135,9 @@ const Container = styled.SafeAreaView`
 `;
 
 const OvenLogo = styled.Image`
-  width: 100px;
+  width: 200px;
   height: 100px;
+  object-fit: contain;
 `;
 
 const Relative = styled.View`
@@ -157,7 +158,7 @@ const DuplicateButton = styled.TouchableOpacity`
 
 const DuplicationText = styled.Text`
   color: white;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   font-size: 16px;
 `;
 

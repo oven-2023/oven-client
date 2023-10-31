@@ -23,9 +23,9 @@ const StyledButton = styled.TouchableOpacity`
 
 const StyledText = styled.Text`
   color: ${BEIGE};
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 800;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 export default AuthButton;

@@ -79,7 +79,7 @@ const Container = styled.View`
 const RoomName = styled.Text`
   font-weight: 800;
   font-size: 20px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   color: ${BROWN};
 `;
 
@@ -97,7 +97,7 @@ const OttView = styled.View`
 `;
 
 const LeftNum = styled.Text`
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   margin-top: 10px;
   color: ${BROWN};
 `;

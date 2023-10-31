@@ -86,7 +86,7 @@ const OttText = styled.Text`
   color: ${ORANGE};
   font-weight: 700;
   margin: 7px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   text-decoration-line: underline;
   font-style: italic;
 `;

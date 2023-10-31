@@ -31,7 +31,7 @@ const SplashScreen = () => {
           transform: [{ translateY }],
         }}
       >
-        <SplashImage source={require('../../img/oven.png')} />
+        <SplashImage source={require('../../img/yellow_logo.png')} />
       </Animated.View>
     </Container>
   );
@@ -45,8 +45,9 @@ const Container = styled.View`
 `;
 
 const SplashImage = styled.Image`
-  width: 200px;
+  width: 300px;
   height: 200px;
+  object-fit: contain;
 `;
 
 export default SplashScreen;

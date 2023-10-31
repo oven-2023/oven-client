@@ -206,7 +206,7 @@ const Title = styled.Text`
   color: ${BROWN};
   font-weight: 700;
   margin: 20px 0px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 const Actor = styled.Text`
@@ -214,7 +214,7 @@ const Actor = styled.Text`
   margin: 5px 0px;
   color: ${BROWN};
   font-weight: 500;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 const Director = styled(Actor)``;
@@ -253,7 +253,7 @@ const Column = styled.TouchableOpacity`
 const WhiteText = styled.Text`
   color: ${BROWN};
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 export default MovieInfoBox;

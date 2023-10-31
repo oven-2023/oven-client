@@ -106,7 +106,7 @@ const MovieTitle = styled.Text`
   justify-content: center;
   color: ${BROWN};
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 const Title = styled.Text`
@@ -116,7 +116,7 @@ const Title = styled.Text`
   margin-top: 30px;
   color: ${BROWN};
   font-weight: 800;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
 `;
 
 export default MyStarScreen;

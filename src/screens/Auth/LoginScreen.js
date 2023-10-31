@@ -96,15 +96,15 @@ const OvenText = styled.Text`
   font-size: 70px;
   font-weight: 800;
   margin: 20px 0px;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
 `;
 
 const Title = styled.Text`
   color: ${BROWN};
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 500;
   margin: 20px 0px;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
 `;
 
 const OvenLogo = styled.Image`

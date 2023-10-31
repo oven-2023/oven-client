@@ -92,7 +92,7 @@ const MovieTitle = styled.Text`
   text-align: center;
   color: black;
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   justify-content: flex-start;
   align-items: center;
   height: 30px;

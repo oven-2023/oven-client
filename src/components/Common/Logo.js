@@ -11,7 +11,7 @@ const LogoText = styled.Text`
   font-weight: 800;
   font-size: 50px;
   margin-left: 20px;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
   color: ${RED};
   padding-bottom: 10px;
 `;

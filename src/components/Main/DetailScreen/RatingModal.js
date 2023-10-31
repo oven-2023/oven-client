@@ -135,7 +135,7 @@ const Title = styled.Text`
   font-size: 30px;
   margin-top: 20px;
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
   color: ${BROWN};
 `;
 
@@ -157,14 +157,14 @@ const Close = styled.Text`
   font-size: 20px;
   font-weight: 700;
   color: ${BROWN};
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 const Submit = styled.Text`
   font-size: 20px;
   color: #ae0c18;
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
 `;
 
 const ButtonContainer = styled.View`

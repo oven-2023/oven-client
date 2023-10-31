@@ -13,6 +13,8 @@ export default function App() {
   const loadFonts = async () => {
     await Font.loadAsync({
       dunggeunmo: require('./assets/fonts/DungGeunMo.ttf'),
+      chab: require('./assets/fonts/chab.otf'),
+      kotra: require('./assets/fonts/kotra.otf'),
     });
     setIsFont(true);
   };

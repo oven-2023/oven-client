@@ -39,7 +39,7 @@ const MsgInput = styled.TextInput`
   border: 3px solid ${BROWN};
   font-size: 16px;
   border-radius: 20px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   padding: 0px 20px;
 `;
 
@@ -55,7 +55,7 @@ const SendBtn = styled.TouchableOpacity`
 `;
 
 const BtnText = styled.Text`
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   font-weight: 800;
   color: white;
   font-size: 20px;

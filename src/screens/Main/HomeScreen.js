@@ -99,7 +99,7 @@ const Bottom = styled.View`
 const Title = styled.Text`
   font-size: 25;
   font-weight: 700;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
   color: ${BROWN};
 `;
 

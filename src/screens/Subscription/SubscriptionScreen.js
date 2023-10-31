@@ -222,7 +222,7 @@ const SubTitle = styled.Text`
   margin-left: 20px;
   font-size: 26px;
   font-weight: 500;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
   color: ${BROWN};
 `;
 

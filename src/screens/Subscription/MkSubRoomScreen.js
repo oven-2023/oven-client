@@ -111,7 +111,7 @@ const Title = styled.Text`
   font-size: 30px;
   font-weight: 500;
   margin: 30px 0px;
-  font-family: 'dunggeunmo';
+  font-family: 'chab';
   color: ${BROWN};
 `;
 
@@ -120,7 +120,7 @@ const NameInput = styled.TextInput`
   height: 50px;
   font-size: 20px;
   padding: 0px 10px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   color: ${BROWN};
   border-radius: 10px;
   background-color: ${BEIGE};
@@ -138,7 +138,7 @@ const MkButton = styled.TouchableOpacity`
 const ButtonText = styled.Text`
   font-weight: 700;
   font-size: 20px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   color: ${BEIGE};
 `;
 
@@ -147,7 +147,7 @@ const StyledDropDownPicker = styled(DropDownPicker)`
   height: 50px;
   border: none;
   font-size: 20px;
-  font-family: 'dunggeunmo';
+  font-family: 'kotra';
   color: ${BROWN};
   border-radius: 10px;
   background-color: ${BEIGE};

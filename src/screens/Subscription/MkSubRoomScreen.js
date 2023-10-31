@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -10,13 +10,54 @@ import {
 import styled from 'styled-components';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { BEIGE, BROWN, RED } from '../../css/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { baseURL } from '../../api/client';
 
 const MkSubRoomScreen = ({ navigation }) => {
   const [roomname, setRoomname] = useState('');
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
-  const [value1, setValue1] = useState(null);
-  const [value2, setValue2] = useState(null);
+  const [providerId, setProviderId] = useState(null);
+  const [num, setNum] = useState(null);
+  const [token, setToken] = useState('');
+  const [roomid, setRoomid] = useState(null);
+
+  useEffect(() => {
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        setToken(value);
+      })
+      .catch((error) => {
+        console.log('Token Error:', error);
+      });
+  }, []);
+
+  const postMakeRoomAPI = async () => {
+    await axios
+      .post(
+        `${baseURL}/chatrooms?providerId=${providerId}`,
+        {
+          title: roomname,
+          wholeNum: num,
+        },
+        {
+          headers: {
+            'Content-Type': `application/json`,
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        setRoomid(response.data.data.chatroomId);
+        navigation.navigate('ChatRoomScreen'); // 해당 방으로 이동하게 수정
+      })
+      .catch(function (error) {
+        console.log('postMakeRoom', error);
+        console.log(roomname, num, providerId);
+      });
+  };
 
   const onOpen1 = useCallback(() => {
     setOpen2(false);
@@ -27,11 +68,13 @@ const MkSubRoomScreen = ({ navigation }) => {
   }, []);
 
   const [ottItems, setOttItems] = useState([
-    { label: '넷플릭스', value: 'Netflix' },
-    { label: '티빙', value: 'Tving' },
-    { label: '왓챠', value: 'Watcha' },
-    { label: '디플', value: 'Disney+' },
-    { label: '웨이브', value: 'Wavve' },
+    { label: '넷플릭스', value: 1 },
+    { label: '티빙', value: 2 },
+    { label: '웨이브', value: 3 },
+    { label: '디즈니플러스', value: 4 },
+    { label: '쿠팡플레이', value: 5 },
+    { label: '왓챠', value: 6 },
+    { label: '애플티비', value: 7 },
   ]);
 
   const [maxNums, setMaxNums] = useState([
@@ -55,10 +98,10 @@ const MkSubRoomScreen = ({ navigation }) => {
           <StyledDropDownPicker
             open={open1}
             onOpen={onOpen1}
-            value={value1}
+            value={providerId}
             items={ottItems}
             setOpen={setOpen1}
-            setValue={setValue1}
+            setValue={setProviderId}
             setItems={setOttItems}
             placeholder="OTT 종류"
             zIndex={3000}
@@ -67,16 +110,16 @@ const MkSubRoomScreen = ({ navigation }) => {
           <StyledDropDownPicker
             open={open2}
             onOpen={onOpen2}
-            value={value2}
+            value={num}
             items={maxNums}
             setOpen={setOpen2}
-            setValue={setValue2}
+            setValue={setNum}
             setMaxNums={setMaxNums}
             placeholder="인원 수"
             zIndex={2000}
             zIndexInverse={2000}
           />
-          <MkButton>
+          <MkButton onPress={postMakeRoomAPI}>
             <ButtonText>방 만들기</ButtonText>
           </MkButton>
         </Centralize>

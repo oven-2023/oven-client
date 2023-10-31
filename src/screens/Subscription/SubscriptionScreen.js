@@ -132,8 +132,8 @@ const SubscriptionScreen = ({ navigation }) => {
   ];
 
   const filteredRooms = clickedOtt
-    ? rooms.filter((room) => room.providerId === clickedOtt) //chatRooms로 바꾸기
-    : rooms; // chatRooms로 바꾸기
+    ? chatRooms.filter((room) => room.providerId === clickedOtt) //chatRooms로 바꾸기
+    : chatRooms; // chatRooms로 바꾸기
 
   const onClickHandler = (title) => {
     setClickedRoom(title);
@@ -160,19 +160,25 @@ const SubscriptionScreen = ({ navigation }) => {
         <Scroller>
           <SubTitle>참여 가능한 구독방</SubTitle>
           <ChatRoomListContainer>
-            {filteredRooms.map(
-              ({ index, title, wholeNum, count, providerId }) => (
-                <Touchable key={index} onPress={() => onClickHandler(title)}>
-                  <ChatRoomButton
-                    index={index}
-                    title={title}
-                    wholeNum={wholeNum}
-                    count={count}
-                    providerId={providerId}
-                  />
-                </Touchable>
-              )
-            )}
+            {filteredRooms
+              ? filteredRooms.map(
+                  ({ chatroomId, title, wholeNum, count, providerId, max }) => (
+                    <Touchable
+                      key={chatroomId}
+                      onPress={() => onClickHandler(title)}
+                    >
+                      <ChatRoomButton
+                        index={chatroomId}
+                        title={title}
+                        wholeNum={wholeNum}
+                        count={count}
+                        providerId={providerId}
+                        max={max}
+                      />
+                    </Touchable>
+                  )
+                )
+              : ''}
           </ChatRoomListContainer>
         </Scroller>
         <FloatingView>
@@ -231,7 +237,7 @@ const FloatingView = styled.View`
   background-color: ${RED};
   position: absolute;
   right: 50px;
-  top: 480px;
+  top: 430px;
 `;
 
 export default SubscriptionScreen;

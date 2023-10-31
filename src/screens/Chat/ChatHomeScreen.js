@@ -84,17 +84,24 @@ const ChatHomeScreen = ({ navigation }) => {
       <Scroller>
         <SubTitle>내가 참여 중인 구독방</SubTitle>
         <ChatRoomListContainer>
-          {rooms.map(({ index, title, wholeNum, count, providerId }) => (
-            <Touchable onPress={() => navigation.navigate('ChatRoomScreen')}>
-              <ChatRoomButton
-                index={index}
-                title={title}
-                wholeNum={wholeNum}
-                count={count}
-                providerId={providerId}
-              />
-            </Touchable>
-          ))}
+          {myChatRooms
+            ? myChatRooms.map(
+                ({ index, title, wholeNum, count, providerId, max }) => (
+                  <Touchable
+                    onPress={() => navigation.navigate('ChatRoomScreen')}
+                  >
+                    <ChatRoomButton
+                      index={index}
+                      title={title}
+                      wholeNum={wholeNum}
+                      count={count}
+                      providerId={providerId}
+                      max={max}
+                    />
+                  </Touchable>
+                )
+              )
+            : ''}
         </ChatRoomListContainer>
       </Scroller>
     </MainLayout>

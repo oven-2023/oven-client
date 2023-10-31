@@ -6,7 +6,7 @@ import DashedVerticalLine from '../../../css/DashedVerticalLine';
 import { useRecoilState } from 'recoil';
 import { clickedOttState } from '../../../states/index';
 
-const ChatRoomButton = ({ index, title, wholeNum, count, providerId }) => {
+const ChatRoomButton = ({ index, title, wholeNum, count, providerId, max }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
 
   const otts = [
@@ -43,6 +43,7 @@ const ChatRoomButton = ({ index, title, wholeNum, count, providerId }) => {
   const findOtt = otts.find((item) => item.ottid === providerId); // clickedOtt로 바꾸기
 
   return (
+    //추가 작업: max면 비활성화 처리하기 - 구독목록에서만 ....
     <Container index={index}>
       <OttView
         style={{

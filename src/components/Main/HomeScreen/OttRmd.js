@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const OttRmd = ({ recommendOtt }) => {
-
   const onHandleLink = (url) => {
     Linking.openURL(url);
   };
@@ -55,16 +54,45 @@ const OttRmd = ({ recommendOtt }) => {
       src: require('../../../img/AppleTv.png'),
       url: 'https://www.netflix.com/kr/',
     },
+    {
+      id: 8,
+      ottname: '애플티비',
+      src: require('../../../img/AppleTv.png'),
+      url: 'https://www.netflix.com/kr/',
+    },
+    {
+      id: 9,
+      ottname: '애플티비',
+      src: require('../../../img/AppleTv.png'),
+      url: 'https://www.netflix.com/kr/',
+    },
+    {
+      id: 10,
+      ottname: '애플티비',
+      src: require('../../../img/AppleTv.png'),
+      url: 'https://www.netflix.com/kr/',
+    },
   ];
 
   return (
     <OttRmdContainer>
       <Touchable onPress={() => onHandleLink(otts[recommendOtt - 1].url)}>
-        <OttLogo source={otts[recommendOtt - 1].src} />
-        <OttText style={{ transform: [{ skewX: '-10deg' }] }}>
-          {otts[recommendOtt - 1].ottname} 바로가기{' '}
-          <Icon name="open-in-new" size={20} />
-        </OttText>
+        {recommendOtt ? (
+          <>
+            <OttLogo source={otts[recommendOtt - 1].src} />
+            <OttText style={{ transform: [{ skewX: '-10deg' }] }}>
+              {otts[recommendOtt - 1].ottname} 바로가기{' '}
+              <Icon name="open-in-new" size={20} />
+            </OttText>
+          </>
+        ) : (
+          <>
+            <OttLogo source={otts[1].src} />
+            <OttText style={{ transform: [{ skewX: '-10deg' }] }}>
+              {otts[1].ottname} 바로가기 <Icon name="open-in-new" size={20} />
+            </OttText>
+          </>
+        )}
       </Touchable>
     </OttRmdContainer>
   );

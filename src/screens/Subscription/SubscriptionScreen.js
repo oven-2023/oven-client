@@ -135,7 +135,7 @@ const SubscriptionScreen = ({ navigation }) => {
     ? chatRooms.filter((room) => room.providerId === clickedOtt)
     : chatRooms;
 
-  const onClickHandler = (title) => {
+  const onClickHandler = (title, chatroomId) => {
     setClickedRoom(title);
     Alert.alert(
       `${title}`,
@@ -145,7 +145,11 @@ const SubscriptionScreen = ({ navigation }) => {
           text: '아니요',
           style: 'cancel',
         },
-        { text: '네', onPress: () => navigation.navigate('ChatRoomScreen') },
+        {
+          text: '네',
+          onPress: () =>
+            navigation.navigate('ChatRoomScreen', { chatroomId }),
+        },
       ],
       { cancelable: false }
     );
@@ -165,7 +169,7 @@ const SubscriptionScreen = ({ navigation }) => {
                   ({ chatroomId, title, wholeNum, count, providerId, max }) => (
                     <Touchable
                       key={chatroomId}
-                      onPress={() => onClickHandler(title)}
+                      onPress={() => onClickHandler(title, chatroomId)}
                     >
                       <ChatRoomButton
                         index={chatroomId}

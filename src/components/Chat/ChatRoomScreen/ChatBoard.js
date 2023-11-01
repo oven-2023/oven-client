@@ -12,10 +12,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Chat from './Chat';
 import { BEIGE } from '../../../css/theme';
 
-const ChatBoard = () => {
+const ChatBoard = ({ chatRoomInfo }) => {
   return (
     <MsgContainer>
-      <Chat />
+      <Chat chatRoomInfo={chatRoomInfo}/>
     </MsgContainer>
   );
 };

@@ -9,83 +9,128 @@ import {
 } from 'react-native';
 import WebSocket from 'react-native-websocket';
 import styled from 'styled-components';
-import { Dimensions, TouchableOpacity } from 'react-native';
+import { Dimensions, TouchableOpacity, Alert } from 'react-native';
 import RoomInfo from '../../components/Chat/ChatRoomScreen/RoomInfo';
 import ChatInput from '../../components/Chat/ChatRoomScreen/ChatInput';
 import ChatBoard from '../../components/Chat/ChatRoomScreen/ChatBoard';
 import * as StompJs from '@stomp/stompjs';
 import { BEIGE, BROWN, GREEN, ORANGE, RED } from '../../css/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { baseURL } from '../../api/client';
+import axios from 'axios';
 
-const ChatRoomScreen = ({ navigation }) => {
+const ChatRoomScreen = ({ route }) => {
   const [ws, setWs] = useState(null);
   const [receivedMessage, setReceivedMessage] = useState('');
-
-  const connect = () => {
-    try {
-      const clientdata = new StompJs.Client({
-        brokerURL: 'ws://localhost:8080/chat',
-        connectHeaders: {
-          login: '',
-          passcode: 'password',
-        },
-        debug: function (str) {
-          console.log(str);
-        },
-        reconnectDelay: 5000, // 자동 재 연결
-        heartbeatIncoming: 4000,
-        heartbeatOutgoing: 4000,
-      });
-
-      // 구독
-      clientdata.onConnect = function () {
-        clientdata.subscribe('/sub/channels/' + chatroomId, callback);
-      };
-
-      clientdata.activate(); // 클라이언트 활성화
-      changeClient(clientdata); // 클라이언트 갱신
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const disConnect = () => {
-    // 연결 끊기
-    if (client === null) {
-      return;
-    }
-    client.deactivate();
-  };
-
-  // 콜백함수 => ChatList 저장하기
-  const callback = function (message) {
-    if (message.body) {
-      let msg = JSON.parse(message.body);
-      setChatList((chats) => [...chats, msg]);
-    }
-  };
-
-  const sendChat = () => {
-    if (chat === '') {
-      return;
-    }
-
-    client.publish({
-      destination: '/pub/chat/' + chatroomId,
-      body: JSON.stringify({
-        type: '',
-        sender: userId,
-        channelId: '1',
-        data: chat,
-      }),
-    });
-
-    setChat('');
-  };
+  const { chatroomId } = route.params;
+  const [chatRoomInfo, setChatRoomInfo] = useState('');
 
   useEffect(() => {
-    connect();
-    return () => disConnect();
+    AsyncStorage.getItem('accessToken')
+      .then((value) => {
+        postEnterRoomAPI(value);
+      })
+      .catch((error) => {
+        console.log('Token Error:', error);
+      });
+    console.log({ chatroomId }.chatroomId);
   }, []);
+
+  const postEnterRoomAPI = async (accessToken) => {
+    await axios
+      .post(
+        `${baseURL}/chatrooms/${chatroomId}`,
+        {
+          chatroomId: { chatroomId }.chatroomId,
+        },
+        {
+          headers: {
+            'Content-Type': `application/json`,
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data.data);
+        setChatRoomInfo(response.data.data);
+        if (response.data.data.newEnter)
+          Alert.alert(
+            response.data.data.title,
+            '방에 입장하신 것을 환영합니다!'
+          );
+      })
+      .catch(function (error) {
+        console.log('postMakeRoom', error);
+        console.log(roomname, num, providerId);
+      });
+  };
+
+  // const connect = () => {
+  //   try {
+  //     const clientdata = new StompJs.Client({
+  //       brokerURL: 'ws://localhost:8080/chat',
+  //       connectHeaders: {
+  //         login: '',
+  //         passcode: 'password',
+  //       },
+  //       debug: function (str) {
+  //         console.log(str);
+  //       },
+  //       reconnectDelay: 5000, // 자동 재 연결
+  //       heartbeatIncoming: 4000,
+  //       heartbeatOutgoing: 4000,
+  //     });
+
+  //     // 구독
+  //     clientdata.onConnect = function () {
+  //       clientdata.subscribe('/sub/channels/' + chatroomId, callback);
+  //     };
+
+  //     clientdata.activate(); // 클라이언트 활성화
+  //     changeClient(clientdata); // 클라이언트 갱신
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // const disConnect = () => {
+  //   // 연결 끊기
+  //   if (client === null) {
+  //     return;
+  //   }
+  //   client.deactivate();
+  // };
+
+  // // 콜백함수 => ChatList 저장하기
+  // const callback = function (message) {
+  //   if (message.body) {
+  //     let msg = JSON.parse(message.body);
+  //     setChatList((chats) => [...chats, msg]);
+  //   }
+  // };
+
+  // const sendChat = () => {
+  //   if (chat === '') {
+  //     return;
+  //   }
+
+  //   client.publish({
+  //     destination: '/pub/chat/' + chatroomId,
+  //     body: JSON.stringify({
+  //       type: '',
+  //       sender: userId,
+  //       channelId: '1',
+  //       data: chat,
+  //     }),
+  //   });
+
+  //   setChat('');
+  // };
+
+  // useEffect(() => {
+  //   connect();
+  //   return () => disConnect();
+  // }, []);
 
   // useEffect(() => {
   //   // 웹소켓 서버 주소를 설정합니다.
@@ -119,22 +164,11 @@ const ChatRoomScreen = ({ navigation }) => {
   return (
     <SafeAreaView>
       <ScreenContainer>
-        <RoomInfo />
-        <ChatBoard />
+        <RoomInfo chatRoomInfo={chatRoomInfo} />
+        <ChatBoard chatRoomInfo={chatRoomInfo} />
         <ChatInput />
       </ScreenContainer>
     </SafeAreaView>
-
-    // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //   <Text>Received Message: {receivedMessage}</Text>
-    //   <TextInput
-    //     value={message}
-    //     onChangeText={setMessage}
-    //     placeholder="Type your message..."
-    //     style={{ borderWidth: 1, padding: 10, width: '80%' }}
-    //   />
-    //   <Button title="Send" onPress={sendMessage} />
-    // </View>
   );
 };
 

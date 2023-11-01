@@ -10,7 +10,7 @@ import {
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Chat = () => {
+const Chat = ({ chatRoomInfo }) => {
   const [msgtxt, setMsgtxt] = useState('메세지입니다.');
   const [isMe, setIsMe] = useState(true);
 
@@ -19,7 +19,7 @@ const Chat = () => {
       <Row>
         <TimeText>3:00</TimeText>
         <TextView msgLength={msgtxt.length}>
-          <MsgText>{msgtxt}</MsgText>
+          <MsgText>{chatRoomInfo.messages}</MsgText>
         </TextView>
       </Row>
     </MyChatContainer>

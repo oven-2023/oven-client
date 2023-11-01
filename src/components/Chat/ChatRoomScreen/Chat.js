@@ -11,8 +11,8 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Chat = () => {
-  const [msgtxt, setMsgtxt] = useState('메세지입ㄹㅇㄴㄹㅇㄴㄹㄴㄹ니다.');
-  const [isMe, setIsMe] = useState(false);
+  const [msgtxt, setMsgtxt] = useState('메세지입니다.');
+  const [isMe, setIsMe] = useState(true);
 
   return isMe ? (
     <MyChatContainer>
@@ -27,7 +27,7 @@ const Chat = () => {
     <OthersChatContainer>
       <User>
         <UserImg name="person" />
-        <UserName>사용자1</UserName>
+        <UserName>임채리</UserName>
       </User>
       <Row>
         <TextView msgLength={msgtxt.length}>

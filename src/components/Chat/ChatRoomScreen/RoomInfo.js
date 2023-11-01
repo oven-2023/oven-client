@@ -39,7 +39,7 @@ const RoomName = styled.Text`
 `;
 
 const PayDate = styled.Text`
-  font-family: 'chakotrab';
+  font-family: 'kotra';
   font-size: 17px;
   color: ${BEIGE};
 `;

@@ -107,7 +107,7 @@ export default function Router() {
                   name="MkSubRoomScreen"
                   component={MkSubRoomScreen}
                   options={{
-                    title: '구독 생성',
+                    title: '구독방 만들기',
                   }}
                 />
               </>

@@ -6,6 +6,7 @@ import {
   ScrollView,
   Dimensions,
   TextInput,
+  Image,
 } from 'react-native';
 import styled from 'styled-components';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -86,6 +87,8 @@ const MkSubRoomScreen = ({ navigation }) => {
 
   return (
     <Container>
+      <SmallCircle />
+      <Circle />
       <MkBox>
         <Centralize>
           <Title>구독방 만들기</Title>
@@ -106,6 +109,14 @@ const MkSubRoomScreen = ({ navigation }) => {
             placeholder="OTT 종류"
             zIndex={3000}
             zIndexInverse={1000}
+            textStyle={{
+              fontFamily: 'kotra',
+              fontSize: 20,
+              color: '#4f2416',
+            }}
+            dropDownContainerStyle={{
+              width: 200,
+            }}
           />
           <StyledDropDownPicker
             open={open2}
@@ -118,6 +129,14 @@ const MkSubRoomScreen = ({ navigation }) => {
             placeholder="인원 수"
             zIndex={2000}
             zIndexInverse={2000}
+            textStyle={{
+              fontFamily: 'kotra',
+              fontSize: 20,
+              color: '#4f2416',
+            }}
+            dropDownContainerStyle={{
+              width: 200,
+            }}
           />
           <MkButton onPress={postMakeRoomAPI}>
             <ButtonText>방 만들기</ButtonText>
@@ -142,6 +161,7 @@ const MkBox = styled.View`
   padding: 10px;
   background-color: white;
   border-radius: 20px;
+  top: -50px;
 `;
 
 const Centralize = styled.View`
@@ -153,7 +173,6 @@ const Centralize = styled.View`
 const Title = styled.Text`
   font-size: 30px;
   font-weight: 500;
-  margin: 30px 0px;
   font-family: 'chab';
   color: ${BROWN};
 `;
@@ -194,6 +213,22 @@ const StyledDropDownPicker = styled(DropDownPicker)`
   color: ${BROWN};
   border-radius: 10px;
   background-color: ${BEIGE};
+`;
+
+const Circle = styled.View`
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+`;
+
+const SmallCircle = styled.View`
+  background-color: ${BEIGE};
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  z-index: 999;
+  top: 50px;
 `;
 
 export default MkSubRoomScreen;

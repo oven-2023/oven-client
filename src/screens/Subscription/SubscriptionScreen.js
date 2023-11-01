@@ -132,8 +132,8 @@ const SubscriptionScreen = ({ navigation }) => {
   ];
 
   const filteredRooms = clickedOtt
-    ? chatRooms.filter((room) => room.providerId === clickedOtt) //chatRooms로 바꾸기
-    : chatRooms; // chatRooms로 바꾸기
+    ? chatRooms.filter((room) => room.providerId === clickedOtt)
+    : chatRooms;
 
   const onClickHandler = (title) => {
     setClickedRoom(title);

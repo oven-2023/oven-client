@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView, Image } from 'react-native';
 import styled from 'styled-components';
 import { ORANGE, BROWN } from '../../../css/theme';
 import * as Linking from 'expo-linking';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const OttRmd = () => {
   const [ott, setOtt] = useState(2);
@@ -63,7 +63,7 @@ const OttRmd = () => {
       <Touchable onPress={() => onHandleLink(otts[ott - 1].url)}>
         <OttLogo source={otts[ott - 1].src} />
         <OttText style={{ transform: [{ skewX: '-10deg' }] }}>
-          {otts[ott - 1].ottname} 바로가기
+          {otts[ott - 1].ottname} 바로가기 <Icon name="open-in-new" size={20} />
         </OttText>
       </Touchable>
     </OttRmdContainer>
@@ -78,7 +78,6 @@ const OttRmdContainer = styled.View`
   padding: 15px;
   background-color: white;
   width: 100%;
-  
 `;
 
 const OttText = styled.Text`

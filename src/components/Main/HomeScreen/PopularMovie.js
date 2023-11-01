@@ -87,7 +87,7 @@ const Movie = styled.TouchableOpacity`
 `;
 
 const MovieTitle = styled.Text`
-  font-size: 10px;
+  font-size: 13px;
   margin-top: 7px;
   text-align: center;
   color: black;
@@ -96,7 +96,7 @@ const MovieTitle = styled.Text`
   justify-content: flex-start;
   align-items: center;
   height: 30px;
-  width: 80px;
+  width: 90px;
 `;
 
 export default PopularMovie;

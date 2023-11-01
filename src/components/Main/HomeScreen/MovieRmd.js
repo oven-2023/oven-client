@@ -56,7 +56,7 @@ const Movie = styled.TouchableOpacity`
 `;
 
 const MovieTitle = styled.Text`
-  font-size: 10px;
+  font-size: 13px;
   margin-top: 7px;
   text-align: center;
   font-weight: 700;
@@ -65,7 +65,7 @@ const MovieTitle = styled.Text`
   align-items: center;
   justify-content: center;
   padding: 0px 10px;
-  width: 80px;
+  width: 90px;
 `;
 
 export default MovieRmd;

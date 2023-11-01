@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, Image } from 'react-native';
 import styled from 'styled-components';
 import { ORANGE, BROWN } from '../../../css/theme';
 import * as Linking from 'expo-linking';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const OttRmd = () => {
-  const [ott, setOtt] = useState(2);
+const OttRmd = ({ recommendOtt }) => {
 
   const onHandleLink = (url) => {
     Linking.openURL(url);
-    console.log('clicked');
   };
 
   const otts = [
@@ -60,10 +59,11 @@ const OttRmd = () => {
 
   return (
     <OttRmdContainer>
-      <Touchable onPress={() => onHandleLink(otts[ott - 1].url)}>
-        <OttLogo source={otts[ott - 1].src} />
+      <Touchable onPress={() => onHandleLink(otts[recommendOtt - 1].url)}>
+        <OttLogo source={otts[recommendOtt - 1].src} />
         <OttText style={{ transform: [{ skewX: '-10deg' }] }}>
-          {otts[ott - 1].ottname} 바로가기 <Icon name="open-in-new" size={20} />
+          {otts[recommendOtt - 1].ottname} 바로가기{' '}
+          <Icon name="open-in-new" size={20} />
         </OttText>
       </Touchable>
     </OttRmdContainer>

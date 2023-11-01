@@ -19,6 +19,7 @@ const HomeScreen = ({ navigation }) => {
   const [recommendations, setRecommendations] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [token, setToken] = useState('');
+  const [recommendOtt, setRecommendOtt] = useState('');
 
   const handleRefresh = async () => {
     console.log('handleRefreshStore');
@@ -32,6 +33,7 @@ const HomeScreen = ({ navigation }) => {
       .then((value) => {
         setToken(value);
         getRecommendationsAPI(value);
+        getRecommendOttAPI(value);
       })
       .catch((error) => {
         console.log('Error getting access token:', error);
@@ -54,6 +56,22 @@ const HomeScreen = ({ navigation }) => {
       });
   };
 
+  const getRecommendOttAPI = async (accessToken) => {
+    await axios
+      .get(`${baseURL}/home/recommendation/providers`, {
+        headers: {
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((response) => {
+        setRecommendOtt(response.data.data.providerId);
+      })
+      .catch(function (error) {
+        console.log('get ott recommend', error);
+      });
+  };
+
   return (
     <MainLayout>
       <Scroller
@@ -64,7 +82,7 @@ const HomeScreen = ({ navigation }) => {
         <Centralizer>
           <Bottom>
             <Title>이번달 나에게 맞는 OTT</Title>
-            <OttRmd />
+            <OttRmd recommendOtt={recommendOtt}/>
           </Bottom>
           <Bottom>
             <Title>실시간 인기작</Title>

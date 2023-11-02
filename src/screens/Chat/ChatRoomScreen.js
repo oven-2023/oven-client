@@ -56,7 +56,7 @@ const ChatRoomScreen = ({ route }) => {
         if (response.data.data.newEnter)
           Alert.alert(
             response.data.data.title,
-            '방에 입장하신 것을 환영합니다!'
+            '구독방에 입장하신 것을 환영합니다!'
           );
       })
       .catch(function (error) {

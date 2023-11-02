@@ -169,7 +169,9 @@ const SubscriptionScreen = ({ navigation }) => {
                   ({ chatroomId, title, wholeNum, count, providerId, max }) => (
                     <Touchable
                       key={chatroomId}
-                      onPress={() => onClickHandler(title, chatroomId)}
+                      onPress={
+                        max ? null : () => onClickHandler(title, chatroomId)
+                      }
                     >
                       <ChatRoomButton
                         index={chatroomId}

@@ -6,14 +6,7 @@ import DashedVerticalLine from '../../../css/DashedVerticalLine';
 import { useRecoilState } from 'recoil';
 import { clickedOttState } from '../../../states/index';
 
-const ChatRoomButton = ({
-  chatroomId,
-  title,
-  wholeNum,
-  count,
-  providerId,
-  max,
-}) => {
+const ChatRoomButton = ({ index, title, wholeNum, count, providerId, max }) => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
 
   const otts = [
@@ -51,7 +44,12 @@ const ChatRoomButton = ({
 
   return (
     //추가 작업: max면 비활성화 처리하기 - 구독목록에서만 ....
-    <Container index={chatroomId}>
+    <Container
+      index={index}
+      style={{
+        opacity: max ? 0.3 : 1,
+      }}
+    >
       <OttView
         style={{
           borderStyle: 'dashed',

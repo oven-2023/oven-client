@@ -19,7 +19,7 @@ const Chat = ({ chatRoomInfo }) => {
       <Row>
         <TimeText>3:00</TimeText>
         <TextView msgLength={msgtxt.length}>
-          <MsgText>{chatRoomInfo.messages}</MsgText>
+          <MsgText>{chatRoomInfo?.messages}</MsgText>
         </TextView>
       </Row>
     </MyChatContainer>

@@ -7,6 +7,7 @@ import {
   Dimensions,
   TextInput,
   Image,
+  Alert,
 } from 'react-native';
 import styled from 'styled-components';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -35,29 +36,37 @@ const MkSubRoomScreen = ({ navigation }) => {
   }, []);
 
   const postMakeRoomAPI = async () => {
-    await axios
-      .post(
-        `${baseURL}/chatrooms?providerId=${providerId}`,
-        {
-          title: roomname,
-          wholeNum: num,
-        },
-        {
-          headers: {
-            'Content-Type': `application/json`,
-            Authorization: `Bearer ${token}`,
+    if (roomname === null) {
+      Alert.alert('구독방 이름을 작성하세요');
+    } else if (providerId === null) {
+      Alert.alert('OTT 종류를 선택하세요');
+    } else if (num === null) {
+      Alert.alert('인원수를 선택하세요');
+    } else {
+      await axios
+        .post(
+          `${baseURL}/chatrooms?providerId=${providerId}`,
+          {
+            title: roomname,
+            wholeNum: num,
           },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-        setRoomid(response.data.data.chatroomId);
-        navigation.navigate('ChatRoomScreen'); // 해당 방으로 이동하게 수정
-      })
-      .catch(function (error) {
-        console.log('postMakeRoom', error);
-        console.log(roomname, num, providerId);
-      });
+          {
+            headers: {
+              'Content-Type': `application/json`,
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          setRoomid(response.data.data.chatroomId);
+          navigation.jumpTo('ChatHomeScreen');
+        })
+        .catch(function (error) {
+          console.log('postMakeRoom', error);
+          console.log(roomname, num, providerId);
+        });
+    }
   };
 
   const onOpen1 = useCallback(() => {
@@ -116,6 +125,7 @@ const MkSubRoomScreen = ({ navigation }) => {
             }}
             dropDownContainerStyle={{
               width: 200,
+              maxHeight: 300,
             }}
           />
           <StyledDropDownPicker
@@ -136,6 +146,7 @@ const MkSubRoomScreen = ({ navigation }) => {
             }}
             dropDownContainerStyle={{
               width: 200,
+              maxHeight: 300,
             }}
           />
           <MkButton onPress={postMakeRoomAPI}>

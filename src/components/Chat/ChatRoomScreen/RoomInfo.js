@@ -12,9 +12,9 @@ import { BROWN, BEIGE, ORANGE } from '../../../css/theme';
 const RoomInfo = ({ chatRoomInfo }) => {
   return (
     <RoomInfoContainer>
-      <RoomName>{chatRoomInfo.title}</RoomName>
+      <RoomName>{chatRoomInfo?.title}</RoomName>
       <Pnum>
-        {chatRoomInfo.count}명/{chatRoomInfo.wholeNum}명
+        {chatRoomInfo?.count}명/{chatRoomInfo?.wholeNum}명
       </Pnum>
       {/*<PayDate>다음 결제일: 9월 8일</PayDate>
        <ChangeDateBtn>

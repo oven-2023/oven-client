@@ -26,7 +26,7 @@ const ChatHomeScreen = ({ navigation }) => {
 
   const getMyChatRoomsAPI = async (accessToken) => {
     await axios
-      .get(`${baseURL}/chatrooms`, {
+      .get(`${baseURL}/chatrooms/my`, {
         headers: {
           'Content-Type': `application/json`,
           Authorization: `Bearer ${accessToken}`,
@@ -86,12 +86,14 @@ const ChatHomeScreen = ({ navigation }) => {
         <ChatRoomListContainer>
           {myChatRooms
             ? myChatRooms.map(
-                ({ index, title, wholeNum, count, providerId, max }) => (
+                ({ chatroomId, title, wholeNum, count, providerId, max }) => (
                   <Touchable
-                    onPress={() => navigation.navigate('ChatRoomScreen')}
+                    onPress={() =>
+                      navigation.navigate('ChatRoomScreen', { chatroomId })
+                    }
                   >
                     <ChatRoomButton
-                      index={index}
+                      index={chatroomId}
                       title={title}
                       wholeNum={wholeNum}
                       count={count}

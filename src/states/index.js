@@ -8,7 +8,7 @@ export const isLoginState = atom({
 
 export const userState = atom({
   key: `user/${v1()}`,
-  default: '임채리',
+  default: '000',
 });
 
 export const isModalState = atom({

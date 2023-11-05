@@ -18,7 +18,7 @@ import {
   detailMovieState,
   isSummaryLoadingState,
 } from '../../../states';
-import { BROWN } from '../../../css/theme';
+import { BROWN, RED } from '../../../css/theme';
 import { baseURL } from '../../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -127,7 +127,9 @@ const MovieInfoBox = ({ route }) => {
         <SplashScreen />
       ) : (
         <Container>
-          <Title>{detailMovie?.titleKr || detailMovie?.titleEng || ''}</Title>
+            <TitleContainer >
+            <Title>{detailMovie?.titleKr || detailMovie?.titleEng || ''}</Title>
+          </TitleContainer>
           <MoviePoster src={detailMovie?.poster || null} />
           <ButtonContainer>
             <Column onPress={() => setIsModalOpened(true)}>
@@ -186,16 +188,28 @@ const Container = styled.View`
   width: 80%;
 `;
 
+const TitleContainer = styled.View`
+  background-color: white;
+  border-radius: 20px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0px;
+  min-width: ${({ width }) => Dimensions.get('window').width - 100}px;
+`;
+
 const MoviePoster = styled.Image`
   background-color: white;
-  width: 100%;
-  min-height: 400px;
+  min-width: 100px;
+  width: ${({ width }) => Dimensions.get('window').width - 100}px;
+  height: 300px;
   position: relative;
   border-radius: 20px;
-  border: 3px solid white;
+  object-fit: contain;
+  margin-bottom: 10px;
 `;
 const TextContainer = styled.View`
-  min-height: 160px;
+  min-height: 130px;
   background-color: white;
   border-radius: 20px;
   padding: 10px 20px;
@@ -205,12 +219,11 @@ const Title = styled.Text`
   font-size: 26px;
   color: ${BROWN};
   font-weight: 700;
-  margin: 20px 0px;
   font-family: 'kotra';
 `;
 
 const Actor = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   margin: 5px 0px;
   color: ${BROWN};
   font-weight: 500;
@@ -224,15 +237,15 @@ const OTT = styled(Actor)``;
 
 const ButtonContainer = styled.View`
   flex-direction: row;
-  margin-top: 10px;
+  margin: 10px 0px;
 `;
 const RatingBtn = styled(FontAwesome)`
-  padding: 10px;
+  padding: 5px;
   color: ${BROWN};
 `;
 const HeartBtn = styled(FontAwesome)`
-  padding: 10px;
-  color: ${BROWN};
+  padding: 5px;
+  color: ${RED};
 `;
 
 const Row = styled.View`

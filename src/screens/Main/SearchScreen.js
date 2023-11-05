@@ -16,7 +16,7 @@ const SearchScreen = () => {
     useRecoilState(searchedResultState);
   const [isLoading, setIsLoading] = useState(false);
   const [lastWorkId, setLastWorkId] = useState(null);
-  const [isAPILoading, setIsAPILoading] = useState(false);
+  // const [isAPILoading, setIsAPILoading] = useState(false);
 
   const getSearchAPI = async (accessToken) => {
     await axios
@@ -62,11 +62,11 @@ const SearchScreen = () => {
   };
 
   useEffect(() => {
-    setIsAPILoading(true);
+    // setIsAPILoading(true);
     AsyncStorage.getItem('accessToken')
       .then((value) => {
         getSearchAPI(value);
-        setIsAPILoading(false);
+        // setIsAPILoading(false);
       })
       .catch((error) => {
         console.log('Error getting access token:', error);
@@ -100,7 +100,7 @@ const SearchScreen = () => {
 
   return (
     <>
-      {!isAPILoading ? (
+      {/* {!isAPILoading ? ( */}
         <Container>
           <SearchInput
             placeholder="작품명을 검색해보세요."
@@ -115,9 +115,9 @@ const SearchScreen = () => {
             disableVirtualization={false}
           />
         </Container>
-      ) : (
-        <SplashScreen />
-      )}
+      {/* ) : ( */}
+        {/* <SplashScreen /> */}
+      {/* )} */}
     </>
   );
 };

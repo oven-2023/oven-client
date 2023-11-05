@@ -74,8 +74,7 @@ const ChatRoomButton = ({ index, title, wholeNum, count, providerId, max }) => {
 
 const Container = styled.View`
   width: 90%;
-  height: 100px;
-  margin: 5px 0px;
+  height: 90px;
   background-color: white;
   border-radius: 20px;
   flex-direction: row;
@@ -84,14 +83,14 @@ const Container = styled.View`
 
 const RoomName = styled.Text`
   font-weight: 800;
-  font-size: 20px;
+  font-size: 23px;
   font-family: 'kotra';
   color: ${BROWN};
 `;
 
 const OttLogo = styled.Image`
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 15px;
 `;
 
@@ -106,6 +105,7 @@ const LeftNum = styled.Text`
   font-family: 'kotra';
   margin-top: 10px;
   color: ${BROWN};
+  font-size: 16px;
 `;
 
 const Column = styled.View`

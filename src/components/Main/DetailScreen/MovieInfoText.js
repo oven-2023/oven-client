@@ -19,46 +19,40 @@ const MovieInfoText = () => {
       {isSummaryLoading ? (
         ''
       ) : (
-        <Container>
           <SummaryContainer>
             <Title>작품 정보</Title>
             <MovieSummary>{detailMovie?.summary || ''}</MovieSummary>
           </SummaryContainer>
-        </Container>
       )}
     </>
   );
 };
 
-const Container = styled.View`
-  height: 350px;
-  margin-top: 10px;
-  width: ${({ width }) => Dimensions.get('window').width - 50}px;
-`;
-
 const Title = styled.Text`
   font-size: 20px;
   color: ${BROWN};
   font-weight: 700;
-  font-family: 'chab';
+  font-family: 'kotra';
   padding-top: 20px;
   padding-left: 20px;
 `;
 
 const MovieSummary = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   color: ${BROWN};
   font-weight: 600;
-  font-family: 'chab';
+  font-family: 'kotra';
   padding: 20px;
-  line-height: 20px;
+  line-height: 27px;
 `;
 
 const SummaryContainer = styled.View`
-  width: 100%;
-  min-height: 120px;
+  min-height: 80px;
   background-color: white;
   border-radius: 20px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  width: ${({ width }) => Dimensions.get('window').width - 50}px;
 `;
 
 export default MovieInfoText;

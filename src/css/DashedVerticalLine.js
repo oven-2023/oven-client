@@ -11,7 +11,7 @@ const DashedVerticalLine = () => {
         width: 10,
       }}
     >
-      <Svg height="80" width="10">
+      <Svg height="70" width="10">
         <Line
           x1="0"
           y1="0"
@@ -19,7 +19,7 @@ const DashedVerticalLine = () => {
           y2="100"
           stroke="#f4efe7"
           strokeWidth="8"
-          strokeDasharray="10 6"
+          strokeDasharray="9 6"
         />
       </Svg>
     </View>

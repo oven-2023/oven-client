@@ -118,7 +118,7 @@ const MenuText = styled.Text`
   font-size: 25px;
   font-weight: 700;
   font-family: 'kotra';
-  margin-left: 5px;
+  margin-left: 20px;
 `;
 
 const ProfileBox = styled.View`

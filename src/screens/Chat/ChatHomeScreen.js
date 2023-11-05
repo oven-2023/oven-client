@@ -113,6 +113,8 @@ const ChatHomeScreen = ({ navigation }) => {
 const Touchable = styled.TouchableOpacity`
   width: 100%;
   align-items: center;
+  height: 90px;
+  margin: 5px 0px;
 `;
 
 const Scroller = styled.ScrollView`
@@ -131,7 +133,7 @@ const SubTitle = styled.Text`
   font-weight: 500;
   margin-top: 8px;
   color: ${BROWN};
-  font-family: 'kotra';
+  font-family: 'chab';
 `;
 
 export default ChatHomeScreen;

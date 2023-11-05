@@ -201,7 +201,8 @@ const SubscriptionScreen = ({ navigation }) => {
 const Touchable = styled.TouchableOpacity`
   width: 100%;
   align-items: center;
-  height: 110px;
+  height: 90px;
+  margin: 5px 0px;
 `;
 
 const Scroller = styled.ScrollView`
@@ -219,7 +220,7 @@ const Centralizer = styled.View`
 
 const OttBtnContainer = styled.View`
   margin: 0px 20px;
-  height: 130px;
+  height: 115px;
   flex-direction: column;
 `;
 

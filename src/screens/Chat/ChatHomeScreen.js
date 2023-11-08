@@ -10,12 +10,14 @@ import { BROWN } from '../../css/theme';
 import { baseURL } from '../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import {useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { isLoginState } from '../../states';
+import { useIsFocused } from '@react-navigation/native';
 
 const ChatHomeScreen = ({ navigation }) => {
   const [myChatRooms, setMyChatRooms] = useState('');
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     AsyncStorage.getItem('accessToken')
@@ -25,7 +27,7 @@ const ChatHomeScreen = ({ navigation }) => {
       .catch((error) => {
         console.log('Error getting access token:', error);
       });
-  }, []);
+  }, [isFocused]);
 
   const getMyChatRoomsAPI = async (accessToken) => {
     await axios

@@ -10,22 +10,23 @@ import {
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRecoilState } from 'recoil';
-import { useridState } from '../../../states';
+import { userState } from '../../../states';
+import { ORANGE } from '../../../css/theme';
 
 const Chat = ({ chatList }) => {
-  const [userid, setUserid] = useRecoilState(useridState);
+  const [user, setUser] = useRecoilState(userState);
 
   return (
     <>
       {chatList?.map((chat, index) => (
         <View key={index}>
-          {chat.sender === userid ? (
+          {chat.sender === user ? (
             <MyChatContainer>
               <Row>
                 <TimeText>{chat.sendTime}</TimeText>
-                <TextView msgLength={chat.content.length}>
+                <TextView1 msgLength={chat.content.length}>
                   <MsgText>{chat.content}</MsgText>
-                </TextView>
+                </TextView1>
               </Row>
             </MyChatContainer>
           ) : (
@@ -35,9 +36,9 @@ const Chat = ({ chatList }) => {
                 <UserName>{chat.sender}</UserName>
               </User>
               <Row>
-                <TextView msgLength={chat.content.length}>
+                <TextView2 msgLength={chat.content.length}>
                   <MsgText>{chat.content}</MsgText>
-                </TextView>
+                </TextView2>
                 <TimeText>{chat.sendTime}</TimeText>
               </Row>
             </OthersChatContainer>
@@ -59,9 +60,12 @@ const OthersChatContainer = styled(MyChatContainer)`
 
 const User = styled.View`
   margin: 0px 20px;
+  flex-direction: row;
 `;
 
-const UserImg = styled(Icon)``;
+const UserImg = styled(Icon)`
+margin-right: 10px;
+`;
 
 const UserName = styled.Text`
   font-family: 'kotra';
@@ -73,13 +77,17 @@ const Row = styled.View`
   align-items: center;
 `;
 
-const TextView = styled.View`
-  background-color: white;
+const TextView1 = styled.View`
+  background-color: ${ORANGE};
   /* min-width: ${(props) => props.msgLength * 10}px; */
   border-radius: 10px;
   padding: 15px;
   margin: 5px 10px;
 `;
+
+const TextView2 = styled(TextView1)`
+ background-color: white;
+`
 
 const MsgText = styled.Text`
   font-family: 'kotra';

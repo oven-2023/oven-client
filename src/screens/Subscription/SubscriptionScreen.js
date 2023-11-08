@@ -14,14 +14,15 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { baseURL } from '../../api/client';
 import SubLayout from '../../components/Layout/SubLayout';
+import { useNavigation } from '@react-navigation/native';
 
-const SubscriptionScreen = ({ navigation }) => {
+const SubscriptionScreen = () => {
   const [clickedOtt, setClickedOtt] = useRecoilState(clickedOttState);
   const [clickedRoom, setClickedRoom] = useState('');
   const [chatRooms, setChatRooms] = useState('');
   const isFocused = useIsFocused();
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
-
+  const navigation = useNavigation();
   useEffect(() => {
     if (!isFocused) {
       setClickedOtt(null);
@@ -61,7 +62,6 @@ const SubscriptionScreen = ({ navigation }) => {
       });
   };
 
-
   const actions = [
     {
       icon: require('../../img/addIcon.png'),
@@ -85,8 +85,7 @@ const SubscriptionScreen = ({ navigation }) => {
         },
         {
           text: '네',
-          onPress: () =>
-            navigation.navigate('ChatRoomScreen', { chatroomId }),
+          onPress: () => navigation.navigate('ChatRoomScreen', { chatroomId }),
         },
       ],
       { cancelable: false }
@@ -146,7 +145,6 @@ const Touchable = styled.TouchableOpacity`
 const Scroller = styled.ScrollView`
   width: 100%;
   margin-bottom: 100px;
-  height: 100%;
 `;
 
 const Centralizer = styled.View`
@@ -166,6 +164,7 @@ const ChatRoomListContainer = styled.View`
   width: 100%;
   margin-top: 10px;
   margin-bottom: 100px;
+  height: 2000px;
 `;
 
 const SubTitle = styled.Text`
@@ -182,7 +181,7 @@ const FloatingView = styled.View`
   background-color: ${RED};
   position: absolute;
   right: 50px;
-  top: 430px;
+  top: 450px;
 `;
 
 export default SubscriptionScreen;

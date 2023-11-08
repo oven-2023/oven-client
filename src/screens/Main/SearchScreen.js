@@ -1,22 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, SafeAreaView, TextInput, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TextInput,
+  FlatList,
+  Alert,
+} from 'react-native';
 import styled from 'styled-components';
 import SearchResult from '../../components/Main/SearchScreen/SearchResult';
 import { useRecoilState } from 'recoil';
-import { searchedResultState } from '../../states';
+import { searchedResultState, isLoginState } from '../../states';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import { BROWN, BEIGE } from '../../css/theme.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from '../../components/Layout/SplashScreen';
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   const [searchInput, setSearchInput] = useState(null);
   const [seachedResult, setSearchedResult] =
     useRecoilState(searchedResultState);
   const [isLoading, setIsLoading] = useState(false);
   const [lastWorkId, setLastWorkId] = useState(null);
   // const [isAPILoading, setIsAPILoading] = useState(false);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
   const getSearchAPI = async (accessToken) => {
     await axios
@@ -58,6 +66,8 @@ const SearchScreen = () => {
       })
       .catch(function (error) {
         console.log(error);
+        Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
+        setIsLogin(false);
       });
   };
 
@@ -101,22 +111,22 @@ const SearchScreen = () => {
   return (
     <>
       {/* {!isAPILoading ? ( */}
-        <Container>
-          <SearchInput
-            placeholder="작품명을 검색해보세요."
-            value={searchInput}
-            onChange={onSearchHandler}
-            onKeyDown={onKeyDownHandler}
-          />
-          <SearchResult
-            onEndReached={onEndReached}
-            onEndReachedThreshold={0.1}
-            isLoading={isLoading}
-            disableVirtualization={false}
-          />
-        </Container>
+      <Container>
+        <SearchInput
+          placeholder="작품명을 검색해보세요."
+          value={searchInput}
+          onChange={onSearchHandler}
+          onKeyDown={onKeyDownHandler}
+        />
+        <SearchResult
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.1}
+          isLoading={isLoading}
+          disableVirtualization={false}
+        />
+      </Container>
       {/* ) : ( */}
-        {/* <SplashScreen /> */}
+      {/* <SplashScreen /> */}
       {/* )} */}
     </>
   );

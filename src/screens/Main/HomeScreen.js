@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, RefreshControl } from 'react-native';
+import { View, Text, SafeAreaView, RefreshControl, Alert } from 'react-native';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { FontAwesome } from '@expo/vector-icons';
@@ -20,6 +20,7 @@ const HomeScreen = ({ navigation }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [token, setToken] = useState('');
   const [recommendOtt, setRecommendOtt] = useState('');
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
   const handleRefresh = async () => {
     console.log('handleRefreshStore');
@@ -69,6 +70,8 @@ const HomeScreen = ({ navigation }) => {
       })
       .catch(function (error) {
         console.log('get ott recommend', error);
+        Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
+        setIsLogin(false);
       });
   };
 

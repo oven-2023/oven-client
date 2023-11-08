@@ -10,13 +10,11 @@ import {
 import styled from 'styled-components';
 import { BEIGE, ORANGE, BROWN } from '../../../css/theme';
 
-const ChatInput = () => {
-  const [message, setMessage] = useState('');
-
+const ChatInput = ({ value, onChangeText, onPress }) => {
   return (
     <ChatInputContainer>
-      <MsgInput value={message} onChangeText={setMessage} />
-      <SendBtn>
+      <MsgInput value={value} onChangeText={onChangeText} />
+      <SendBtn onPress={onPress}>
         <BtnText>전송</BtnText>
       </SendBtn>
     </ChatInputContainer>
@@ -25,10 +23,11 @@ const ChatInput = () => {
 
 const ChatInputContainer = styled.View`
   width: 100%;
-  height: 10%;
+  height: 200px;
   margin-bottom: auto;
   flex-direction: row;
   justify-content: space-evenly;
+  padding-top: 20px;
 `;
 
 const MsgInput = styled.TextInput`

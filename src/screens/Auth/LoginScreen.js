@@ -13,7 +13,7 @@ import Input from '../../components/Auth/Input';
 import AuthButton from '../../components/Auth/AuthButton';
 import TabNavigation from '../../navigations/TabNavigation';
 import { useRecoilState } from 'recoil';
-import { isLoginState, userState } from '../../states';
+import { isLoginState, userState, useridState } from '../../states';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,6 +23,7 @@ import SplashLogo from '../../components/Layout/SplashLogo';
 const LoginScreen = ({ navigation }) => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [user, setUser] = useRecoilState(userState);
+  const [userid, setUserid] = useRecoilState(useridState);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -51,6 +52,7 @@ const LoginScreen = ({ navigation }) => {
             response.data.data.jwtTokenResponse.refreshToken
           );
           setUser(response.data.data.nickname);
+          setUserid(response.data.data.username);
           setIsLogin(true);
         })
         .catch(function (error) {

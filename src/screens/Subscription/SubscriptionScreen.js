@@ -5,7 +5,7 @@ import MainLayout from '../../components/Layout/MainLayout';
 import OttButtonList from '../../components/Subscription/OttButtonList';
 import ChatRoomButton from '../../components/Chat/ChatHomeScreen/ChatRoomButton';
 import { useRecoilState } from 'recoil';
-import { clickedOttState } from '../../states';
+import { clickedOttState, isLoginState } from '../../states';
 import { useIsFocused } from '@react-navigation/native';
 import ActionButton from 'react-native-action-button';
 import * as Font from 'expo-font';
@@ -20,6 +20,7 @@ const SubscriptionScreen = ({ navigation }) => {
   const [clickedRoom, setClickedRoom] = useState('');
   const [chatRooms, setChatRooms] = useState('');
   const isFocused = useIsFocused();
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
   useEffect(() => {
     if (!isFocused) {
@@ -55,74 +56,11 @@ const SubscriptionScreen = ({ navigation }) => {
       })
       .catch(function (error) {
         console.log('getChatRooms', error);
+        Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
+        setIsLogin(false);
       });
   };
 
-  const rooms = [
-    {
-      id: 1,
-      title: '구독방1',
-      wholeNum: 4,
-      count: 0,
-      providerId: 1,
-    },
-    {
-      id: 2,
-      title: '구독방2',
-      wholeNum: 4,
-      count: 0,
-      providerId: 2,
-    },
-    {
-      id: 3,
-      title: '구독방3',
-      wholeNum: 4,
-      count: 0,
-      providerId: 3,
-    },
-    {
-      id: 4,
-      title: '구독방4',
-      wholeNum: 4,
-      count: 4,
-      providerId: 4,
-    },
-    {
-      id: 5,
-      title: '구독방5',
-      wholeNum: 4,
-      count: 0,
-      providerId: 4,
-    },
-    {
-      id: 6,
-      title: '구독방6',
-      wholeNum: 4,
-      count: 0,
-      providerId: 3,
-    },
-    {
-      id: 7,
-      title: '구독방6',
-      wholeNum: 4,
-      count: 0,
-      providerId: 3,
-    },
-    {
-      id: 8,
-      title: '구독방6',
-      wholeNum: 4,
-      count: 0,
-      providerId: 3,
-    },
-    {
-      id: 9,
-      title: '구독방6',
-      wholeNum: 4,
-      count: 0,
-      providerId: 3,
-    },
-  ];
 
   const actions = [
     {

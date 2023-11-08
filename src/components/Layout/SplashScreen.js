@@ -31,7 +31,7 @@ const SplashScreen = () => {
           transform: [{ translateY }],
         }}
       >
-        <SplashImage source={require('../../img/yellow_logo.png')} />
+        <SplashImage source={require('../../img/oven_logo.png')} />
       </Animated.View>
     </Container>
   );

@@ -93,7 +93,7 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <OvenLogo source={require('../../img/yellow_logo.png')} />
+      <OvenLogo source={require('../../img/oven_logo.png')} />
       <Title>회원가입</Title>
       <Input placeholder="이름" value={name} onChangeText={HandleChangeName} />
       <Relative>
@@ -135,7 +135,7 @@ const Container = styled.SafeAreaView`
 `;
 
 const OvenLogo = styled.Image`
-  width: 200px;
+  width: 250px;
   height: 100px;
   object-fit: contain;
 `;

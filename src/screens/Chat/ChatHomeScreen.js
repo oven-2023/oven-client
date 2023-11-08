@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, Text, Button, ScrollView } from 'react-native';
+import { SafeAreaView, Text, Button, ScrollView, Alert } from 'react-native';
 import styled from 'styled-components';
 import OttList from '../../components/Main/DetailScreen/OttList';
 import OttButtonList from '../../components/Subscription/OttButtonList';
@@ -10,9 +10,12 @@ import { BROWN } from '../../css/theme';
 import { baseURL } from '../../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import {useRecoilState } from 'recoil';
+import { isLoginState } from '../../states';
 
 const ChatHomeScreen = ({ navigation }) => {
   const [myChatRooms, setMyChatRooms] = useState('');
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
   useEffect(() => {
     AsyncStorage.getItem('accessToken')
@@ -33,52 +36,14 @@ const ChatHomeScreen = ({ navigation }) => {
         },
       })
       .then((response) => {
-        console.log(response.data.data);
         setMyChatRooms(response.data.data);
       })
       .catch(function (error) {
-        console.log('getMyChatRooms', error);
+        Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
+        setIsLogin(false);
       });
   };
 
-  const rooms = [
-    {
-      title: '참여방1',
-      wholeNum: 4,
-      count: 0,
-      providerId: 1,
-    },
-    {
-      title: '참여방2',
-      wholeNum: 4,
-      count: 1,
-      providerId: 2,
-    },
-    {
-      title: '참여방3',
-      wholeNum: 4,
-      count: 2,
-      providerId: 3,
-    },
-    {
-      title: '참여방4',
-      wholeNum: 4,
-      count: 3,
-      providerId: 4,
-    },
-    {
-      title: '참여방4',
-      wholeNum: 4,
-      count: 0,
-      providerId: 1,
-    },
-    {
-      title: '참여방4',
-      wholeNum: 4,
-      count: 0,
-      providerId: 2,
-    },
-  ];
   return (
     <MainLayout>
       <Scroller>

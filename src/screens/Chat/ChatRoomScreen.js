@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  SafeAreaView,
-  Image,
-} from 'react-native';
-import WebSocket from 'react-native-websocket';
+import React, { useEffect, useState, useRef } from 'react';
+import { SafeAreaView } from 'react-native';
 import styled from 'styled-components';
-import { Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { Dimensions, Alert } from 'react-native';
 import RoomInfo from '../../components/Chat/ChatRoomScreen/RoomInfo';
 import ChatInput from '../../components/Chat/ChatRoomScreen/ChatInput';
 import ChatBoard from '../../components/Chat/ChatRoomScreen/ChatBoard';
@@ -18,30 +10,70 @@ import { BEIGE, BROWN, GREEN, ORANGE, RED } from '../../css/theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { baseURL } from '../../api/client';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { useridState } from '../../states';
 
 const ChatRoomScreen = ({ route }) => {
-  const [ws, setWs] = useState(null);
-  const [receivedMessage, setReceivedMessage] = useState('');
   const { chatroomId } = route.params;
+  const roomid = { chatroomId }.chatroomId;
+  const [userid, setUserid] = useRecoilState(useridState);
   const [chatRoomInfo, setChatRoomInfo] = useState('');
+  const client = useRef({});
+  const [chat, setChat] = useState('');
+  const [chatList, setChatList] = useState([]);
+
+  const disConnect = () => {
+    client.current.deactivate();
+    console.log('채팅이 종료되었습니다.');
+  };
+
+  const handleMessage = (e) => {
+    setChat(e);
+  };
 
   useEffect(() => {
+    const subscribe = () => {
+      client.current.subscribe(
+        `/sub/chatrooms/${roomid}/message`,
+        onMessageReceived
+      );
+    };
+ 
+    const connect = (accessToken) => {
+      client.current = new StompJs.Client({
+        brokerURL: 'wss://hs-ceos.shop/ws/endpoint',
+        connectHeaders: {
+          'Content-Type': `application/json`,
+          Authorization: `Bearer ${accessToken}`,
+        },
+        debug: function (str) {
+          console.log(str);
+        },
+        onConnect: () => {
+          subscribe();
+        },
+      });
+      console.log('client', client);
+      client.current.activate();
+    };
+
     AsyncStorage.getItem('accessToken')
       .then((value) => {
         postEnterRoomAPI(value);
+        connect(value);
       })
       .catch((error) => {
         console.log('Token Error:', error);
       });
-    console.log({ chatroomId }.chatroomId);
-  }, []);
+    return () => disConnect();
+  }, [roomid]);
 
   const postEnterRoomAPI = async (accessToken) => {
     await axios
       .post(
         `${baseURL}/chatrooms/${chatroomId}`,
         {
-          chatroomId: { chatroomId }.chatroomId,
+          chatroomId: roomid,
         },
         {
           headers: {
@@ -51,8 +83,8 @@ const ChatRoomScreen = ({ route }) => {
         }
       )
       .then((response) => {
-        console.log(response.data.data);
         setChatRoomInfo(response.data.data);
+        setChatList(response.data.data.messages);
         if (response.data.data.newEnter)
           Alert.alert(
             response.data.data.title,
@@ -65,108 +97,46 @@ const ChatRoomScreen = ({ route }) => {
       });
   };
 
-  // const connect = () => {
-  //   try {
-  //     const clientdata = new StompJs.Client({
-  //       brokerURL: 'ws://localhost:8080/chat',
-  //       connectHeaders: {
-  //         login: '',
-  //         passcode: 'password',
-  //       },
-  //       debug: function (str) {
-  //         console.log(str);
-  //       },
-  //       reconnectDelay: 5000, // 자동 재 연결
-  //       heartbeatIncoming: 4000,
-  //       heartbeatOutgoing: 4000,
-  //     });
+  const sendChat = () => {
+    if (chat === '' || !client.current.connected) {
+      return;
+    }
+    client.current.publish({
+      destination: '/pub/chatrooms/' + roomid + '/message',
+      body: JSON.stringify({
+        senderId: userid,
+        content: chat,
+      }),
+    });
+    setChat('');
+  };
 
-  //     // 구독
-  //     clientdata.onConnect = function () {
-  //       clientdata.subscribe('/sub/channels/' + chatroomId, callback);
-  //     };
-
-  //     clientdata.activate(); // 클라이언트 활성화
-  //     changeClient(clientdata); // 클라이언트 갱신
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const disConnect = () => {
-  //   // 연결 끊기
-  //   if (client === null) {
-  //     return;
-  //   }
-  //   client.deactivate();
-  // };
-
-  // // 콜백함수 => ChatList 저장하기
-  // const callback = function (message) {
-  //   if (message.body) {
-  //     let msg = JSON.parse(message.body);
-  //     setChatList((chats) => [...chats, msg]);
-  //   }
-  // };
-
-  // const sendChat = () => {
-  //   if (chat === '') {
-  //     return;
-  //   }
-
-  //   client.publish({
-  //     destination: '/pub/chat/' + chatroomId,
-  //     body: JSON.stringify({
-  //       type: '',
-  //       sender: userId,
-  //       channelId: '1',
-  //       data: chat,
-  //     }),
-  //   });
-
-  //   setChat('');
-  // };
-
-  // useEffect(() => {
-  //   connect();
-  //   return () => disConnect();
-  // }, []);
-
-  // useEffect(() => {
-  //   // 웹소켓 서버 주소를 설정합니다.
-  //   const serverUrl = 'ws://your-websocket-server-url';
-  //   // WebSocket 인스턴스를 생성하고 서버와 연결합니다.
-  //   const wsInstance = new WebSocket(serverUrl);
-  //   setWs(wsInstance);
-
-  //   // 메시지 수신 이벤트 핸들러를 등록합니다.
-  //   wsInstance.onmessage = (event) => {
-  //     const messageFromServer = event.data;
-  //     // 수신된 메시지를 상태에 저장합니다.
-  //     setReceivedMessage(messageFromServer);
-  //   };
-
-  //   // 컴포넌트 언마운트 시 WebSocket 연결을'`` 해제합니다.
-  //   return () => {
-  //     wsInstance.close();
-  //   };
-  // }, []);
-
-  // // 메시지를 전송하는 함수
-  // const sendMessage = () => {
-  //   if (ws && message.trim() !== '') {
-  //     ws.send(message);
-  //     setMessage('');
-  //   }
-  //   alert('전송');
-  // };
+  // 콜백함수 => chatList 저장하기
+  const onMessageReceived = (message) => {
+    console.log('!!!!!!!!!!!!!!!!!!!', JSON.parse(message.body));
+    const messageBody = JSON.parse(message.body);
+    const { content, sendTime, senderId } = messageBody;
+    if (content !== '') {
+      const newChat = {
+        content,
+        sendTime,
+        senderId,
+      };
+      setChatList((prevChatList) => [...prevChatList, newChat]);
+      console.log(chatList);
+    }
+  };
 
   return (
     <SafeAreaView>
       <ScreenContainer>
         <RoomInfo chatRoomInfo={chatRoomInfo} />
-        <ChatBoard chatRoomInfo={chatRoomInfo} />
-        <ChatInput />
+        <ChatBoard chatList={chatList} />
+        <ChatInput
+          value={chat}
+          onChangeText={handleMessage}
+          onPress={sendChat}
+        />
       </ScreenContainer>
     </SafeAreaView>
   );
@@ -178,19 +148,5 @@ const ScreenContainer = styled.View`
   align-items: center;
   background-color: ${BEIGE};
 `;
-
-const MsgContainer = styled.View`
-  background-color: ${BEIGE};
-  width: 100%;
-  height: 60%;
-`;
-
-const SingleMsg = styled.View``;
-
-const UserImg = styled.Image``;
-
-const UserName = styled.Text``;
-
-const BtnText = styled.Text``;
 
 export default ChatRoomScreen;

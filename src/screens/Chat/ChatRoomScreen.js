@@ -12,8 +12,10 @@ import { baseURL } from '../../api/client';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { useridState } from '../../states';
+import SplashScreen from '../../components/Layout/SplashScreen';
 
 const ChatRoomScreen = ({ route }) => {
+  const [showSplash, setShowSplash] = useState(true);
   const { chatroomId } = route.params;
   const roomid = { chatroomId }.chatroomId;
   const [userid, setUserid] = useRecoilState(useridState);
@@ -38,7 +40,7 @@ const ChatRoomScreen = ({ route }) => {
         onMessageReceived
       );
     };
- 
+
     const connect = (accessToken) => {
       client.current = new StompJs.Client({
         brokerURL: 'wss://hs-ceos.shop/ws/endpoint',
@@ -85,6 +87,7 @@ const ChatRoomScreen = ({ route }) => {
       .then((response) => {
         setChatRoomInfo(response.data.data);
         setChatList(response.data.data.messages);
+        setShowSplash(false);
         if (response.data.data.newEnter)
           Alert.alert(
             response.data.data.title,
@@ -128,17 +131,23 @@ const ChatRoomScreen = ({ route }) => {
   };
 
   return (
-    <SafeAreaView>
-      <ScreenContainer>
-        <RoomInfo chatRoomInfo={chatRoomInfo} />
-        <ChatBoard chatList={chatList} />
-        <ChatInput
-          value={chat}
-          onChangeText={handleMessage}
-          onPress={sendChat}
-        />
-      </ScreenContainer>
-    </SafeAreaView>
+    <>
+      {showSplash ? (
+        <SplashScreen />
+      ) : (
+        <SafeAreaView>
+          <ScreenContainer>
+            <RoomInfo chatRoomInfo={chatRoomInfo} />
+            <ChatBoard chatList={chatList} />
+            <ChatInput
+              value={chat}
+              onChangeText={handleMessage}
+              onPress={sendChat}
+            />
+          </ScreenContainer>
+        </SafeAreaView>
+      )}
+    </>
   );
 };
 

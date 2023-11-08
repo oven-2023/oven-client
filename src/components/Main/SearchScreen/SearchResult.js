@@ -58,17 +58,6 @@ const SearchResult = ({
         disableVirtualization={disableVirtualization}
         ListFooterComponent={isLoading && <ActivityIndicator size="large" />}
       >
-        {/* <Movies>
-          {searchedResult.map(({ poster, title, workId }) => (
-            <Movie
-              key={workId}
-              onPress={() => navigation.navigate('DetailScreen', { workId })}
-            >
-              <MoviePoster src={poster} />
-              <MovieTitle>{title}</MovieTitle>
-            </Movie>
-          ))}
-        </Movies> */}
       </MovieContainer>
     </SearchResultBox>
   );

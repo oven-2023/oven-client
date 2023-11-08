@@ -22,6 +22,11 @@ export const isModalState = atom({
   default: false,
 });
 
+export const isSignupModalState = atom({
+  key: `isSignupModal/${v1()}`,
+  default: false,
+});
+
 export const searchedResultState = atom({
   key: `searchedResult/${v1()}`,
   default: [],

@@ -125,8 +125,10 @@ const ChatRoomScreen = ({ route }) => {
         sendTime,
         senderId,
       };
-      setChatList((prevChatList) => [...prevChatList, newChat]);
-      console.log(chatList);
+      if (chatList === null) setChatList(newChat);
+      else {
+        setChatList((prevChatList) => [...prevChatList, newChat]);
+      }
     }
   };
 

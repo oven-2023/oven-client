@@ -6,43 +6,35 @@ import {
   TextInput,
   FlatList,
   Alert,
+  Dimensions,
 } from 'react-native';
 import styled from 'styled-components';
-import SearchResult from '../../components/Main/SearchScreen/SearchResult';
 import { useRecoilState } from 'recoil';
 import { searchedResultState, isLoginState } from '../../states';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import { BROWN, BEIGE } from '../../css/theme.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SplashScreen from '../../components/Layout/SplashScreen';
 
-const SearchScreen = ({ navigation }) => {
+const MovieSelection = () => {
   const [searchInput, setSearchInput] = useState(null);
-  const [seachedResult, setSearchedResult] =
+  const [searchedResult, setSearchedResult] =
     useRecoilState(searchedResultState);
   const [isLoading, setIsLoading] = useState(false);
   const [lastWorkId, setLastWorkId] = useState(null);
-  // const [isAPILoading, setIsAPILoading] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
-  const getSearchAPI = async (accessToken) => {
+  const getSearchAPI = async () => {
     await axios
       .get(`${baseURL}/search`, {
-        headers: {
-          'Content-Type': `application/json`,
-          Authorization: `Bearer ${accessToken}`,
-        },
+        headers: {},
         params: {
           size: 20,
           workId: lastWorkId,
-          keyword: searchInput,
         },
       })
       .then((response) => {
         console.log('get 함수 실행');
-        console.log(searchInput);
-        console.log(lastWorkId);
         console.log(
           'search',
           response.data.data.workListDtos[
@@ -66,84 +58,94 @@ const SearchScreen = ({ navigation }) => {
       })
       .catch(function (error) {
         console.log(error);
-        Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
-        setIsLogin(false);
       });
   };
 
   useEffect(() => {
-    // setIsAPILoading(true);
     AsyncStorage.getItem('accessToken')
       .then((value) => {
         getSearchAPI(value);
-        // setIsAPILoading(false);
       })
       .catch((error) => {
         console.log('Error getting access token:', error);
       });
-  }, [searchInput]);
+  }, []);
 
-  const onSearchHandler = (event) => {
-    console.log(event.nativeEvent.text);
-    setSearchInput(event.nativeEvent.text);
-    setLastWorkId(null); // 검색어가 변경되면 1로 초기화
-  };
-  const onKeyDownHandler = (event) => {
-    if (event.key === 'Enter') {
-      onSubmitHandler();
+  const onEndReached = () => {
+    if (!isLoading) {
+      setIsLoading(true);
+      getSearchAPI(value);
+      setIsLoading(false);
     }
   };
 
-  const onEndReached = () => {
-    AsyncStorage.getItem('accessToken')
-      .then((value) => {
-        if (!isLoading) {
-          setIsLoading(true);
-          getSearchAPI(value);
-          setIsLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.log('Error getting access token in onEndReached:', error);
-      });
-  };
-
   return (
-    <>
-      <Container>
-        <SearchInput
-          placeholder="작품명을 검색해보세요."
-          value={searchInput}
-          onChange={onSearchHandler}
-          onKeyDown={onKeyDownHandler}
-        />
-        <SearchResult
-          onEndReached={onEndReached}
-          onEndReachedThreshold={0.1}
-          isLoading={isLoading}
-          disableVirtualization={false}
-        />
-      </Container>
-    </>
+    <SearchResultBox>
+      <MovieContainer
+        showsVerticalScrollIndicator={false}
+        data={searchedResult}
+        keyExtractor={(item) => item.workId}
+        numColumns={3}
+        renderItem={({ item }) => {
+          return (
+            <Movie>
+              {item.poster ? (
+                <MoviePoster src={item.poster} />
+              ) : (
+                <MoviePoster />
+              )}
+              <MovieTitle numberOfLines={2}>{item.title}</MovieTitle>
+            </Movie>
+          );
+        }}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.1}
+        disableVirtualization={false}
+        ListFooterComponent={isLoading && <ActivityIndicator size="large" />}
+      ></MovieContainer>
+    </SearchResultBox>
   );
 };
 
-const Container = styled.SafeAreaView`
-  flex: 1;
+const SearchResultBox = styled.View`
+  width: 90%;
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px;
   align-items: center;
-  background-color: ${BEIGE};
+  min-height: 650px;
 `;
 
-const SearchInput = styled.TextInput`
-  background-color: white;
-  width: 80%;
-  height: 40px;
-  margin: 20px 0px;
-  padding: 0px 20px;
-  border-radius: 20px;
-  color: brown;
-  font-size: 16px;
+const MovieContainer = styled.FlatList``;
+
+const Movies = styled.View`
+  width: ${({ width }) => Dimensions.get('window').width - 50}px;
+  background-color: pink;
+`;
+
+const Movie = styled.TouchableOpacity`
+  width: ${Dimensions.get('window').width / 3 - 15}px;
+  margin: 5px;
+  width: 100px;
+  height: 180px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const MoviePoster = styled.Image`
+  background-color: ${BEIGE};
+  height: 150;
+  width: 100;
+  border-radius: 20;
+`;
+
+const MovieTitle = styled.Text`
+  font-size: 12px;
+  margin-top: 5;
+  text-align: center;
+  font-weight: 700;
   font-family: 'kotra';
 `;
 
-export default SearchScreen;
+export default MovieSelection;

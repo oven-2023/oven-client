@@ -20,7 +20,7 @@ const ChatBoard = ({ chatList, onScrollEnd }) => {
    const [totalChatHeight, setTotalChatHeight] = useState(0);
 
    const onScrollChat = (e) => {
-     if (e.nativeEvent.contentOffset.y == 0) {
+     if (e?.nativeEvent.contentOffset.y == 0) {
        setTotalChatHeight(e.nativeEvent.contentSize.height);
        onScrollEnd();
      }

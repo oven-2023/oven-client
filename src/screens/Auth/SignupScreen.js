@@ -15,6 +15,9 @@ import AuthButton from '../../components/Auth/AuthButton';
 import axios from 'axios';
 import { baseURL } from '../../api/client';
 import { BEIGE, BROWN, ORANGE } from '../../css/theme';
+import AuthModal from '../../components/Auth/AuthModal';
+import { useRecoilState } from 'recoil';
+import { isSignupModalState } from '../../states';
 
 const SignUpScreen = ({ navigation }) => {
   const width = Dimensions.get('window').width;
@@ -23,6 +26,7 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [isDupChecked, setIsDupChecked] = useState(false);
+  const [isModalOpened, setIsModalOpened] = useRecoilState(isSignupModalState);
 
   const HandleChangeName = (name) => {
     setName(name);
@@ -62,59 +66,76 @@ const SignUpScreen = ({ navigation }) => {
     } else Alert.alert('아이디를 입력하세요');
   };
 
-  const postJoinAPI = async () => {
-    if (password !== passwordConfirm) Alert.alert('비밀번호가 다릅니다.');
-    else if (
-      name === '' ||
-      id === '' ||
-      password === '' ||
-      passwordConfirm === ''
-    )
-      Alert.alert('모든 정보를 입력하세요.');
-    else if (!isDupChecked) Alert.alert('아이디 중복 체크를 해주세요.');
-    else {
-      await axios
-        .post(`${baseURL}/auth/join`, {
-          nickname: name,
-          password: password,
-          username: id,
-        })
-        .then((response) => {
-          console.log(response);
-          Alert.alert('회원가입 완료');
-          navigation.navigate('LoginScreen');
-        })
-        .catch(function (error) {
-          console.log(error);
-          Alert.alert('회원가입을 실패했습니다. 다시 시도하세요.');
-        });
-    }
-  };
+  // const postJoinAPI = async () => {
+  //   if (password !== passwordConfirm) Alert.alert('비밀번호가 다릅니다.');
+  //   else if (
+  //     name === '' ||
+  //     id === '' ||
+  //     password === '' ||
+  //     passwordConfirm === ''
+  //   )
+  //     Alert.alert('모든 정보를 입력하세요.');
+    // else if (!isDupChecked) Alert.alert('아이디 중복 체크를 해주세요.');
+    // else {
+    //   await axios
+    //     .post(`${baseURL}/auth/join`, {
+    //       nickname: name,
+    //       password: password,
+    //       username: id,
+    //     })
+  //       .then((response) => {
+  //         console.log(response);
+  //         Alert.alert('회원가입 완료');
+  //         navigation.navigate('LoginScreen');
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //         Alert.alert('회원가입을 실패했습니다. 다시 시도하세요.');
+  //       });
+  //   }
+  // };
 
   return (
     <Container>
-      <OvenLogo source={require('../../img/oven_logo.png')} />
-      <Title>회원가입</Title>
-      <Input placeholder="이름" value={name} onChangeText={HandleChangeName} />
-      <Relative>
-        <Input placeholder="아이디" value={id} onChangeText={HandleChangeId} />
-        <DuplicateButton onPress={postDuplicateAPI}>
-          <DuplicationText>중복 체크</DuplicationText>
-        </DuplicateButton>
-      </Relative>
-      <Input
-        placeholder="비밀번호"
-        value={password}
-        onChangeText={HandleChangePassword}
-        secureTextEntry={true}
-      />
-      <Input
-        placeholder="비밀번호 확인"
-        value={passwordConfirm}
-        onChangeText={HandleChangePasswordConfirm}
-        secureTextEntry={true}
-      />
-      <AuthButton text="회원가입" onPress={postJoinAPI} />
+      {isModalOpened ? (
+        <AuthModal id={id} name={name} password={password} passwordConfirm={passwordConfirm}/>
+      ) : (
+        <>
+          <OvenLogo source={require('../../img/oven_logo.png')} />
+          <Title>회원가입</Title>
+          <Input
+            placeholder="이름"
+            value={name}
+            onChangeText={HandleChangeName}
+          />
+          <Relative>
+            <Input
+              placeholder="아이디"
+              value={id}
+              onChangeText={HandleChangeId}
+            />
+            <DuplicateButton onPress={postDuplicateAPI}>
+              <DuplicationText>중복 체크</DuplicationText>
+            </DuplicateButton>
+          </Relative>
+          <Input
+            placeholder="비밀번호"
+            value={password}
+            onChangeText={HandleChangePassword}
+            secureTextEntry={true}
+          />
+          <Input
+            placeholder="비밀번호 확인"
+            value={passwordConfirm}
+            onChangeText={HandleChangePasswordConfirm}
+            secureTextEntry={true}
+          />
+          <AuthButton
+            text="관심 작품 선택하러 가기"
+            onPress={() => setIsModalOpened(true)}
+          />
+        </>
+      )}
     </Container>
   );
 };

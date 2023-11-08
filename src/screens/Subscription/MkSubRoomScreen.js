@@ -60,12 +60,12 @@ const MkSubRoomScreen = ({ navigation }) => {
         .then((response) => {
           console.log(response.data);
           setRoomid(response.data.data.chatroomId);
-        //   navigation.jumpTo('ChatHomeScreen');
-        // })
-        // .catch(function (error) {
-        //   console.log('postMakeRoom', error);
-        //   console.log(roomname, num, providerId);
-          navigation.jumpTo('ChatHomeScreen');
+          // })
+          // .catch(function (error) {
+          //   console.log('postMakeRoom', error);
+          //   console.log(roomname, num, providerId);
+          navigation.goBack('SubscriptionScreen');
+          Alert.alert(roomname, '방을 만들었어요!');
         });
     }
   };

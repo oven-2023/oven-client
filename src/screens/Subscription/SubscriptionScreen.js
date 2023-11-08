@@ -23,9 +23,17 @@ const SubscriptionScreen = () => {
   const isFocused = useIsFocused();
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const navigation = useNavigation();
+
   useEffect(() => {
     if (!isFocused) {
       setClickedOtt(null);
+      AsyncStorage.getItem('accessToken')
+        .then((value) => {
+          getChatRoomsAPI(value);
+        })
+        .catch((error) => {
+          console.log('Error getting access token:', error);
+        });
     }
   }, [isFocused]);
 

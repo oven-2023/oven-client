@@ -17,7 +17,11 @@ import { baseURL } from '../../api/client';
 import { BEIGE, BROWN, ORANGE } from '../../css/theme';
 import AuthModal from '../../components/Auth/AuthModal';
 import { useRecoilState } from 'recoil';
-import { isSignupModalState } from '../../states';
+import {
+  isSignupModalState,
+  authWorkState,
+  lastWorkIdState,
+} from '../../states';
 
 const SignUpScreen = ({ navigation }) => {
   const width = Dimensions.get('window').width;
@@ -27,6 +31,8 @@ const SignUpScreen = ({ navigation }) => {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [isDupChecked, setIsDupChecked] = useState(false);
   const [isModalOpened, setIsModalOpened] = useRecoilState(isSignupModalState);
+  const [workList, setWorkList] = useRecoilState(authWorkState);
+  const [lastWorkId, setLastWorkId] = useRecoilState(lastWorkIdState);
 
   const HandleChangeName = (name) => {
     setName(name);
@@ -66,39 +72,49 @@ const SignUpScreen = ({ navigation }) => {
     } else Alert.alert('아이디를 입력하세요');
   };
 
-  // const postJoinAPI = async () => {
-  //   if (password !== passwordConfirm) Alert.alert('비밀번호가 다릅니다.');
-  //   else if (
-  //     name === '' ||
-  //     id === '' ||
-  //     password === '' ||
-  //     passwordConfirm === ''
-  //   )
-  //     Alert.alert('모든 정보를 입력하세요.');
-    // else if (!isDupChecked) Alert.alert('아이디 중복 체크를 해주세요.');
-    // else {
-    //   await axios
-    //     .post(`${baseURL}/auth/join`, {
-    //       nickname: name,
-    //       password: password,
-    //       username: id,
-    //     })
-  //       .then((response) => {
-  //         console.log(response);
-  //         Alert.alert('회원가입 완료');
-  //         navigation.navigate('LoginScreen');
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-  //         Alert.alert('회원가입을 실패했습니다. 다시 시도하세요.');
-  //       });
-  //   }
-  // };
+  const getWorksAPI = async () => {
+    await axios
+      .get(`${baseURL}/auth/join/works`, {
+        headers: {},
+        params: {
+          size: 20,
+          workId: lastWorkId,
+          keyword: '',
+        },
+      })
+      .then((response) => {
+        console.log('get 함수 실행');
+        console.log('search', response.data.data.workListDtos);
+        const newResults = response.data.data.workListDtos;
+        console.log(lastWorkId);
+        console.log(workList);
+
+        setWorkList((prevResults) => [...prevResults, ...newResults]);
+        // 마지막 workId 업데이트
+        setLastWorkId(
+          response.data.data.workListDtos[
+            response.data.data.workListDtos.length - 1
+          ].workId
+        );
+        setIsModalOpened(true);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <Container>
       {isModalOpened ? (
-        <AuthModal id={id} name={name} password={password} passwordConfirm={passwordConfirm}/>
+        <AuthModal
+          navigation={navigation}
+          id={id}
+          name={name}
+          password={password}
+          passwordConfirm={passwordConfirm}
+          isDupChecked={isDupChecked}
+          getWorksAPI={getWorksAPI}
+        />
       ) : (
         <>
           <OvenLogo source={require('../../img/oven_logo.png')} />
@@ -130,10 +146,7 @@ const SignUpScreen = ({ navigation }) => {
             onChangeText={HandleChangePasswordConfirm}
             secureTextEntry={true}
           />
-          <AuthButton
-            text="관심 작품 선택하러 가기"
-            onPress={() => setIsModalOpened(true)}
-          />
+          <AuthButton text="관심 작품 선택하러 가기" onPress={getWorksAPI} />
         </>
       )}
     </Container>

@@ -11,14 +11,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { baseURL } from '../../api/client';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
-import { useridState } from '../../states';
+import { useridState, userState } from '../../states';
 import SplashScreen from '../../components/Layout/SplashScreen';
 
 const ChatRoomScreen = ({ route }) => {
   const [showSplash, setShowSplash] = useState(true);
   const { chatroomId } = route.params;
   const roomid = { chatroomId }.chatroomId;
-  const [userid, setUserid] = useRecoilState(useridState);
+  const [user, setUser] = useRecoilState(useridState);
   const [chatRoomInfo, setChatRoomInfo] = useState('');
   const client = useRef({});
   const [chat, setChat] = useState('');
@@ -52,6 +52,7 @@ const ChatRoomScreen = ({ route }) => {
           console.log(str);
         },
         onConnect: () => {
+          console.log('WebSocket이 성공적으로 연결되었습니다!');
           subscribe();
         },
       });
@@ -87,6 +88,7 @@ const ChatRoomScreen = ({ route }) => {
       .then((response) => {
         setChatRoomInfo(response.data.data);
         setChatList(response.data.data.messages);
+        console.log(response.data.data.messages);
         setShowSplash(false);
         if (response.data.data.newEnter)
           Alert.alert(
@@ -105,13 +107,14 @@ const ChatRoomScreen = ({ route }) => {
       return;
     }
     client.current.publish({
-      destination: '/pub/chatrooms/' + roomid + '/message',
+      destination: `/pub/chatrooms/${roomid}/message`,
       body: JSON.stringify({
-        senderId: userid,
+        senderId: user,
         content: chat,
       }),
     });
     setChat('');
+    console.log(chatList);
   };
 
   // 콜백함수 => chatList 저장하기
@@ -129,6 +132,7 @@ const ChatRoomScreen = ({ route }) => {
       else {
         setChatList((prevChatList) => [...prevChatList, newChat]);
       }
+      console.log(messageBody);
     }
   };
 

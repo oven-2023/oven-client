@@ -74,10 +74,6 @@ const SearchResultBox = styled.View`
 
 const MovieContainer = styled.FlatList``;
 
-const Movies = styled.View`
-  width: ${({ width }) => Dimensions.get('window').width - 50}px;
-  background-color: pink;
-`;
 
 const Movie = styled.TouchableOpacity`
   width: ${Dimensions.get('window').width / 3 - 15}px;

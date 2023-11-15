@@ -32,6 +32,16 @@ export const searchedResultState = atom({
   default: [],
 });
 
+export const authWorkState = atom({
+  key: `authWork/${v1()}`,
+  default: [],
+});
+
+export const selectedWorkState = atom({
+  key: `selectedWork/${v1()}`,
+  default: [],
+});
+
 export const detailMovieState = atom({
   key: `detailMovie/${v1()}`,
   default: [],
@@ -60,4 +70,9 @@ export const isStaredState = atom({
 export const isSummaryLoadingState = atom({
   key: `isSummaryLoading/${v1()}`,
   default: false,
+});
+
+export const lastWorkIdState = atom({
+  key: `lastWorkId/${v1()}`,
+  default: null,
 });

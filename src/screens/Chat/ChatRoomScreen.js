@@ -109,7 +109,7 @@ const ChatRoomScreen = ({ route }) => {
     client.current.publish({
       destination: `/pub/chatrooms/${roomid}/message`,
       body: JSON.stringify({
-        senderId: user,
+        senderUsername: user,
         content: chat,
       }),
     });
@@ -121,18 +121,19 @@ const ChatRoomScreen = ({ route }) => {
   const onMessageReceived = (message) => {
     console.log('!!!!!!!!!!!!!!!!!!!', JSON.parse(message.body));
     const messageBody = JSON.parse(message.body);
-    const { content, sendTime, senderId } = messageBody;
+    const { content, sendTime, senderUsername, senderNickname } = messageBody;
     if (content !== '') {
       const newChat = {
         content,
         sendTime,
-        senderId,
+        senderUsername,
+        senderNickname,
       };
-      if (chatList === null) setChatList(newChat);
-      else {
-        setChatList((prevChatList) => [...prevChatList, newChat]);
-      }
-      console.log(messageBody);
+      // if (chatList === null) setChatList(newChat);
+      // else {
+      setChatList((prevChatList) => [...(prevChatList ?? []), newChat]);
+      // }
+      // console.log(messageBody);
     }
   };
 
@@ -158,8 +159,8 @@ const ChatRoomScreen = ({ route }) => {
 };
 
 const ScreenContainer = styled.View`
+  height: ${({ height }) => Dimensions.get('window').height}px;
   width: ${Dimensions.get('window').width}px;
-  height: ${Dimensions.get('window').height}px;
   align-items: center;
   background-color: ${BEIGE};
 `;

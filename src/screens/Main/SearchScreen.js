@@ -66,8 +66,6 @@ const SearchScreen = ({ navigation }) => {
       })
       .catch(function (error) {
         console.log(error);
-        Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
-        setIsLogin(false);
       });
   };
 

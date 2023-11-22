@@ -45,11 +45,11 @@ export default function App({ navigation }) {
             AsyncStorage.setItem('accessToken', response.data.data.accessToken);
           } else {
             console.log(error);
-            Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
+            // Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
           }
         } catch (error) {
           console.log(error);
-          Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
+          // Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
         }
       }
     };
@@ -74,7 +74,6 @@ export default function App({ navigation }) {
   //     })
   //     .catch(function (error) {
   //       console.log(error);
-  //       Alert.alert('로그인이 만료되었습니다. 다시 로그인하세요.');
   //       navigation.navigate('LoginScreen');
   //     });
   // };

@@ -66,6 +66,7 @@ const MyHeartScreen = ({ navigation }) => {
 const Container = styled.SafeAreaView`
   align-items: center;
   background-color: ${BEIGE};
+  height: 100%;
 `;
 
 const MovieContainer = styled.ScrollView`
@@ -98,14 +99,14 @@ const Movie = styled.TouchableOpacity`
 `;
 
 const MovieTitle = styled.Text`
-  font-size: 10px;
+  font-size: 14px;
   margin-top: 5px;
   text-align: center;
   align-items: center;
   justify-content: center;
   color: ${BROWN};
   font-weight: 700;
-  font-family: 'chab';
+  font-family: 'kotra';
 `;
 
 const Title = styled.Text`

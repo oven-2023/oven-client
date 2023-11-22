@@ -51,6 +51,7 @@ const HomeScreen = ({ navigation }) => {
       })
       .then((response) => {
         setRecommendations(response.data.data);
+        console.log('refresh',response.data.data);
       })
       .catch(function (error) {
         console.log('get recommend', error);

@@ -20,7 +20,7 @@ const Chat = ({ chatList }) => {
     <>
       {chatList?.map((chat, index) => (
         <View key={index}>
-          {chat.sender === user ? (
+          {chat.senderNickname === user ? (
             <MyChatContainer>
               <Row>
                 <TimeText>{chat.sendTime}</TimeText>
@@ -33,7 +33,7 @@ const Chat = ({ chatList }) => {
             <OthersChatContainer>
               <User>
                 <UserImg name="person" size={20} />
-                <UserName>{chat.sender}</UserName>
+                <UserName>{chat.senderNickname}</UserName>
               </User>
               <Row>
                 <TextView2 msgLength={chat.content.length}>

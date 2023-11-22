@@ -127,7 +127,7 @@ const MovieInfoBox = ({ route }) => {
         <SplashScreen />
       ) : (
         <Container>
-            <TitleContainer >
+          <TitleContainer>
             <Title>{detailMovie?.titleKr || detailMovie?.titleEng || ''}</Title>
           </TitleContainer>
           <MoviePoster src={detailMovie?.poster || null} />
@@ -157,15 +157,13 @@ const MovieInfoBox = ({ route }) => {
               </Genre>
               <Actor>
                 출연:{' '}
-                {(detailMovie &&
-                  detailMovie.actor?.split('/').slice(0, -1).join(',')) ||
-                  ''}
+                {detailMovie && detailMovie.actor ? detailMovie.actor : ''}
               </Actor>
               <Director>
                 감독:{' '}
-                {(detailMovie &&
-                  detailMovie.director?.split('/').slice(0, -1).join(',')) ||
-                  ''}
+                {detailMovie && detailMovie.director
+                  ? detailMovie.director
+                  : ''}
               </Director>
               <OTT>
                 OTT:{' '}

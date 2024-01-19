@@ -1,20 +1,88 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {MainScreen, SubscriptionScreen, ChattingScreen, MyPageScreen} from '../screens'
+import {
+  HomeScreen,
+  SubscriptionScreen,
+  ChatHomeScreen,
+  MyPageScreen,
+  SearchScreen
+} from '../screens';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator initialRouteName="Main">
-        <Tab.Screen name="메인" component={MainScreen} />
-        <Tab.Screen name="구독" component={SubscriptionScreen} />
-        <Tab.Screen name="채팅" component={ChattingScreen} />
-        <Tab.Screen name="마이페이지" component={MyPageScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator
+      initialRouteName="HomeScreen"
+      independent={true}
+      tabBarOptions={{
+        activeTintColor: '#d72201',
+        inactiveTintColor: '#4f2416',
+        shadowOpacity: 0.7,
+        shadowRadius: 40,
+        elevation: 24,
+      }}
+      screenOptions={{
+        tabBarStyle: { backgroundColor: 'white' },
+      }}
+    >
+      <Tab.Screen
+        name="home"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+          title: '홈',
+          tabBarIcon: ({ color }) => (
+            <Icon name="home" color={color} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="search"
+        component={SearchScreen}
+        options={{
+          headerShown: false,
+          title: '작품 검색',
+          tabBarIcon: ({ color }) => (
+            <Icon name="search" color={color} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="subscription"
+        component={SubscriptionScreen}
+        options={{
+          headerShown: false,
+          title: '구독',
+          tabBarIcon: ({ color }) => (
+            <Icon name="supervised-user-circle" color={color} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="chathome"
+        component={ChatHomeScreen}
+        options={{
+          headerShown: false,
+          title: '채팅',
+          tabBarIcon: ({ color }) => (
+            <Icon name="message" color={color} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="mypage"
+        component={MyPageScreen}
+        options={{
+          headerShown: false,
+          title: '내 정보',
+          tabBarIcon: ({ color }) => (
+            <Icon name="person" color={color} size={30} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 

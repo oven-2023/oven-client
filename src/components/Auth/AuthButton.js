@@ -1,9 +1,10 @@
 import { Text, Button, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
+import { BEIGE, BROWN } from '../../css/theme';
 
-const AuthButton = ({ text, onClick }) => {
+const AuthButton = ({ text, onPress }) => {
   return (
-    <StyledButton isFilled={false} onClick={onClick}>
+    <StyledButton isFilled={false} onPress={onPress}>
       <StyledText>{text}</StyledText>
     </StyledButton>
   );
@@ -11,13 +12,20 @@ const AuthButton = ({ text, onClick }) => {
 
 const StyledButton = styled.TouchableOpacity`
   height: 50px;
-  width: 200px;
-  background-color: pink;
-  border-radius: 4px;
+  width: 300px;
+  background-color: ${BROWN};
+  border-radius: 20px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
-const StyledText = styled.Text``;
+const StyledText = styled.Text`
+  color: ${BEIGE};
+  font-size: 25px;
+  font-weight: 800;
+  font-family: 'kotra';
+`;
 
 export default AuthButton;
